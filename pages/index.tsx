@@ -24,7 +24,6 @@ const Home: NextPage = () => {
 
       <footer className={styles.footer}>
           Built on Next.js
-
       </footer>
     </div>
   )
