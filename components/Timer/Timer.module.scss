@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+.p{
+    font-family: 'Orbitron', sans-serif;
+    position: fixed;
+    bottom: 2rem;
+    right: 4rem;
+    opacity: 0.4;
+    transition-duration: 225ms;
+    &:hover{
+        opacity: 0.6;
+    }
+}

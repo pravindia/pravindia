@@ -1,0 +1,188 @@
+.container {
+  position: relative;
+  max-width: 100vw;
+  overflow: hidden;
+}
+// @keyframes grain {
+//   0%, 100% { transform:translate(0, 0) }
+//   10% { transform:translate(-5%, -10%) }
+//   20% { transform:translate(-15%, 5%) }
+//   30% { transform:translate(7%, -25%) }
+//   40% { transform:translate(-5%, 25%) }
+//   50% { transform:translate(-15%, 10%) }
+//   60% { transform:translate(15%, 0%) }
+//   70% { transform:translate(0%, 15%) }
+//   80% { transform:translate(3%, 35%) }
+//   90% { transform:translate(-10%, 10%) }
+// }
+
+.main {
+  min-height: 100vh;
+  padding: 4rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+// .main::after {
+//   content: "";
+//   background-image: url("../public/assets/img/grains.png");
+//   height: 300%;
+//   width: 300%;
+//   opacity: 0.3;
+//   position: fixed;
+//   animation: grain 8s steps(10) infinite;
+// }
+
+.footer {
+  display: flex;
+  flex: 1;
+  padding: 2rem 0;
+  border-top: 1px solid #eaeaea;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.title a {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+.title a:hover,
+.title a:focus,
+.title a:active {
+  text-decoration: underline;
+}
+
+.title {
+  margin: 0;
+  line-height: 1.15;
+  font-size: 3rem;
+}
+
+.title,
+.description {
+  text-align: center;
+}
+
+.description {
+  margin: 4rem 0;
+  // line-height: 1.5;
+  font-size: 1.5rem;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.code {
+  background: #fafafa;
+  border-radius: 5px;
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+    Bitstream Vera Sans Mono, Courier New, monospace;
+}
+
+.grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 800px;
+}
+
+.card {
+  margin: 1rem;
+  padding: 1.5rem;
+  text-align: left;
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  max-width: 300px;
+}
+
+.card:hover,
+.card:focus,
+.card:active {
+  color: #0070f3;
+  border-color: #0070f3;
+}
+
+.card h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+.card p {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+.logo {
+  height: 1em;
+  margin-left: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
+
+// Background
+$particleSize: 30vmin;
+$animationDuration: 45s;
+$amount: 3;
+.background {
+
+  overflow: hidden;
+  width: 100vw;
+  height: 100%;
+}
+.background span {
+  width: $particleSize;
+  height: $particleSize;
+  border-radius: $particleSize;
+  // backface-visibility: hidden;
+  position: absolute;
+  animation-name: move;
+  animation-duration: $animationDuration;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  opacity: 0.4;
+  $colors: (#087b25, #8F00FF, #ff6600, #ff2200 , #ff6600);
+  @for $i from 1 through $amount {
+    &:nth-child(#{$i}) {
+      color: nth($colors, $i);
+      bottom: random(50) * 1%;
+      right: random(50) * 1%;
+      animation-duration: (random($animationDuration * 10) / 10) * 1s + 10s;
+      animation-delay: random(($animationDuration + 10s) * 10) / 10 * -1s;
+      transform-origin: (random(50) - 25) * 1vw (random(50) - 25) * 1vh;
+      $blurRadius: (random(3) + 0.9) * $particleSize * 0.4;
+      $x: if(random() > 0.5, -1, 1);
+      box-shadow: ($particleSize * 2 * $x) 0 $blurRadius currentColor;
+    }
+  }
+}
+
+@keyframes move {
+  100% {
+    transform: translate3d(0, 0, 60px) rotate(360deg);
+    x: random($limit: 3);
+    y: random($limit: 1);
+  }
+}
