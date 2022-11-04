@@ -16,7 +16,7 @@
 //   90% { transform:translate(-10%, 10%) }
 // }
 
-.main {
+.home {
   min-height: 100vh;
   padding: 4rem 0;
   flex: 1;
@@ -35,22 +35,6 @@
 //   position: fixed;
 //   animation: grain 8s steps(10) infinite;
 // }
-
-.footer {
-  display: flex;
-  flex: 1;
-  padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
-  justify-content: center;
-  align-items: center;
-}
-
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-}
 
 .title a {
   color: #0070f3;
@@ -147,7 +131,6 @@ $particleSize: 30vmin;
 $animationDuration: 45s;
 $amount: 3;
 .background {
-
   overflow: hidden;
   width: 100vw;
   height: 100%;
