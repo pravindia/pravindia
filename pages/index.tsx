@@ -43,7 +43,6 @@ export default function Home() {
     <>
       <Cursor variants={variants} curVariant={cursorVariant} />
       <Header></Header>
-      <Timer />
       <div className={styles.container}>
         <div className={styles.background}>
           <span></span>
@@ -59,9 +58,11 @@ export default function Home() {
         </Head>
         <main>
           <section className={styles.home}>
-            <h1 className={styles.title}>
-              I <span>develop products</span> that delight and inspire people.
-            </h1>
+            <div style={{maxWidth:"50vmax"}}>
+              <h1 className={styles.title}>
+                I <span onMouseLeave={textLeave} onMouseEnter={textEnter}>develop products</span> that delight and inspire people.
+              </h1>
+            </div>
             <p className={styles.description}>
               Hi! I’m Pravin, a Software Developer based in Chennai. I create
               user-friendly websites and apps for fast-growing startups.

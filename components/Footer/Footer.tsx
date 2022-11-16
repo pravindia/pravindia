@@ -11,21 +11,28 @@ const Footer = (props: { textEnter: any; textLeave: any }) => {
         <a
           onMouseEnter={props.textEnter}
           onMouseLeave={props.textLeave}
-          href=""
+          target="_blank"
+          rel="noreferrer"
+          download={true}
+          href="https://pravindia.com/assets/resume.pdf"
         >
           Resumé
         </a>
         <a
           onMouseEnter={props.textEnter}
           onMouseLeave={props.textLeave}
-          href=""
+          target="_blank"
+          rel="noreferrer"
+          href="https://www.linkedin.com/in/pravindia"
         >
           LinkedIn
         </a>
         <a
           onMouseEnter={props.textEnter}
           onMouseLeave={props.textLeave}
-          href=""
+          target="_blank"
+          rel="noreferrer"
+          href="https://codepen.io/pravindia"
         >
           Codepen
         </a>

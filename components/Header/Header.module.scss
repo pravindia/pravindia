@@ -1,6 +1,9 @@
 .header {
-  padding: 40px 60px;
+  padding: 2rem 2.4rem;
   position: fixed;
+  z-index: 10;
+  backdrop-filter: blur(24px);
+  width: 100%;
 
   a {
     letter-spacing: 0.1rem;
