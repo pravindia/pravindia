@@ -1,14 +1,36 @@
 .header {
-  padding: 2rem 2.4rem;
+  padding: 2vmin 2.4vmin;
   position: fixed;
   z-index: 10;
   backdrop-filter: blur(24px);
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
 
   a {
     letter-spacing: 0.1rem;
     font-family: monospace;
     font-size: large;
+  }
+  ul{
+    list-style: none;
+    display: flex;
+    li{
+      padding-left: min(3rem, 2vw);
+      position: relative;
+      a::after{
+        content: '';
+        position: absolute;
+        height: 4px;
+        width: 4px;
+        bottom: 4px;
+        // background-color: red;
+        border-radius: 10px;
+
+      }
+    }
   }
 }
 .blinker {
@@ -17,7 +39,7 @@
   animation-timing-function: cubic-bezier(1, 0, 0, 1);
   animation-duration: 1s;
   //Basic styling
-  display: inline-block;
+  // display: inline-block;
 }
 @keyframes blinker {
   from {

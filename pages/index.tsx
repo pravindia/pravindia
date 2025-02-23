@@ -5,7 +5,7 @@ import Timer from "../components/Timer/Timer";
 import Footer from "../components/Footer/Footer";
 import Cursor from "../components/Cursor/Cursor";
 import { Variants } from "framer-motion";
-import { useEffect, useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 
 export default function Home() {
   const [mousePosition, setMousePosition] = useState({
@@ -25,6 +25,7 @@ export default function Home() {
       window.removeEventListener("mousemove", mouseMove);
     };
   }, []);
+  const colors = ['purple', 'green', 'blue', 'yellow']
   const variants: Variants = {
     inactive: {
       x: mousePosition.x + 140,
@@ -56,7 +57,7 @@ export default function Home() {
           <meta name="description" content="Hi, I'm Pravin Kumar" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <main>
+        <main className={styles.bgdark}>
           <section className={styles.home}>
             <div style={{maxWidth:"50vmax"}}>
               <h1 className={styles.title}>
@@ -68,6 +69,12 @@ export default function Home() {
               user-friendly websites and apps for fast-growing startups.
             </p>
           </section>
+          {/* <section className={styles.about}>
+            <h3>💻 Selected work</h3> 
+            <div className="">
+              
+            </div>
+          </section> */}
         </main>
         <Footer textLeave={textLeave} textEnter={textEnter}></Footer>
       </div>

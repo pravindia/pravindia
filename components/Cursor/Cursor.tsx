@@ -23,6 +23,7 @@ const Cursor = (props: {variants: Variants, curVariant: string}) => {
       style={cursorStye}
       variants={props.variants}
       animate={props.curVariant}
+      // transition={{ delay: 1 }}
     />
   );
 };

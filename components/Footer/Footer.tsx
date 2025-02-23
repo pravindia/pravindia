@@ -14,7 +14,7 @@ const Footer = (props: { textEnter: any; textLeave: any }) => {
           target="_blank"
           rel="noreferrer"
           download={true}
-          href="https://pravindia.com/assets/resume.pdf"
+          href="https://drive.google.com/file/d/1i1xcgy1VaEw1n1eI4p9JeZ2hJDLsw17K/view?usp=sharing"
         >
           Resumé
         </a>

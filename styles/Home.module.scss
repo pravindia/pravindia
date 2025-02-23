@@ -16,7 +16,9 @@
 //   80% { transform:translate(3%, 35%) }
 //   90% { transform:translate(-10%, 10%) }
 // }
-
+.bgdark{
+  // background-color: #087b257e;
+}
 .home {
   min-height: 100vh;
   padding: 4rem 0;
@@ -170,4 +172,16 @@ $amount: 3;
     x: random($limit: 3);
     y: random($limit: 1);
   }
+}
+
+.about {
+  min-height: 40vmin;
+  padding: 4rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  z-index: 2;
 }
