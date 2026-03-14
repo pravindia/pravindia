@@ -1,0 +1,165 @@
+.page {
+	min-height: 100vh;
+	background: var(--bg, #070b14);
+	display: flex;
+	flex-direction: column;
+}
+
+.main {
+	flex: 1;
+	max-width: 1100px;
+	width: 100%;
+	margin: 0 auto;
+	padding: 8rem 2rem 5rem;
+}
+
+.backLink,
+.status,
+.period,
+.role,
+.tag,
+.links a,
+.muted {
+	font-family: var(--font-mono);
+}
+
+.backLink {
+	display: inline-block;
+	margin-bottom: 1.5rem;
+	color: var(--green);
+	font-size: 0.8rem;
+}
+
+.hero {
+	margin-bottom: 2rem;
+}
+
+.heroTop {
+	display: flex;
+	align-items: center;
+	gap: 0.8rem;
+	margin-bottom: 1rem;
+	flex-wrap: wrap;
+}
+
+.status {
+	font-size: 0.65rem;
+	padding: 0.2rem 0.6rem;
+	border-radius: 999px;
+	border: 1px solid;
+
+	&[data-status="live"] {
+		color: var(--green);
+		border-color: var(--green);
+	}
+
+	&[data-status="wip"] {
+		color: var(--yellow);
+		border-color: var(--yellow);
+	}
+}
+
+.period,
+.role,
+.summary,
+.list li,
+.muted {
+	color: var(--text-muted);
+}
+
+.period,
+.role {
+	font-size: 0.76rem;
+}
+
+.title {
+	margin: 0 0 0.6rem;
+	font-size: clamp(2.2rem, 6vw, 4rem);
+	line-height: 1.05;
+	color: var(--text-bright);
+}
+
+.role {
+	margin: 0 0 1rem;
+}
+
+.summary {
+	margin: 0;
+	max-width: 760px;
+	font-size: 1rem;
+	line-height: 1.8;
+}
+
+.layout {
+	display: grid;
+	grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.9fr);
+	gap: 1.25rem;
+	align-items: start;
+}
+
+.panel {
+	padding: 1.3rem;
+	border-radius: 14px;
+	border: 1px solid var(--border);
+	background: var(--surface-2);
+
+	h2 {
+		margin: 0 0 1rem;
+		font-size: 1rem;
+		color: var(--text-bright);
+	}
+}
+
+.list {
+	margin: 0;
+	padding-left: 1.2rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.8rem;
+
+	li {
+		line-height: 1.7;
+	}
+}
+
+.sidebar {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.45rem;
+}
+
+.tag {
+	font-size: 0.68rem;
+	padding: 0.2rem 0.55rem;
+	border-radius: 6px;
+	background: var(--surface-3);
+	border: 1px solid var(--border);
+	color: var(--blue);
+}
+
+.links {
+	display: flex;
+	flex-direction: column;
+	gap: 0.7rem;
+
+	a {
+		color: var(--green);
+		font-size: 0.76rem;
+	}
+}
+
+.muted {
+	font-size: 0.76rem;
+}
+
+@media (max-width: 820px) {
+	.layout {
+		grid-template-columns: 1fr;
+	}
+}

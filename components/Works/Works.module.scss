@@ -1,0 +1,131 @@
+.section {
+	padding: 6rem 2rem;
+	position: relative;
+	z-index: 2;
+}
+
+.inner {
+	max-width: 1100px;
+	margin: 0 auto;
+}
+
+.heading {
+	margin-bottom: 3rem;
+
+	.prompt {
+		display: block;
+		font-family: var(--font-mono);
+		font-size: 0.85rem;
+		color: var(--green);
+		margin-bottom: 0.4rem;
+	}
+
+	h2 {
+		margin: 0;
+		font-family: var(--font-mono);
+		font-size: clamp(1.8rem, 4vw, 2.8rem);
+		font-weight: 700;
+		color: var(--text-bright);
+		letter-spacing: -0.02em;
+	}
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
+	gap: 1.5rem;
+}
+
+.card {
+	background: var(--surface-2, #161b22);
+	border: 1px solid var(--border, #30363d);
+	border-radius: 12px;
+	padding: 1.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+
+	&:hover {
+		border-color: var(--green);
+		transform: translateY(-4px);
+		box-shadow: 0 8px 32px rgba(57, 211, 83, 0.08);
+	}
+}
+
+.cardTop {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.status {
+	font-family: var(--font-mono);
+	font-size: 0.65rem;
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	padding: 0.2rem 0.6rem;
+	border-radius: 20px;
+	border: 1px solid;
+
+	&[data-status="live"] {
+		color: var(--green);
+		border-color: var(--green);
+		background: rgba(57, 211, 83, 0.08);
+	}
+
+	&[data-status="wip"] {
+		color: var(--yellow, #e3b341);
+		border-color: var(--yellow, #e3b341);
+		background: rgba(227, 179, 65, 0.08);
+	}
+}
+
+.links {
+	display: flex;
+	gap: 0.75rem;
+	align-items: center;
+
+	a {
+		color: var(--text-muted);
+		transition: color 0.2s;
+		display: flex;
+		align-items: center;
+
+		&:hover {
+			color: var(--text-bright);
+		}
+	}
+}
+
+.title {
+	margin: 0;
+	font-size: 1.15rem;
+	font-weight: 600;
+	color: var(--text-bright);
+}
+
+.desc {
+	margin: 0;
+	font-size: 0.9rem;
+	line-height: 1.65;
+	color: var(--text-muted);
+	flex: 1;
+}
+
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	margin-top: 0.25rem;
+}
+
+.tag {
+	font-family: var(--font-mono);
+	font-size: 0.7rem;
+	padding: 0.2rem 0.55rem;
+	border-radius: 4px;
+	background: var(--surface-3, #21262d);
+	color: var(--blue);
+	border: 1px solid var(--border, #30363d);
+}

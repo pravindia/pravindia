@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
 import styles from './Header.module.scss'
@@ -7,11 +6,18 @@ const Header = () => {
     return (
         <header className={styles.header}>
             <Link href="/">pravindia<span className={styles.blinker}>_</span></Link>
-            <ul >
-                {/* <li><Link href="#about">About</Link></li>
-                <li><Link href="#works">Works</Link></li> */}
-                <li><Link href="https://wa.me/+918870142519?text=" target={'_blank'}>Contact</Link></li>
-            </ul>
+            <nav>
+                <ul>
+                    <li><Link href="/#works">About</Link></li>
+                    <li><Link href="/blog">Blog</Link></li>
+                    <li>
+                        <a href="https://wa.me/+918870142519?text=" target="_blank" rel="noreferrer" >
+
+                            <span className={styles.openToWork}>Open to work</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </header>
     );
 }

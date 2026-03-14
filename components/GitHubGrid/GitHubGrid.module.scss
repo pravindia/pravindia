@@ -1,0 +1,126 @@
+/* ── Background variant ── */
+.bgContainer {
+	position: absolute;
+	inset: 0;
+	overflow: hidden;
+	pointer-events: none;
+	z-index: 0;
+	opacity: 0.18;
+}
+
+/* ── Section variant ── */
+.sectionContainer {
+	width: 100%;
+	overflow-x: auto;
+	padding-bottom: 1rem;
+}
+
+.monthLabels {
+	display: flex;
+	gap: 0;
+	padding-left: 12px;
+	margin-bottom: 4px;
+	justify-content: space-around;
+
+	span {
+		font-family: var(--font-mono);
+		font-size: 0.65rem;
+		color: var(--text-muted);
+	}
+}
+
+/* ── Shared grid ── */
+.grid {
+	display: grid;
+	grid-template-columns: repeat(53, minmax(0, 1fr));
+	grid-template-rows: repeat(7, 1fr);
+	gap: 3px;
+	width: 100%;
+	height: 100%;
+
+	&[data-variant="section"] {
+		height: auto;
+		aspect-ratio: 53 / 7;
+		// max-width: 900px;
+		margin: 0 auto;
+	}
+}
+
+.cell {
+	border-radius: 2px;
+	transition: background-color 0.5s ease;
+	animation: flicker var(--dur, 4s) var(--delay, 0s) ease-in-out infinite alternate;
+
+	&[data-level="0"] {
+		background: #161b22;
+	}
+
+	&[data-level="1"] {
+		background: #0e4429;
+	}
+
+	&[data-level="2"] {
+		background: #006d32;
+	}
+
+	&[data-level="3"] {
+		background: #26a641;
+	}
+
+	&[data-level="4"] {
+		background: #39d353;
+	}
+}
+
+@keyframes flicker {
+	from {
+		opacity: 0.4;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+/* ── Legend ── */
+.legend {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	margin-top: 8px;
+	justify-content: flex-end;
+	padding-right: 12px;
+
+	span {
+		font-size: 0.65rem;
+		color: var(--text-muted);
+		font-family: var(--font-mono);
+		margin: 0 4px;
+	}
+}
+
+.legendCell {
+	width: 12px;
+	height: 12px;
+	border-radius: 2px;
+
+	&[data-level="0"] {
+		background: #161b22;
+	}
+
+	&[data-level="1"] {
+		background: #0e4429;
+	}
+
+	&[data-level="2"] {
+		background: #006d32;
+	}
+
+	&[data-level="3"] {
+		background: #26a641;
+	}
+
+	&[data-level="4"] {
+		background: #39d353;
+	}
+}

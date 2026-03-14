@@ -4,184 +4,243 @@
   overflow: hidden;
   z-index: 1;
 }
-// @keyframes grain {
-//   0%, 100% { transform:translate(0, 0) }
-//   10% { transform:translate(-5%, -10%) }
-//   20% { transform:translate(-15%, 5%) }
-//   30% { transform:translate(7%, -25%) }
-//   40% { transform:translate(-5%, 25%) }
-//   50% { transform:translate(-15%, 10%) }
-//   60% { transform:translate(15%, 0%) }
-//   70% { transform:translate(0%, 15%) }
-//   80% { transform:translate(3%, 35%) }
-//   90% { transform:translate(-10%, 10%) }
-// }
-.bgdark{
-  // background-color: #087b257e;
-}
+/* ── Hero ── */
 .home {
   min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
+  padding: 6rem 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  position: relative;
   z-index: 2;
 }
-// .main::after {
-//   content: "";
-//   background-image: url("../public/assets/img/grains.png");
-//   height: 300%;
-//   width: 300%;
-//   opacity: 0.3;
-//   position: fixed;
-//   animation: grain 8s steps(10) infinite;
-// }
 
-.title a {
-  color: #0070f3;
-  text-decoration: none;
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 720px;
+  z-index: 1;
+  position: relative;
 }
 
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
+.terminalLine {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  background: var(--surface-2, #161b22);
+  border: 1px solid var(--border, #21262d);
+  padding: 0.35rem 0.9rem;
+  border-radius: 6px;
+}
+
+.promptSymbol {
+  color: var(--green);
+  font-weight: bold;
 }
 
 .title {
-  margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
+  margin: 0 0 1.5rem;
+    line-height: 1.1;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    color: var(--text-bright, #f0f6fc);
+    letter-spacing: -0.03em;
 }
 
-.title,
+.highlight {
+  color: var(--green);
+  position: relative;
+}
+
 .description {
-  text-align: center;
+  margin: 0 0 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--text-muted, #8b949e);
+    line-height: 1.7;
+    max-width: 560px;
+  
+    strong {
+      color: var(--text, #c9d1d9);
+    }
 }
 
-.description {
-  margin: 4rem 0;
-  // line-height: 1.5;
-  font-size: 1.5rem;
-  font-weight: 300;
-  font-style: italic;
-}
-
-.code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
-}
-
-.grid {
+.heroActions {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 1rem;
   flex-wrap: wrap;
-  max-width: 800px;
+  justify-content: center;
 }
 
-.card {
-  margin: 1rem;
+.btnPrimary {
+  padding: 0.65rem 1.5rem;
+  background: var(--green);
+  color: #000;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  transition: opacity 0.2s, transform 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+}
+
+.btnSecondary {
+  padding: 0.65rem 1.5rem;
+  border: 1px solid var(--border-bright, #30363d);
+  color: var(--text, #c9d1d9);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  transition: border-color 0.2s, color 0.2s;
+
+  &:hover {
+    border-color: var(--text-muted);
+    color: var(--text-bright);
+  }
+}
+
+/* ── Shared section heading ── */
+.heading {
+  margin-bottom: 3rem;
+
+  .prompt {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--green);
+    margin-bottom: 0.4rem;
+  }
+
+    h2 {
+      margin: 0;
+    font-family: var(--font-mono);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--text-bright);
+    }
+    }
+    
+    /* ── Currently Learning section ── */
+    .learningSection {
+      padding: 6rem 2rem;
+      position: relative;
+      z-index: 2;
+      background: linear-gradient(180deg, transparent 0%, rgba(188, 140, 255, 0.04) 50%, transparent 100%);
+    }
+    
+    .learningInner {
+      max-width: 1100px;
+      margin: 0 auto;
+}
+
+.learningGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+  gap: 1.25rem;
+}
+
+.learningCard {
+  background: var(--surface-2, #161b22);
+  border: 1px solid var(--border, #30363d);
+  border-radius: 12px;
   padding: 1.5rem;
-  text-align: left;
-  color: inherit;
-  text-decoration: none;
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  
+    &[data-status="active"] {
+      border-color: rgba(188, 140, 255, 0.3);
+  
+      &:hover {
+        border-color: var(--purple);
+        box-shadow: 0 4px 24px rgba(188, 140, 255, 0.08);
+      }
+    }
+  
+    &[data-status="exploring"] {
+      &:hover {
+        border-color: var(--border-bright, #30363d);
+      }
+    }
+  }
+  
+  .learningCardTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .learningIcon {
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+  
+  .learningStatus {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.5rem;
+    border-radius: 20px;
+    border: 1px solid;
+  
+    &[data-status="active"] {
+      color: var(--purple);
+      border-color: rgba(188, 140, 255, 0.3);
+      background: rgba(188, 140, 255, 0.08);
+    }
+  
+    &[data-status="exploring"] {
+      color: var(--text-muted);
+      border-color: var(--border, #30363d);
+      background: transparent;
+    }
+  }
+  
+  .learningName {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-bright);
+    line-height: 1.3;
+}
+.learningAbbr {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--purple);
+  background: rgba(188, 140, 255, 0.08);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  display: inline-block;
+  width: fit-content;
 }
 
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
-}
-
-.card h2 {
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
-}
-
-.card p {
+.learningDesc {
   margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.5;
-}
-
-.logo {
-  height: 1em;
-  margin-left: 0.5rem;
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: var(--text-muted);
 }
 
 @media (max-width: 600px) {
-  .grid {
-    width: 100%;
+  .heroActions {
     flex-direction: column;
-  }
-}
-
-
-// Background
-$particleSize: 30vmin;
-$animationDuration: 45s;
-$amount: 3;
-.background {
-  overflow: hidden;
-  width: 100vw;
-  height: 100%;
-}
-.background span {
-  width: $particleSize;
-  height: $particleSize;
-  border-radius: $particleSize;
-  // backface-visibility: hidden;
-  position: absolute;
-  animation-name: move;
-  animation-duration: $animationDuration;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  opacity: 0.4;
-  $colors: (#087b25, #8F00FF, #ff6600, #ff2200 , #ff6600);
-  @for $i from 1 through $amount {
-    &:nth-child(#{$i}) {
-      color: nth($colors, $i);
-      bottom: random(50) * 1%;
-      right: random(50) * 1%;
-      animation-duration: (random($animationDuration * 10) / 10) * 1s + 10s;
-      animation-delay: random(($animationDuration + 10s) * 10) / 10 * -1s;
-      transform-origin: (random(50) - 25) * 1vw (random(50) - 25) * 1vh;
-      $blurRadius: (random(3) + 0.9) * $particleSize * 0.4;
-      $x: if(random() > 0.5, -1, 1);
-      box-shadow: ($particleSize * 2 * $x) 0 $blurRadius currentColor;
+    width: 100%;
+    
+      .btnPrimary,
+      .btnSecondary {
+        text-align: center;
+      }
     }
-  }
-}
-
-@keyframes move {
-  100% {
-    transform: translate3d(0, 0, 60px) rotate(360deg);
-    x: random($limit: 3);
-    y: random($limit: 1);
-  }
-}
-
-.about {
-  min-height: 40vmin;
-  padding: 4rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-  z-index: 2;
 }
