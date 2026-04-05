@@ -11,7 +11,7 @@ const Header = () => {
                     <li><Link href="/#works">About</Link></li>
                     <li><Link href="/blog">Blog</Link></li>
                     <li>
-                        <a href="https://wa.me/+918870142519?text=" target="_blank" rel="noreferrer" >
+                        <a href="https://www.linkedin.com/in/pravindia" target="_blank" rel="noreferrer" >
 
                             <span className={styles.openToWork}>Open to work</span>
                         </a>
