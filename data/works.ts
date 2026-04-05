@@ -32,8 +32,8 @@ export const works: WorkItem[] = [
 		github: null,
 	},
 	{
-		slug: "shaoke-warehouse-management-system",
-		title: "SHAOKE Warehouse Management System",
+		slug: "warehouse-management-system",
+		title: "Warehouse Management System",
 		status: "live",
 		period: "2023 — Present",
 		role: "Tech Lead",
@@ -50,8 +50,8 @@ export const works: WorkItem[] = [
 		github: null,
 	},
 	{
-		slug: "verstrade-b2b-ecommerce-platform",
-		title: "VersTrade B2B E-Commerce Platform",
+		slug: "b2b-ecommerce-platform",
+		title: "B2B E-Commerce Platform",
 		status: "live",
 		period: "2023 — Present",
 		role: "Backend / App Engineer",

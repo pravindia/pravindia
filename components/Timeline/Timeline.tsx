@@ -3,10 +3,10 @@ import styles from "./Timeline.module.scss";
 const experiences = [
 	{
 		role: "Senior Software Specialist | Tech Lead",
-		company: "Creative Wiz B.V (via Tem Technologies Pvt. Ltd)",
+		company: "Tem Technologies Pvt. Ltd ( for Creative Wiz B.V )",
 		companyUrl: "https://temtechnologies.com",
 		period: "Jan 2023 — Present",
-		location: "Netherlands (Remote)",
+		location: "Remote",
 		description:
 			"Leading backend architecture and delivery for customs, warehouse, and e-commerce systems using Node.js, NestJS, Python microservices, Kafka-style event workflows, Redis caching, CI/CD, and infrastructure automation.",
 		tags: ["NestJS", "TypeScript", "Python", "System Design", "Docker", "CI/CD", "AI Integrations"],
@@ -20,7 +20,7 @@ const experiences = [
 		location: "Chennai, India",
 		description:
 			"Co-founded and led a 4-5 member engineering team. Drove architecture and delivery across e-commerce, delivery, accounting, and e-learning products, and shipped multiple Flutter apps to Play Store and App Store.",
-		tags: ["Flutter", "Node.js", "Angular", "Next.js", "PHP", "Team Leadership"],
+		tags: ["Flutter", "Node.js", "Angular", "Next.js", "Python", "PHP", "Team Leadership"],
 		current: false,
 	},
 	{

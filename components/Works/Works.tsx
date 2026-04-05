@@ -11,7 +11,7 @@ const works = [
 		status: "live",
 	},
 	{
-		title: "SHAOKE Warehouse Management System",
+		title: "Warehouse Management System",
 		description:
 			"Led backend from project kickoff to production: architecture, CI/CD, server setup, load balancing, and replication. Built parcel scanning APIs, OCR document extraction services, and real-time event workflows.",
 		tech: ["Node.js", "FastAPI", "MySQL", "Redis", "Socket.IO", "Firebase", "Typesense", "Docker"],
@@ -20,7 +20,7 @@ const works = [
 		status: "live",
 	},
 	{
-		title: "VersTrade B2B E-Commerce Platform",
+		title: "B2B E-Commerce Platform",
 		description:
 			"Developed FastAPI backend services for inbound and parcel sorting workflows with SOAP integrations. Built and maintained Flutter apps (Android/iOS/Web) plus Node.js admin systems.",
 		tech: ["FastAPI", "Flutter", "Node.js", "SOAP APIs", "Analytics Dashboards"],
@@ -34,8 +34,18 @@ const works = [
 			"Built production-oriented AI features including OCR pipelines, context retrieval flows, and MCP/RAG based backend integrations for workflow automation and faster operations.",
 		tech: ["RAG", "MCP", "Python", "Elasticsearch", "Redis", "Distributed Systems"],
 		link: null,
-		github: "https://github.com/pravindia",
+		// github: "https://github.com/pravindia",
+		github: null,
 		status: "wip",
+	},
+	{
+		title: "E-Learning Platform",
+		description:
+			"Built a full-stack e-learning platform with React.js frontend, Django backend, and Postgres database. Implemented features like course management, user authentication, progress tracking, and interactive quizzes.",
+		tech: ["React.js", "Django", "Postgres", "TypeScript", "Python", "REST APIs"],
+		link: null,
+		github: null,
+		status: "live",
 	},
 ];
 
