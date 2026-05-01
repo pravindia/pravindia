@@ -5,6 +5,8 @@ import { Analytics } from '@vercel/analytics/next'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { trackEvent } from '../lib/analytics'
+import CommandPalette from '../components/CommandPalette/CommandPalette'
+import { CommandPaletteProvider } from '../lib/CommandPaletteContext'
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -36,7 +38,10 @@ export default function App({ Component, pageProps }: AppProps) {
         });`,
       }}
     />
-    <Component {...pageProps} />
+    <CommandPaletteProvider>
+      <Component {...pageProps} />
+      <CommandPalette />
+    </CommandPaletteProvider>
     <Analytics />
   </>);
 }
