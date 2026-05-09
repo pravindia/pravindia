@@ -49,6 +49,7 @@ const ParticleBackground = () => {
 		}
 
 		function build() {
+			if (!canvas || !ctx) return;
 			readAccent();
 			W = canvas.clientWidth;
 			H = canvas.clientHeight;
@@ -95,6 +96,7 @@ const ParticleBackground = () => {
 
 		let last = performance.now();
 		function tick(now: number) {
+			if (!ctx) return;
 			const dt = Math.min(0.05, (now - last) / 1000);
 			last = now;
 
@@ -180,6 +182,7 @@ const ParticleBackground = () => {
 		}
 
 		function onMove(e: MouseEvent) {
+			if (!canvas) return;
 			const rect = canvas.getBoundingClientRect();
 			mouseRef.current.x = e.clientX - rect.left;
 			mouseRef.current.y = e.clientY - rect.top;
