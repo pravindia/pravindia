@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import styles from "./Works.module.scss";
 
 const works = [
@@ -50,13 +51,40 @@ const works = [
 ];
 
 export default function Works() {
+	const gridRef = useRef<HTMLDivElement>(null);
+	const [visibleCards, setVisibleCards] = useState<Set<string>>(new Set());
+
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						setVisibleCards((prev) => new Set(prev).add(entry.target.getAttribute("data-work") || ""));
+					}
+				});
+			},
+			{ threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+		);
+
+		const cards = gridRef.current?.querySelectorAll("[data-work]");
+		cards?.forEach((card) => observer.observe(card));
+
+		return () => {
+			cards?.forEach((card) => observer.unobserve(card));
+		};
+	}, []);
+
 	return (
 		<section className={styles.section} id="works">
 			<div className={styles.inner}>
-
-				<div className={styles.grid}>
-					{works.map((w) => (
-						<article key={w.title} className={styles.card}>
+				<div className={styles.grid} ref={gridRef}>
+					{works.map((w, idx) => (
+						<article
+							key={w.title}
+							className={`${styles.card} ${visibleCards.has(w.title) ? styles.visible : ""}`}
+							data-work={w.title}
+							style={{ animationDelay: `${idx * 0.1}s` }}
+						>
 							<div className={styles.cardTop}>
 								<span className={styles.status} data-status={w.status}>
 									{w.status === "wip" ? "WIP" : "LIVE"}

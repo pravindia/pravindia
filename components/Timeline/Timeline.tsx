@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import styles from "./Timeline.module.scss";
 
 const experiences = [
@@ -6,7 +7,7 @@ const experiences = [
 		company: "Tem Technologies Pvt. Ltd ( for Creative Wiz B.V )",
 		companyUrl: "https://temtechnologies.com",
 		period: "Jan 2023 — Present",
-		location: "Remote",
+		location: "Hybrid (Chennai, India / Remote)",
 		description:
 			"Leading backend architecture and delivery for customs, warehouse, and e-commerce systems using Node.js, NestJS, Python microservices, Kafka-style event workflows, Redis caching, CI/CD, and infrastructure automation.",
 		tags: ["NestJS", "TypeScript", "Python", "System Design", "Docker", "CI/CD", "AI Integrations"],
@@ -36,8 +37,47 @@ const experiences = [
 ];
 
 export default function Timeline() {
+	const sectionRef = useRef<HTMLElement>(null);
+	const spinesRef = useRef<(HTMLDivElement | null)[]>([]);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			const section = sectionRef.current;
+			if (!section) return;
+
+			const sectionTop = section.getBoundingClientRect().top;
+			const sectionHeight = section.getBoundingClientRect().height;
+			const windowHeight = window.innerHeight;
+
+			// Progress: 0 when section top reaches bottom of viewport, 1 when section bottom reaches top
+			const progressValue = Math.max(
+				0,
+				Math.min(1, (windowHeight - sectionTop) / (sectionHeight + windowHeight))
+			);
+
+			// Update each spine's progress sequentially
+			const totalLines = spinesRef.current.filter(s => s).length - 1; // excluding last entry without line
+			spinesRef.current.forEach((spine, idx) => {
+				if (!spine) return;
+				const lines = spine.querySelectorAll(`.${styles.line}`);
+				lines.forEach(() => {
+					// Each line gets a portion of the total scroll: divide into segments
+					const segmentStart = (idx / totalLines);
+					const segmentEnd = ((idx + 1) / totalLines);
+					const lineProgress = Math.max(0, Math.min(1, (progressValue - segmentStart) / (segmentEnd - segmentStart)));
+					(lines[0] as HTMLElement).style.setProperty('--line-progress', `${lineProgress * 100}%`);
+				});
+			});
+		};
+
+		window.addEventListener('scroll', handleScroll, { passive: true });
+		handleScroll();
+
+		return () => window.removeEventListener('scroll', handleScroll);
+	}, []);
+
 	return (
-		<section className={styles.section} id="experience">
+		<section className={styles.section} id="experience" ref={sectionRef}>
 			<div className={styles.inner}>
 				<div className={styles.heading}>
 					<span className={styles.prompt}>pravindia@portfolio:~$</span>
@@ -46,8 +86,17 @@ export default function Timeline() {
 
 				<div className={styles.timeline}>
 					{experiences.map((exp, i) => (
-						<div key={i} className={styles.entry} data-current={exp.current}>
-							<div className={styles.spine}>
+						<div
+							key={i}
+							className={styles.entry}
+							data-current={exp.current}
+						>
+							<div
+								className={styles.spine}
+								ref={(el) => {
+									spinesRef.current[i] = el;
+								}}
+							>
 								<div className={styles.dot} />
 								{i < experiences.length - 1 && <div className={styles.line} />}
 							</div>

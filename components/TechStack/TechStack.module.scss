@@ -19,6 +19,7 @@
 		font-size: 0.85rem;
 		color: var(--green);
 		margin-bottom: 0.4rem;
+		font-weight: 600;
 	}
 
 	h2 {
@@ -136,4 +137,28 @@
 			background: rgba(188, 140, 255, 0.18);
 		}
 	}
+}
+
+.rowWrapper {
+	margin-bottom: 4rem;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.rowLabel {
+	margin-bottom: 1.5rem;
+	padding-left: 0;
+}
+
+.confidence {
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--text-muted);
+	font-weight: 500;
+	opacity: 0.75;
+	display: inline-block;
 }

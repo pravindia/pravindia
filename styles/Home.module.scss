@@ -96,15 +96,17 @@
 
 .btnSecondary {
   padding: 0.65rem 1.5rem;
-  border: 1px solid var(--border-bright, #30363d);
-  color: var(--text, #c9d1d9);
+  background: rgba(57, 211, 83, 0.1);
+  border: 1px solid rgba(57, 211, 83, 0.2);
+  color: var(--green);
   font-weight: 600;
   font-size: 0.9rem;
   border-radius: 8px;
-  transition: border-color 0.2s, color 0.2s;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
 
   &:hover {
-    border-color: var(--text-muted);
+    background: rgba(57, 211, 83, 0.15);
+    border-color: rgba(57, 211, 83, 0.3);
     color: var(--text-bright);
   }
 }

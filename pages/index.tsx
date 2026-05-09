@@ -3,9 +3,13 @@ import styles from "../styles/Home.module.scss";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import Cursor from "../components/Cursor/Cursor";
+import ParticleBackground from "../components/ParticleBackground/ParticleBackground";
 import Works from "../components/Works/Works";
 import TechStack from "../components/TechStack/TechStack";
+import Interests from "../components/Interests/Interests";
 import Timeline from "../components/Timeline/Timeline";
+import Blog from "../components/Blog/Blog";
+import ResumeModal from "../components/ResumeModal/ResumeModal";
 import { Variants } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -15,6 +19,7 @@ export default function Home() {
     y: 0,
   });
   const [cursorVariant, setCursorVariant] = useState<string>("inactive");
+  const [resumeOpen, setResumeOpen] = useState(false);
 
   const experienceYears = (() => {
     const startYear = 2018;
@@ -51,10 +56,16 @@ export default function Home() {
 
   const textEnter = () => setCursorVariant("active");
   const textLeave = () => setCursorVariant("inactive");
+
+  const handleOpenResume = () => setResumeOpen(true);
+  const handleCloseResume = () => setResumeOpen(false);
+
   return (
     <>
+      <ParticleBackground />
       <Cursor variants={variants} curVariant={cursorVariant} />
       <Header />
+      <ResumeModal open={resumeOpen} onClose={handleCloseResume} />
       <div className={styles.container}>
         <Head>
           <title>Pravin Kumar — Software Developer</title>
@@ -76,14 +87,16 @@ export default function Home() {
               </p>
               <div className={styles.heroActions}>
                 <a href="#works" className={styles.btnPrimary}>See my work</a>
-                <a href="https://drive.google.com/file/d/1i1xcgy1VaEw1n1eI4p9JeZ2hJDLsw17K/view?usp=sharing" target="_blank" rel="noreferrer" className={styles.btnSecondary}>Resumé ↗</a>
+                <button onClick={handleOpenResume} className={styles.btnSecondary}>Resumé ↗</button>
               </div>
             </div>
           </section>
 
           <Works />
           <TechStack />
+          <Interests />
           <Timeline />
+          <Blog />
 
           <section className={styles.learningSection} id="learning">
             <div className={styles.learningInner}>

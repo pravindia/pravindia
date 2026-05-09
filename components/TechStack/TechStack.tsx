@@ -1,13 +1,12 @@
 import styles from "./TechStack.module.scss";
 
-const stack = {
+const dailyConfident = {
 	Frontend: [
 		"Angular",
 		"React.js",
 		"Next.js",
 		"TypeScript",
 		"JavaScript",
-		"Flutter (Web)",
 		"HTML5 / CSS3",
 	],
 	Backend: [
@@ -18,35 +17,33 @@ const stack = {
 		"Python",
 		"REST APIs",
 		"Microservices",
-		"Event-Driven Architecture",
-		"Kafka",
-		"Socket.IO",
 	],
 	Data: [
 		"PostgreSQL",
 		"MongoDB",
 		"MySQL",
 		"Redis",
-		"Firestore",
 		"Elasticsearch",
 	],
+};
+
+const passionateSideprojects = {
 	"Tools & DevOps": [
 		"Git / GitHub",
 		"Docker",
 		"CI/CD Pipelines",
-		"AWS (EC2, S3, Lambda, CloudFormation)",
+		"AWS (EC2, S3, Lambda)",
 		"DigitalOcean",
 		"Vercel",
 		"Firebase",
-		"Sentry",
-		"Jest",
 	],
-	"🤖 Currently Learning": [
+	"🤖 Experimenting": [
 		"MCP (Model Context Protocol)",
 		"RAG (Retrieval-Augmented Gen)",
-		"LLM Embeddings + Similarity Search",
+		"LLM Embeddings",
 		"Vector Databases",
-		"AI Workflow Automation",
+		"Kafka",
+		"Socket.IO",
 	],
 };
 
@@ -55,7 +52,7 @@ const categoryColors: Record<string, string> = {
 	Backend: "green",
 	Data: "purple",
 	"Tools & DevOps": "orange",
-	"🤖 Currently Learning": "ai",
+	"🤖 Experimenting": "ai",
 };
 
 export default function TechStack() {
@@ -63,23 +60,50 @@ export default function TechStack() {
 		<section className={styles.section} id="stack">
 			<div className={styles.inner}>
 				<div className={styles.heading}>
-					<span className={styles.prompt}>pravindia@portfolio:~$</span>
-					<h2>cat tech-stack.json</h2>
+					<span className={styles.prompt}>/02</span>
+					<h2>Things I reach for</h2>
 				</div>
 
-				<div className={styles.categories}>
-					{Object.entries(stack).map(([category, items]) => (
-						<div key={category} className={styles.category} data-color={categoryColors[category]}>
-							<h3 className={styles.catLabel}>{category}</h3>
-							<div className={styles.pills}>
-								{items.map((item) => (
-									<span key={item} className={styles.pill} data-color={categoryColors[category]}>
-										{item}
-									</span>
-								))}
+				{/* Row 1: Daily & Confident */}
+				<div className={styles.rowWrapper}>
+					<div className={styles.rowLabel}>
+						<span className={styles.confidence}>more confident</span>
+					</div>
+					<div className={styles.categories}>
+						{Object.entries(dailyConfident).map(([category, items]) => (
+							<div key={category} className={styles.category} data-color={categoryColors[category]}>
+								<h3 className={styles.catLabel}>{category}</h3>
+								<div className={styles.pills}>
+									{items.map((item) => (
+										<span key={item} className={styles.pill} data-color={categoryColors[category]}>
+											{item}
+										</span>
+									))}
+								</div>
 							</div>
-						</div>
-					))}
+						))}
+					</div>
+				</div>
+
+				{/* Row 2: Passionate & Sideprojects */}
+				<div className={styles.rowWrapper}>
+					<div className={styles.rowLabel}>
+						<span className={styles.confidence}>passionate & sideprojects</span>
+					</div>
+					<div className={styles.categories}>
+						{Object.entries(passionateSideprojects).map(([category, items]) => (
+							<div key={category} className={styles.category} data-color={categoryColors[category]}>
+								<h3 className={styles.catLabel}>{category}</h3>
+								<div className={styles.pills}>
+									{items.map((item) => (
+										<span key={item} className={styles.pill} data-color={categoryColors[category]}>
+											{item}
+										</span>
+									))}
+								</div>
+							</div>
+						))}
+					</div>
 				</div>
 			</div>
 		</section>
