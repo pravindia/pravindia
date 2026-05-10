@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { trackEvent } from '../lib/analytics'
 import CommandPalette from '../components/CommandPalette/CommandPalette'
 import { CommandPaletteProvider } from '../lib/CommandPaletteContext'
+import PageLoader from '../components/PageLoader/PageLoader'
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -39,6 +40,7 @@ export default function App({ Component, pageProps }: AppProps) {
       }}
     />
     <CommandPaletteProvider>
+      <PageLoader />
       <Component {...pageProps} />
       <CommandPalette />
     </CommandPaletteProvider>

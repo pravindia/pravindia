@@ -96,18 +96,17 @@
 
 .btnSecondary {
   padding: 0.65rem 1.5rem;
-  background: rgba(57, 211, 83, 0.1);
-  border: 1px solid rgba(57, 211, 83, 0.2);
-  color: var(--green);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-bright);
   font-weight: 600;
   font-size: 0.9rem;
   border-radius: 8px;
   transition: background 0.2s, border-color 0.2s, color 0.2s;
 
   &:hover {
-    background: rgba(57, 211, 83, 0.15);
-    border-color: rgba(57, 211, 83, 0.3);
-    color: var(--text-bright);
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(255, 255, 255, 0.25);
   }
 }
 
@@ -146,92 +145,141 @@
 }
 
 .learningGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
-  gap: 1.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  perspective: 1000px;
 }
 
-.learningCard {
-  background: var(--surface-2, #161b22);
-  border: 1px solid var(--border, #30363d);
+.playCard {
+  position: relative;
+  width: 180px;
+  height: 260px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  
-    &[data-status="active"] {
-      border-color: rgba(188, 140, 255, 0.3);
-  
-      &:hover {
-        border-color: var(--purple);
-        box-shadow: 0 4px 24px rgba(188, 140, 255, 0.08);
-      }
-    }
-  
-    &[data-status="exploring"] {
-      &:hover {
-        border-color: var(--border-bright, #30363d);
-      }
-    }
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+  transform: rotateZ(var(--base-tilt, 0deg));
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.08) 50%, transparent 100%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
-  
-  .learningCardTop {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .learningIcon {
-    font-size: 1.4rem;
-    line-height: 1;
-  }
-  
-  .learningStatus {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    padding: 0.2rem 0.5rem;
-    border-radius: 20px;
-    border: 1px solid;
-  
-    &[data-status="active"] {
-      color: var(--purple);
-      border-color: rgba(188, 140, 255, 0.3);
-      background: rgba(188, 140, 255, 0.08);
-    }
-  
-    &[data-status="exploring"] {
-      color: var(--text-muted);
-      border-color: var(--border, #30363d);
-      background: transparent;
+
+  &:hover {
+    transform: rotateZ(var(--base-tilt, 0deg)) translateY(-8px);
+    box-shadow: 0 0 24px rgba(255, 255, 255, 0.12), 0 0 40px rgba(188, 140, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.25);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
+
+    &::before {
+      opacity: 1;
     }
   }
-  
-  .learningName {
-    margin: 0;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text-bright);
-    line-height: 1.3;
-}
-.learningAbbr {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--purple);
-  background: rgba(188, 140, 255, 0.08);
-  padding: 0.15rem 0.5rem;
-  border-radius: 4px;
-  display: inline-block;
-  width: fit-content;
 }
 
-.learningDesc {
+.cardCorner {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1;
+  z-index: 2;
+}
+
+.cardCornerBR {
+  position: absolute;
+  bottom: 0.6rem;
+  right: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1;
+  transform: rotate(180deg);
+  z-index: 2;
+}
+
+.rank {
+  font-size: 1.1rem;
+  color: var(--text-bright);
+}
+
+.suit {
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+.cardCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  z-index: 2;
+  position: relative;
+}
+
+.icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.cardName {
   margin: 0;
   font-size: 0.85rem;
-  line-height: 1.65;
+  font-weight: 700;
+  color: var(--text-bright);
+  line-height: 1.2;
+}
+
+.cardAbbr {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  display: block;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.cardDesc {
+  margin: 0;
+  font-size: 0.7rem;
+  line-height: 1.3;
   color: var(--text-muted);
 }
 

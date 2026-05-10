@@ -11,19 +11,19 @@ const Interests = () => {
 		{ id: 'arch', label: 'system architecture', x: 0.30, y: 0.30, s: 3, group: 'core' },
 		{ id: 'queues', label: 'message queues', x: 0.62, y: 0.30, s: 2, group: 'core' },
 		{ id: 'observ', label: 'observability', x: 0.78, y: 0.42, s: 2, group: 'core' },
-		{ id: 'pg', label: 'postgres internals', x: 0.20, y: 0.62, s: 2, group: 'core' },
+		{ id: 'pg', label: 'postgres', x: 0.20, y: 0.62, s: 2, group: 'core' },
 
 		// Languages
-		{ id: 'rust', label: 'rust', x: 0.42, y: 0.74, s: 2, group: 'lang' },
+		{ id: 'dart', label: 'dart', x: 0.42, y: 0.74, s: 2, group: 'lang' },
 		{ id: 'ts', label: 'typescript', x: 0.58, y: 0.66, s: 2, group: 'lang' },
 		{ id: 'py', label: 'python', x: 0.36, y: 0.20, s: 2, group: 'lang' },
 
 		// Life interests
-		{ id: 'climbing', label: 'bouldering', x: 0.86, y: 0.62, s: 2, group: 'life' },
-		{ id: 'film', label: 'film photography', x: 0.16, y: 0.40, s: 2, group: 'life' },
+		{ id: 'aquarist', label: 'fishkeeping', x: 0.86, y: 0.62, s: 2, group: 'life' },
+		{ id: 'ele', label: 'electronics', x: 0.16, y: 0.40, s: 2, group: 'life' },
 		{ id: 'coffee', label: 'pour-over coffee', x: 0.74, y: 0.78, s: 1, group: 'life' },
-		{ id: 'scifi', label: 'hard sci-fi', x: 0.10, y: 0.78, s: 1, group: 'life' },
-		{ id: 'music', label: 'music production', x: 0.66, y: 0.85, s: 1, group: 'life' },
+		{ id: 'scifi', label: 'Music & Movies', x: 0.10, y: 0.78, s: 1, group: 'life' },
+		{ id: 'apps', label: 'build apps', x: 0.66, y: 0.85, s: 1, group: 'life' },
 	], []);
 
 	const edges = useMemo(() => [
@@ -31,14 +31,14 @@ const Interests = () => {
 		['queues', 'distsys'],
 		['observ', 'distsys'],
 		['pg', 'distsys'],
-		['rust', 'distsys'],
+		['dart', 'distsys'],
 		['ts', 'arch'],
 		['py', 'arch'],
-		['climbing', 'observ'],
-		['film', 'arch'],
-		['coffee', 'climbing'],
-		['scifi', 'film'],
-		['music', 'climbing'],
+		['aquarist', 'observ'],
+		['ele', 'arch'],
+		['coffee', 'aquarist'],
+		['scifi', 'ele'],
+		['apps', 'aquarist'],
 	], []);
 
 	const [hovered, setHovered] = useState<string | null>(null);

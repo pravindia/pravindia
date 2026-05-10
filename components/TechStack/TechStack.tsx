@@ -1,61 +1,45 @@
 import styles from "./TechStack.module.scss";
 
-const dailyConfident = {
-	Frontend: [
-		"Angular",
-		"React.js",
-		"Next.js",
-		"TypeScript",
-		"JavaScript",
-		"HTML5 / CSS3",
-	],
-	Backend: [
-		"Node.js",
-		"NestJS",
-		"FastAPI",
-		"Django",
-		"Python",
-		"REST APIs",
-		"Microservices",
-	],
-	Data: [
-		"PostgreSQL",
-		"MongoDB",
-		"MySQL",
-		"Redis",
-		"Elasticsearch",
-	],
-};
+const dailyConfident = [
+	{ icon: "📘", name: "TypeScript" },
+	{ icon: "🐍", name: "Python" },
+	{ icon: "🔷", name: "Angular" },
+	{ icon: "▲", name: "Next.js" },
+	{ icon: "☕", name: "JavaScript" },
+	{ icon: "🟢", name: "Node.js" },
+	{ icon: "🦅", name: "NestJS" },
+	{ icon: "⚡", name: "FastAPI" },
+	{ icon: "🦋", name: "Flutter" },
+	{ icon: "🔗", name: "REST APIs" },
+	{ icon: "🏗️", name: "Microservices" },
+	{ icon: "🐘", name: "PostgreSQL" },
+	{ icon: "🍃", name: "MongoDB" },
+	{ icon: "🐬", name: "MySQL" },
+	{ icon: "⚡", name: "Redis" },
 
-const passionateSideprojects = {
-	"Tools & DevOps": [
-		"Git / GitHub",
-		"Docker",
-		"CI/CD Pipelines",
-		"AWS (EC2, S3, Lambda)",
-		"DigitalOcean",
-		"Vercel",
-		"Firebase",
-	],
-	"🤖 Experimenting": [
-		"MCP (Model Context Protocol)",
-		"RAG (Retrieval-Augmented Gen)",
-		"LLM Embeddings",
-		"Vector Databases",
-		"Kafka",
-		"Socket.IO",
-	],
-};
+];
 
-const categoryColors: Record<string, string> = {
-	Frontend: "blue",
-	Backend: "green",
-	Data: "purple",
-	"Tools & DevOps": "orange",
-	"🤖 Experimenting": "ai",
-};
+const experimentingTools = [
+	{ icon: "🔗", name: "Git / GitHub" },
+	{ icon: "🐳", name: "Docker" },
+	{ icon: "☁️", name: "AWS (EC2, S3, Lambda)" },
+	{ icon: "🔄", name: "CI/CD Pipelines" },
+	{ icon: "☁️", name: "DigitalOcean" },
+	{ icon: "▲", name: "Vercel" },
+	{ icon: "🔥", name: "Firebase" },
+	{ icon: "🔌", name: "MCP" },
+	{ icon: "🔍", name: "Elasticsearch" },
+	{ icon: "🧠", name: "RAG" },
+	{ icon: "✨", name: "LLM Embeddings" },
+	{ icon: "📊", name: "Vector DBs" },
+	{ icon: "🚂", name: "Kafka" },
+	{ icon: "🔌", name: "Socket.IO" },
+];
 
 export default function TechStack() {
+	const allChips1 = [...dailyConfident, ...dailyConfident];
+	const allChips2 = [...experimentingTools, ...experimentingTools];
+
 	return (
 		<section className={styles.section} id="stack">
 			<div className={styles.inner}>
@@ -64,45 +48,31 @@ export default function TechStack() {
 					<h2>Things I reach for</h2>
 				</div>
 
-				{/* Row 1: Daily & Confident */}
 				<div className={styles.rowWrapper}>
-					<div className={styles.rowLabel}>
-						<span className={styles.confidence}>more confident</span>
-					</div>
-					<div className={styles.categories}>
-						{Object.entries(dailyConfident).map(([category, items]) => (
-							<div key={category} className={styles.category} data-color={categoryColors[category]}>
-								<h3 className={styles.catLabel}>{category}</h3>
-								<div className={styles.pills}>
-									{items.map((item) => (
-										<span key={item} className={styles.pill} data-color={categoryColors[category]}>
-											{item}
-										</span>
-									))}
-								</div>
-							</div>
-						))}
+					{/* <span className={styles.confidence}>more confident</span> */}
+					<div className={styles.wrapper}>
+						<div className={styles.track}>
+							{allChips1.map((chip, idx) => (
+								<span key={`${chip.name}-${idx}`} className={styles.chip}>
+									<span className={styles.glyph}>{chip.icon}</span>
+									{chip.name}
+								</span>
+							))}
+						</div>
 					</div>
 				</div>
 
-				{/* Row 2: Passionate & Sideprojects */}
 				<div className={styles.rowWrapper}>
-					<div className={styles.rowLabel}>
-						<span className={styles.confidence}>passionate & sideprojects</span>
-					</div>
-					<div className={styles.categories}>
-						{Object.entries(passionateSideprojects).map(([category, items]) => (
-							<div key={category} className={styles.category} data-color={categoryColors[category]}>
-								<h3 className={styles.catLabel}>{category}</h3>
-								<div className={styles.pills}>
-									{items.map((item) => (
-										<span key={item} className={styles.pill} data-color={categoryColors[category]}>
-											{item}
-										</span>
-									))}
-								</div>
-							</div>
-						))}
+					{/* <span className={styles.confidence}>passionate & experimenting</span> */}
+					<div className={styles.wrapper}>
+						<div className={`${styles.track} ${styles.trackRev}`}>
+							{allChips2.map((chip, idx) => (
+								<span key={`${chip.name}-${idx}`} className={styles.chip}>
+									<span className={styles.glyph}>{chip.icon}</span>
+									{chip.name}
+								</span>
+							))}
+						</div>
 					</div>
 				</div>
 			</div>

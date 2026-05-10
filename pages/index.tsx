@@ -106,21 +106,32 @@ export default function Home() {
               </div>
               <div className={styles.learningGrid}>
                 {[
-                  { icon: "🔌", name: "Model Context Protocol", abbr: "MCP", desc: "Protocol for connecting AI assistants to external tools, APIs, and data sources. Building custom MCP servers to supercharge AI workflows.", status: "active" },
-                  { icon: "🧠", name: "Retrieval-Augmented Generation", abbr: "RAG", desc: "Giving LLMs long-term memory by retrieving relevant context from vector databases at query time. Exploring ChromaDB and pgvector.", status: "active" },
-                  { icon: "⛓️", name: "LangChain / LangGraph", abbr: "LangChain", desc: "Framework for composing LLM-powered apps — chains, agents, memory. Using it to build document Q&A and agentic workflows.", status: "exploring" },
-                  { icon: "🔢", name: "Embeddings & Vector DBs", abbr: "Vectors", desc: "How text becomes numbers, similarity search, and why semantic search beats keyword search for AI applications.", status: "exploring" },
+                  { rank: "A", suit: "♠", name: "Model Context Protocol", abbr: "MCP", desc: "Protocol for connecting AI assistants to external tools, APIs, and data sources. Building custom MCP servers.", tilt: -2 },
+                  { rank: "K", suit: "♣", name: "Retrieval-Augmented Generation", abbr: "RAG", desc: "Giving LLMs long-term memory by retrieving relevant context from vector databases at query time.", tilt: -1 },
+                  { rank: "Q", suit: "♥", name: "LangChain / LangGraph", abbr: "LangChain", desc: "Framework for composing LLM-powered apps — chains, agents, memory.", tilt: 1 },
+                  { rank: "J", suit: "♦", name: "Embeddings & Vector DBs", abbr: "Vectors", desc: "How text becomes numbers, similarity search, and semantic understanding.", tilt: 2 },
                 ].map((item) => (
-                  <div key={item.abbr} className={styles.learningCard} data-status={item.status}>
-                    <div className={styles.learningCardTop}>
-                      <span className={styles.learningIcon}>{item.icon}</span>
-                      <span className={styles.learningStatus} data-status={item.status}>
-                        {item.status === "active" ? "▶ active" : "◎ exploring"}
-                      </span>
+                  <div
+                    key={item.abbr}
+                    className={styles.playCard}
+                    style={{ '--base-tilt': `${item.tilt}deg` } as React.CSSProperties}
+                  >
+                    <div className={styles.cardCorner}>
+                      <div className={styles.rank}>{item.rank}</div>
+                      <div className={styles.suit}>{item.suit}</div>
                     </div>
-                    <h3 className={styles.learningName}>{item.name}</h3>
-                    <code className={styles.learningAbbr}>{item.abbr}</code>
-                    <p className={styles.learningDesc}>{item.desc}</p>
+                    <div className={styles.cardCenter}>
+                      {/* <span className={styles.icon}>{item.icon}</span> */}
+                      <div className={styles.cardContent}>
+                        <h3 className={styles.cardName}>{item.name}</h3>
+                        <code className={styles.cardAbbr}>{item.abbr}</code>
+                        <p className={styles.cardDesc}>{item.desc}</p>
+                      </div>
+                    </div>
+                    <div className={styles.cardCornerBR}>
+                      <div className={styles.rank}>{item.rank}</div>
+                      <div className={styles.suit}>{item.suit}</div>
+                    </div>
                   </div>
                 ))}
               </div>
