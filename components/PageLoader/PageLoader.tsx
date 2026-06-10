@@ -1,36 +1,33 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import styles from './PageLoader.module.scss';
 
+// useLayoutEffect runs before paint on the client; fall back to useEffect on the
+// server to avoid the SSR warning. Hiding before paint stops the loader from
+// flashing on repeat (already-loaded) visits.
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+
 export default function PageLoader() {
-  const [show, setShow] = useState(false);
+  // Start shown so the backdrop covers the page from the very first paint —
+  // otherwise the real page is briefly visible before the effect runs.
+  const [show, setShow] = useState(true);
   const [progress, setProgress] = useState(0);
-  const [lines, setLines] = useState(0);
   const [fading, setFading] = useState(false);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const isLoaded = sessionStorage.getItem('pageLoaded');
-    if (isLoaded) return;
+    if (isLoaded) {
+      setShow(false);
+      return;
+    }
 
-    setShow(true);
-
-    // Progress bar animation
     const progressInterval = setInterval(() => {
       setProgress((p) => {
         const newP = Math.min(100, p + Math.random() * 12);
-        if (newP >= 100) {
-          clearInterval(progressInterval);
-        }
+        if (newP >= 100) clearInterval(progressInterval);
         return newP;
       });
     }, 80);
 
-    // Terminal lines appear
-    const lineTimings = [150, 350, 550, 750, 950];
-    const lineTimeouts = lineTimings.map((delay) =>
-      setTimeout(() => setLines((l) => l + 1), delay)
-    );
-
-    // Fade out and mark as loaded
     const fadeTimeout = setTimeout(() => {
       setFading(true);
       const unmountTimeout = setTimeout(() => {
@@ -42,44 +39,21 @@ export default function PageLoader() {
 
     return () => {
       clearInterval(progressInterval);
-      lineTimeouts.forEach((t) => clearTimeout(t));
       clearTimeout(fadeTimeout);
     };
   }, []);
 
   if (!show) return null;
 
-  const logLines = [
-    '> booting environment',
-    '> loading assets',
-    '> initializing client',
-    '> rendering components',
-    '> ready',
-  ];
+  const filled = Math.round(progress / 5);
+  const empty = 20 - filled;
+  const bar = ':'.repeat(filled) + ' '.repeat(empty);
+  const pct = String(Math.round(progress)).padStart(3, ' ');
 
   return (
     <div className={`${styles.backdrop} ${fading ? styles.fading : ''}`}>
-      <div className={styles.container}>
-        <div className={styles.terminal}>
-          <div className={styles.prompt}>
-            pravindia@portfolio:~ <span className={styles.blink}>$</span>
-          </div>
-
-          <div className={styles.stream}>
-            {logLines.slice(0, lines).map((line, i) => (
-              <div key={i} className={styles.line}>
-                <span className={styles.arrow}>›</span> {line}
-              </div>
-            ))}
-          </div>
-
-          <div className={styles.bar}>
-            <div
-              className={styles.fill}
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-        </div>
+      <div className={styles.loader}>
+        <span className={styles.bar}>[{bar}] {pct}%</span>
       </div>
     </div>
   );

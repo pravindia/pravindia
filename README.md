@@ -1,6 +1,6 @@
 # Hi there 👋
 
-I'm **Pravin Kumar**, Senior Software Engineer · 8 Years · Backend Architecture & Distributed Systems · JavaScript & Python · Node.js · Angular, Next.js
+I'm **Pravin Kumar**, Senior Software Engineer · 8 Years · Backend Architecture & Distributed Systems · TypeScript & Python · Node.js · Angular, Next.js, AWS, System Design
 
 ---
 
