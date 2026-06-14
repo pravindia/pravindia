@@ -7,6 +7,8 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
+  // Vercel optimizations
+  compress: true,
 }
 
 module.exports = nextConfig

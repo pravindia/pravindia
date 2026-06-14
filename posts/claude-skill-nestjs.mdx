@@ -1,0 +1,128 @@
+---
+title: "Building a Claude PR Review Skill for NestJS"
+date: "2026-06-14"
+excerpt: "Checklist and methods for creating a PR skills for a NestJS project"
+tags: ["claude", "skills", "NestJS"]
+readTime: "2"
+---
+# Building a Claude PR Review Skill for NestJS
+
+Automating pull request reviews can significantly reduce manual effort and improve code quality. In this guide, we'll create a Claude skill that validates NestJS pull requests before allowing them to be merged.
+
+## Goal
+
+For every PR, Claude should:
+
+1. Detect changed modules/files.
+2. Run a project build and check for compilation errors.
+3. Run Prettier formatting checks.
+4. Run ESLint validation.
+5. Execute tests related to the changed module.
+6. Create or approve the PR only if all validations pass.
+7. If a new feature or behavior is added without corresponding tests, ask the user whether to proceed without test coverage.
+
+## Workflow
+
+### 1. Analyze Changed Files
+
+Identify the files modified in the PR:
+
+```bash
+git diff --name-only origin/main...HEAD
+```
+
+Determine which NestJS module(s) are affected.
+
+### 2. Verify Build
+
+Ensure the application compiles successfully:
+
+```bash
+npm run build
+```
+
+Fail the review if any TypeScript or NestJS compilation errors are found.
+
+### 3. Run Prettier
+
+Validate code formatting:
+
+```bash
+npx prettier --check .
+```
+
+If formatting issues exist, request the author to run:
+
+```bash
+npx prettier --write .
+```
+
+### 4. Run ESLint
+
+Check code quality and linting rules:
+
+```bash
+npm run lint
+```
+
+Block the PR if lint errors are detected.
+
+### 5. Run Relevant Tests
+
+Execute tests for the affected module only:
+
+```bash
+npm test -- users
+npm test -- auth
+```
+
+Or use a custom mapping between source files and test files.
+
+### 6. Verify Test Coverage
+
+When Claude detects:
+
+* New endpoints
+* New services
+* New business logic
+* Modified behavior
+
+but no related test changes are included, respond with:
+
+> I detected feature or behavior changes without corresponding test updates. Do you want to proceed with this PR review without adding test coverage?
+
+Wait for user confirmation before continuing.
+
+### 7. Create or Approve PR
+
+Only proceed when:
+
+* Build passes
+* Prettier passes
+* ESLint passes
+* Relevant tests pass
+* Missing test coverage is explicitly acknowledged
+
+Example final status:
+
+```text
+✅ Build Passed
+✅ Prettier Passed
+✅ ESLint Passed
+✅ Module Tests Passed
+✅ Test Coverage Verified
+
+PR approved and ready for merge.
+```
+
+## Benefits
+
+This workflow ensures every NestJS pull request maintains:
+
+* Consistent code style
+* Clean linting
+* Working builds
+* Verified functionality
+* Explicit handling of missing tests
+
+The result is faster reviews, fewer regressions, and higher confidence in every merge.

@@ -45,6 +45,7 @@ const Header = () => {
 						onClick={openPalette}
 						aria-label="Open search"
 						title="Press ⌘K or Ctrl+K"
+						suppressHydrationWarning
 					>
 						<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
 							<circle cx="11" cy="11" r="7" />

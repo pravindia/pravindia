@@ -3,6 +3,7 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import styles from "../../styles/Blog.module.scss";
 import { useState, useMemo, useRef, useEffect } from "react";
+import Link from 'next/link';
 
 type Kind = "blog" | "insights" | "case-study";
 
@@ -103,7 +104,7 @@ const KINDS = [
 
 const totalReadMin = POSTS.reduce((sum, p) => sum + parseInt(p.readTime), 0) + parseInt(PINNED.readTime);
 
-export default function Blog() {
+export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 	const [kind, setKind] = useState<string>("all");
 	const [q, setQ] = useState("");
 	const [activeTag, setActiveTag] = useState<string | null>(null);
@@ -136,9 +137,24 @@ export default function Blog() {
 		return () => window.removeEventListener("keydown", onKey);
 	}, []);
 
+	// `localPosts` comes from getStaticProps and is merged with external POSTS
+	const mergedPosts = useMemo(() => {
+		const locals = (localPosts || []).map((p: any) => ({
+			slug: p.slug,
+			title: p.title,
+			date: p.date || '',
+			excerpt: p.excerpt || '',
+			tags: p.tags || [],
+			readTime: p.readTime || '1',
+			kind: 'blog' as Kind,
+			url: `/blog/${p.slug}`,
+		}));
+		return [...locals, ...POSTS];
+	}, [localPosts]);
+
 	const filtered = useMemo(() => {
 		const needle = q.trim().toLowerCase();
-		return POSTS.filter((p) => {
+		return mergedPosts.filter((p) => {
 			if (kind !== "all" && p.kind !== kind) return false;
 			if (activeTag && !p.tags.includes(activeTag)) return false;
 			if (needle) {
@@ -148,6 +164,8 @@ export default function Blog() {
 			return true;
 		});
 	}, [kind, q, activeTag]);
+
+
 
 	function handleTag(tag: string) {
 		setActiveTag((prev) => (prev === tag ? null : tag));
@@ -167,6 +185,7 @@ export default function Blog() {
 			<Head>
 				<title>Writing — Pravin Kumar</title>
 				<meta name="description" content="Essays, notes, and short takes on frontend, mobile, and the craft of building things." />
+				<link rel="alternate" type="application/rss+xml" title="Pravin Kumar Blog" href="/api/rss.xml" />
 			</Head>
 
 			<Header />
@@ -260,7 +279,7 @@ export default function Blog() {
 								<button onClick={reset}>Clear filters</button>
 							</div>
 						) : (
-							filtered.map((post) => (
+								filtered.map((post: Post) => (
 								<a
 									key={post.slug}
 									className={styles.postCard}
@@ -279,7 +298,7 @@ export default function Blog() {
 									<p className={styles.postExcerpt}>{post.excerpt}</p>
 									<div className={styles.postFoot}>
 										<div className={styles.postTags}>
-											{post.tags.map((t) => (
+												{post.tags.map((t: string) => (
 												<span
 													key={t}
 													className={styles.tag}
@@ -345,4 +364,28 @@ export default function Blog() {
 			</div>
 		</>
 	);
+}
+
+export async function getStaticProps() {
+	let localPosts: any[] = [];
+	try {
+		const { getAllPosts } = await import('../../lib/mdx');
+		localPosts = await getAllPosts();
+	} catch (e) {
+		// ignore
+	}
+	const locals = localPosts.map((p: any) => ({
+		slug: p.slug,
+		title: p.title,
+		date: p.date || '',
+		excerpt: p.excerpt || '',
+		tags: p.tags || [],
+		readTime: p.readTime || '1',
+		kind: 'blog' as Kind,
+		url: `/blog/${p.slug}`,
+	}));
+	return {
+		props: { localPosts: locals },
+		revalidate: 3600, // ISR: regenerate every hour on Vercel
+	};
 }
