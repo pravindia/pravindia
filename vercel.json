@@ -4,10 +4,7 @@
 	"installCommand": "npm install",
 	"framework": "nextjs",
 	"env": {
-		"NEXT_PUBLIC_SITE_URL": {
-			"description": "Site URL for canonical links",
-			"placeholder": "https://yourdomain.com"
-		}
+		"NEXT_PUBLIC_SITE_URL": "https://pravindia.com"
 	},
 	"functions": {
 		"pages/**": {
