@@ -3,15 +3,26 @@ import styles from "./Timeline.module.scss";
 
 const experiences = [
 	{
+		role: "Senior Product Engineer",
+		company: "WCC Pty Ltd.",
+		companyUrl: null,
+		period: "Jun 2026 — Present",
+		location: "Remote (Australia)",
+		description:
+			"Architecting a multi-tenant AI marketing intelligence platform with NestJS, TypeScript, Next.js, and PostgreSQL. Building reliable multi-model agent workflows, multimodal RAG, LLM observability, evaluations, and cost controls for production-scale AI systems.",
+		tags: ["NestJS","Next.js", "PostgreSQL", "RAG", "LLMOps", "AI Agents", "AI Observability"],
+		current: true,
+	},
+	{
 		role: "Senior Software Specialist | Tech Lead",
 		company: "Tem Technologies Pvt. Ltd ( for Creative Wiz B.V )",
 		companyUrl: "https://temtechnologies.com",
-		period: "Jan 2023 — Present",
+		period: "Jan 2023 — May 2026",
 		location: "Hybrid (Chennai, India / Remote)",
 		description:
 			"Leading backend architecture and delivery for customs, warehouse, and e-commerce systems using Node.js, NestJS, Python microservices, Kafka-style event workflows, Redis caching, CI/CD, and infrastructure automation.",
 		tags: ["NestJS", "TypeScript", "Python", "System Design", "Docker", "CI/CD", "AI Integrations"],
-		current: true,
+		current: false,
 	},
 	{
 		role: "Senior Software Developer | Co-Founder",

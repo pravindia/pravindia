@@ -23,7 +23,7 @@ const Interests = () => {
 		{ id: 'ele', label: 'electronics', x: 0.16, y: 0.40, s: 2, group: 'life' },
 		{ id: 'coffee', label: 'pour-over coffee', x: 0.74, y: 0.78, s: 1, group: 'life' },
 		{ id: 'scifi', label: 'Music & Movies', x: 0.10, y: 0.78, s: 1, group: 'life' },
-		{ id: 'apps', label: 'build apps', x: 0.66, y: 0.85, s: 1, group: 'life' },
+		{ id: 'apps', label: 'swimming', x: 0.66, y: 0.85, s: 1, group: 'life' },
 	], []);
 
 	const edges = useMemo(() => [
