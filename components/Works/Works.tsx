@@ -3,6 +3,15 @@ import styles from "./Works.module.scss";
 
 const works = [
 	{
+		title: "AI Marketing Intelligence Platform",
+		description:
+			"Architecting a multi-tenant AI platform with agent workflows, multimodal RAG, observability, and cost controls to turn fragmented AI capabilities into a reliable product system.",
+		tech: ["NestJS", "Next.js", "PostgreSQL", "RAG", "LangChain", "LLMOps"],
+		link: null,
+		github: null,
+		status: "wip",
+	},
+	{
 		title: "Customs Clearance System (Netherlands)",
 		description:
 			"Built backend services with NestJS + Python microservices for Dutch import customs workflows, integrated with DMS/DECO, implemented secure IPSec VPN communication, and delivered an AI-assisted HS code recommendation flow.",

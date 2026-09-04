@@ -14,6 +14,25 @@ export type WorkItem = {
 
 export const works: WorkItem[] = [
 	{
+		slug: "ai-marketing-intelligence-platform",
+		title: "AI Marketing Intelligence Platform",
+		status: "wip",
+		period: "Jun 2026 — Present",
+		role: "Senior Product Engineer",
+		summary: "Multi-tenant AI marketing intelligence platform with agent workflows, multimodal RAG, LLM observability, and cost controls.",
+		description:
+			"Architecting a scalable multi-tenant AI marketing intelligence platform that brings fragmented AI capabilities into a reusable multi-model agent architecture. The platform combines production-grade RAG, evaluation, observability, and resilient execution workflows.",
+		highlights: [
+			"Designed a reusable multi-model agent architecture with NestJS, TypeScript, Next.js, and PostgreSQL",
+			"Built multimodal RAG using pgvector, hybrid retrieval, grounded citations, reranking, and human-in-the-loop controls",
+			"Improved reliability and cost governance with automated evaluations, token metering, idempotent execution, and failure recovery",
+			"Reduced p95 time-to-first-token from 3.1s to 2.4s and lowered average AI-run cost by 14%",
+		],
+		tech: ["NestJS", "TypeScript", "Next.js", "PostgreSQL", "pgvector", "LangChain", "RAG", "LLMOps"],
+		link: null,
+		github: null,
+	},
+	{
 		slug: "customs-clearance-system-netherlands",
 		title: "Customs Clearance System (Netherlands)",
 		status: "live",

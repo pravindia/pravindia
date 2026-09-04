@@ -13,7 +13,7 @@ export default async function handler(
 		res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
 		res.status(200).send(feed);
 	} catch (error) {
-		console.error('RSS generation error:', error);
+		// console.error('RSS generation error:', error);
 		res.status(500).send('Error generating RSS feed');
 	}
 }

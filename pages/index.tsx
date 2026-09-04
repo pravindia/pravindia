@@ -68,7 +68,7 @@ export default function Home() {
       <ResumeModal open={resumeOpen} onClose={handleCloseResume} />
       <div className={styles.container}>
         <Head>
-          <title>Pravin Kumar Govindaraju — Senior Software Developer</title>
+          <title>Pravin Kumar — Senior Software Developer</title>
           <meta name="description" content="Personal portfolio and blog of Pravin Kumar featuring software projects, technical writing, career highlights, and engineering expertise." />
           <link rel="icon" href="/favicon.ico" />
         </Head>
