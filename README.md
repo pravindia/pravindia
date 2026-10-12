@@ -1,6 +1,6 @@
 # Hi there 👋
 
-I'm **Pravin Kumar**, Senior Software Engineer · 8 Years · Backend Architecture & Distributed Systems · TypeScript & Python · Node.js · Angular, Next.js, AWS, System Design
+I'm **Pravin Kumar**, Senior Software Engineer · 8.4 Years · Backend Architecture, AI Engineering & Distributed Systems · TypeScript & Python · Node.js · Angular, React.js, AWS, System Design, Applied AI, RAG & LLMOps
 
 ---
 
@@ -9,7 +9,7 @@ I'm **Pravin Kumar**, Senior Software Engineer · 8 Years · Backend Architectur
 * 💼 Current role: Senior Software Developer
 * 🌱 Currently learning: Cloud architecture, AI systems, distributed systems
 * 🔭 Working on: Open-source projects and backend platforms
-* ⚡ Interests: System design, automation, developer tooling
+* ⚡ Interests: System design, AI automation, developer tooling
 * 📫 Reach me at: `hello [at] pravindia [dot] com`
 * 🌐 Portfolio: [https://pravindia.com](https://pravindia.com)
 

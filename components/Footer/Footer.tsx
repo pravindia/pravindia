@@ -18,18 +18,6 @@ const Footer = (props: { textEnter: any; textLeave: any }) => {
         <GitHubGrid variant="section" />
       </div>
 
-      <div className={styles.contactRow}>
-        {phone ? (
-          <a href={`tel:${phone.replace(/\s/g, "")}`}>{phone}</a>
-        ) : (
-          <span aria-hidden="true" />
-        )}
-        {email ? (
-          <a href={`mailto:${email}`}>{email}</a>
-        ) : (
-          <span aria-hidden="true" />
-        )}
-      </div>
       <div className={styles.socialRow}>
         <a
           onMouseEnter={props.textEnter}

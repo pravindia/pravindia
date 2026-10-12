@@ -62,7 +62,7 @@ export default function Home() {
 
   return (
     <>
-      <ParticleBackground />
+      {/* <ParticleBackground /> */}
       <Cursor variants={variants} curVariant={cursorVariant} />
       <Header />
       <ResumeModal open={resumeOpen} onClose={handleCloseResume} />

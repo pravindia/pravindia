@@ -6,7 +6,7 @@ const experiences = [
 		role: "Senior Product Engineer",
 		company: "WCC Pty Ltd.",
 		companyUrl: null,
-		period: "Jun 2026 — Present",
+		period: "Jun 2026 — Sept 2026",
 		location: "Remote (Australia)",
 		description:
 			"Architecting a multi-tenant AI marketing intelligence platform with NestJS, TypeScript, Next.js, and PostgreSQL. Building reliable multi-model agent workflows, multimodal RAG, LLM observability, evaluations, and cost controls for production-scale AI systems.",
@@ -25,7 +25,7 @@ const experiences = [
 		current: false,
 	},
 	{
-		role: "Senior Software Developer | Co-Founder",
+		role: "Software Developer | Co-Founder",
 		company: "Smazee",
 		companyUrl: "https://smazee.com",
 		period: "May 2018 — Dec 2022",
