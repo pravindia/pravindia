@@ -13,6 +13,14 @@ interface Command {
 
 const commands: Command[] = [
 	{
+		id: "developers",
+		title: "Developers",
+		description: "Public APIs, agent context, and developer resources",
+		category: "navigation",
+		icon: "⌘",
+		action: () => window.location.href = "/developers",
+	},
+	{
 		id: "home",
 		title: "Home",
 		category: "navigation",

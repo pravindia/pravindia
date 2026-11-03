@@ -26,6 +26,7 @@ const Header = () => {
 					<ul>
 						<li><Link href="/#works"><span className={styles.hash}>/</span>works</Link></li>
 						<li><Link href="/blog"><span className={styles.hash}>/</span>writing</Link></li>
+						<li><Link href="/developers"><span className={styles.hash}>/</span>developers</Link></li>
 					</ul>
 				</nav>
 

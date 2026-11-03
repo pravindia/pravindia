@@ -19,6 +19,7 @@ const Footer = (props: { textEnter: any; textLeave: any }) => {
       </div>
 
       <div className={styles.socialRow}>
+        <a href="/developers">Developers</a>
         <a
           onMouseEnter={props.textEnter}
           onMouseLeave={props.textLeave}

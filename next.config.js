@@ -9,6 +9,12 @@ const nextConfig = {
   },
   // Vercel optimizations
   compress: true,
+  async rewrites() {
+    return ['llms.txt', 'developers.md', 'openapi.json', 'sitemap.xml'].map(file => ({
+      source: `/${file}`,
+      destination: `/api/developer-files/${file}`,
+    }))
+  },
 }
 
 module.exports = nextConfig
