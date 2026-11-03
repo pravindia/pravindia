@@ -149,7 +149,9 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 			kind: 'blog' as Kind,
 			url: `/blog/${p.slug}`,
 		}));
-		return [...locals, ...POSTS];
+		return [...locals, ...POSTS].sort(
+			(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+		);
 	}, [localPosts]);
 
 	const filtered = useMemo(() => {
@@ -163,7 +165,7 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 			}
 			return true;
 		});
-	}, [kind, q, activeTag]);
+	}, [mergedPosts, kind, q, activeTag]);
 
 
 
