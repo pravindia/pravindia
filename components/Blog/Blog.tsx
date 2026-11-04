@@ -33,7 +33,7 @@ export default function Blog() {
 			<div className={styles.inner}>
 				<div className={styles.heading}>
 					<span className={styles.prompt}>/04</span>
-					<h2>Writing</h2>
+					<h2>Scribble</h2>
 					<span className={styles.meta}>thoughts on systems, code & craft</span>
 				</div>
 

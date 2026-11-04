@@ -1,0 +1,60 @@
+import Head from 'next/head';
+import { useEffect, useState } from 'react';
+import Header from '../components/Header/Header';
+import Footer from '../components/Footer/Footer';
+import styles from '../styles/Coding.module.scss';
+
+// Demonstration values until the private WakaTime export is supplied.
+const days = [2.1,4.2,3.4,5.8,2.8,4.7,1.5,3.7,5.1,4.4,2.4,6.2,3.5,4.8,2.9,5.6,1.9,3.8,4.9,2.5,5.3,3.1,4.4,1.8,5.9,3.6,4.7,2.3,5.2,3.9];
+const landscape = Array.from({length: 28 * 7}, (_, i) => {
+  const n = Math.abs(Math.sin(i * 12.9898 + 4.2) * Math.cos(i * .17));
+  return n < .18 ? 0 : Math.round(n * 60) / 10;
+});
+const languages = [
+  {name:'TypeScript', hours:184, color:'#5b9cf5'}, {name:'JavaScript', hours:126, color:'#f6c644'},
+  {name:'Python', hours:86, color:'#b58af3'}, {name:'Other', hours:54, color:'#72d59b'},
+];
+const categories = [
+  {name:'Coding', color:'#398b65', values:[3.3,3.7,3.4,3.8,2.9,.6,.8]},
+  {name:'Debugging', color:'#7b9fde', values:[.7,.8,.8,.9,.5,.2,.2]},
+  {name:'Writing docs', color:'#d2a653', values:[.3,.2,.3,.2,.2,.1,.1]},
+  {name:'Writing tests', color:'#9d79bf', values:[.2,.3,.2,.3,.1,.1,.1]},
+  {name:'Building', color:'#a2b2a4', values:[.1,.1,.1,.1,.1,0,0]},
+  {name:'AI coding', color:'#cc8276', values:[.1,.1,.1,.1,.1,0,0]},
+].sort((a,b) => b.values.reduce((x,y)=>x+y,0) - a.values.reduce((x,y)=>x+y,0)).slice(0,4);
+const weekdays = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+const metrics = [
+  {label:'CODING TIME',value:'450',unit:'hrs',color:'#317a4b',note:'A year in the editor', series:[3.2,4.1,3.4,4.7,3.8,5.2,4.3]},
+  {label:'ACTIVE DAYS',value:'186',unit:'days',color:'#e7684f',note:'Days with activity', series:[3,4,3,5,4,5,4]},
+  {label:'DAILY AVERAGE',value:'2.4',unit:'hrs',color:'#2f56dc',note:'Across active days', series:[2,3,2.2,3.8,2.8,4,3.2]},
+  {label:'LANGUAGES',value:'12',unit:'used',color:'#b88519',note:'And counting', series:[2,3,2.5,3.5,3,4,3.5]},
+];
+function Spark({series,color}:{series:number[];color:string}) {
+  const [point,setPoint]=useState<number|null>(null);
+  const points=series.map((n,i)=>`${i*100/6},${48-n*8}`).join(' ');
+  return <div className={styles.sparkWrap}><svg viewBox="0 0 100 52" preserveAspectRatio="none" aria-hidden="true"><polyline points={points} fill="none" stroke={color} strokeWidth="1.4" vectorEffect="non-scaling-stroke"/></svg><div className={styles.sparkTargets}>{series.map((v,i)=><button key={i} aria-label={`Sample point ${i+1}: ${v}`} onMouseEnter={()=>setPoint(i)} onFocus={()=>setPoint(i)} onClick={()=>setPoint(i)} onMouseLeave={()=>setPoint(null)} onBlur={()=>setPoint(null)} />)}</div>{point!==null && <span className={styles.sparkValue}>{series[point]}</span>}</div>;
+}
+function blockPath(x:number,y:number,h:number) {
+  return {top:`${x},${y-h} ${x+10},${y-5-h} ${x+20},${y-h} ${x+10},${y+5-h}`, left:`${x},${y-h} ${x+10},${y+5-h} ${x+10},${y+5} ${x},${y}`, right:`${x+10},${y+5-h} ${x+20},${y-h} ${x+20},${y} ${x+10},${y+5}`};
+}
+function wedge(i:number,h:number) {
+  const a=(i*12-90)*Math.PI/180, half=4.6*Math.PI/180, inner=100, outer=100+h*10;
+  const p=(r:number,t:number)=>`${200+r*Math.cos(t)},${200+r*Math.sin(t)}`;
+  return `M${p(inner,a-half)} L${p(outer,a-half)} A${outer},${outer} 0 0 1 ${p(outer,a+half)} L${p(inner,a+half)} A${inner},${inner} 0 0 0 ${p(inner,a-half)} Z`;
+}
+export default function CodingPage() {
+  const [paused,setPaused]=useState(false), [selected,setSelected]=useState(29), [tower,setTower]=useState<number|null>(null), [language,setLanguage]=useState<number|null>(null), [weekday,setWeekday]=useState<number|null>(null);
+  useEffect(()=>{
+    const sections=document.querySelectorAll(`.${styles.panel}`);
+    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting) entry.target.classList.add(styles.visible)}),{threshold:.15});
+    sections.forEach(section=>observer.observe(section)); return ()=>observer.disconnect();
+  },[]);
+  const move=(e:React.KeyboardEvent, value:number, count:number, update:(n:number)=>void)=>{if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault(); update((value+(e.key==='ArrowRight'||e.key==='ArrowDown'?1:-1)+count)%count)}};
+  return <><Head><title>Coding activity — Pravin Kumar</title><meta name="description" content="Coding activity and the patterns behind the work."/></Head><Header/><div className={`${styles.page} ${paused?styles.paused:''}`}><main>
+    <section className={`${styles.panel} ${styles.hero}`} id="overview"><div className={styles.topline}><span>CODING ACTIVITY</span><button onClick={()=>setPaused(!paused)} aria-pressed={paused}>{paused?'PLAY LOOPS':'PAUSE LOOPS'}</button></div><div className={styles.heroGrid}><div><div className={styles.eyebrow}><span className={styles.greenDot}/> THE WORK BEHIND THE WORK</div><h1>Making things,<br/><em>one day at a time.</em></h1><p className={styles.lede}>A little window into the hours, habits, and happy accidents behind the code. The figures shown are sample data.</p></div><div className={styles.cards}>{metrics.map(m=><div className={styles.card} key={m.label}><span>{m.label}</span><div><strong>{m.value}</strong> <small>{m.unit}</small></div><Spark series={m.series} color={m.color}/><p>{m.note}</p></div>)}</div></div><div className={styles.bottomline}><p>Not a measure of productivity.<br/>Just a record of showing up.</p><a href="#landscape">SCROLL TO EXPLORE ↓</a></div></section>
+    <section className={`${styles.panel} ${styles.landscape}`} id="landscape"><div className={styles.sectionHead}><div><div className={styles.eyebrow}>01 / THE LANDSCAPE</div><h2>Every day<br/><em>leaves a mark.</em></h2></div><p>A skyline of time spent making things. Hover, tap, or use the arrow keys to explore a day.</p></div><div className={styles.cityWrap}><svg className={styles.citySvg} viewBox="0 0 750 270" role="group" aria-label="Sample isometric activity chart. Use arrow keys to explore days." onKeyDown={e=>move(e,tower??0,landscape.length,setTower)}>{landscape.map((hours,i)=>{const week=Math.floor(i/7),day=i%7,x=65+week*19+day*10,y=55+week*6-day*5,h=hours*9+3,p=blockPath(x,y,h),active=tower===i;return <g key={i} className={styles.tower} role="button" tabIndex={i===(tower??0)?0:-1} aria-label={`Sample day ${i+1}: ${hours} hours`} onFocus={()=>setTower(i)} onMouseEnter={()=>setTower(i)} onClick={()=>setTower(i)} style={{'--delay':`${week*25}ms`} as React.CSSProperties}><polygon points={p.left} fill={active?'#53b575':'#17683b'}/><polygon points={p.right} fill={active?'#82daa0':'#238c4e'}/><polygon points={p.top} fill={active?'#c1f5cb':hours===0?'#203c30':`hsl(139 52% ${35+hours*4}%)`}/></g>})}</svg></div><div className={styles.chartFooter}><span aria-live="polite">{tower===null?'28 WEEKS / SAMPLE ACTIVITY':`SAMPLE DAY ${tower+1} · ${landscape[tower]} HOURS`}</span><span>LESS <i/> <i/> <i/> <i/> MORE</span></div><div className={styles.dividerStats}><div><span>THE IDEA</span><strong>One day, one tower.</strong></div><div><span>THE SOURCE</span><strong>WakaTime, when connected.</strong></div><div><span>THE DETAILS</span><strong>Names stay private.</strong></div></div></section>
+    <section className={`${styles.panel} ${styles.languages}`} id="languages"><div className={styles.sectionHead}><div><div className={styles.eyebrow}>02 / THE MIX</div><h2>Time, in<br/><em>different languages.</em></h2></div><p>Different tools for different ideas. Select a block to inspect the sample breakdown.</p></div><div className={styles.dotColumns}>{languages.map((l,i)=><button className={`${styles.dotColumn} ${language===i?styles.activeBlock:''}`} key={l.name} onClick={()=>setLanguage(i)} onFocus={()=>setLanguage(i)} onMouseEnter={()=>setLanguage(i)} aria-pressed={language===i}><div className={styles.dots} aria-hidden="true">{Array.from({length:Math.round(l.hours/3)},(_,j)=><span key={j} style={{background:l.color,animationDelay:`${j*12}ms`}}/>)}</div><div className={styles.languageLabel}><span>{l.name.toUpperCase()}</span><strong>{l.hours}<small> hrs</small></strong><small>{Math.round(l.hours/450*100)}% OF TOTAL</small></div></button>)}</div><p className={styles.note} aria-live="polite">{language===null?'Each dot represents roughly three hours. Sample data.':`${languages[language].name}: ${languages[language].hours} sample hours.`}</p><details><summary>Show as a table</summary><table><thead><tr><th>Language</th><th>Hours</th><th>Share</th></tr></thead><tbody>{languages.map(l=><tr key={l.name}><td>{l.name}</td><td>{l.hours}</td><td>{Math.round(l.hours/450*100)}%</td></tr>)}</tbody></table></details></section>
+    <section className={`${styles.panel} ${styles.month}`} id="month"><div className={styles.monthGrid}><div className={styles.radial}><svg viewBox="0 0 400 400" role="group" aria-label="Sample 30-day chart. Use arrow keys to change day." onKeyDown={e=>move(e,selected,days.length,setSelected)}><circle cx="200" cy="200" r="168" fill="none" stroke="currentColor" strokeOpacity=".12" strokeDasharray="2 8"/><circle cx="200" cy="200" r="104" fill="none" stroke="currentColor" strokeOpacity=".12" strokeDasharray="2 8"/>{days.map((h,i)=><path key={i} className={styles.wedge} d={wedge(i,h)} fill={h>=4?'#327b4d':'#b6d3b9'} stroke={i===selected?'#111':'transparent'} strokeWidth="2" role="button" tabIndex={i===selected?0:-1} aria-label={`Sample day ${i+1}: ${h} hours`} aria-pressed={i===selected} onMouseEnter={()=>setSelected(i)} onFocus={()=>setSelected(i)} onClick={()=>setSelected(i)} style={{'--delay':`${i*30}ms`} as React.CSSProperties}/>)}</svg><div className={styles.radialCenter} aria-live="polite"><strong>{days[selected]}<small>h</small></strong><span>DAY {selected+1} / SAMPLE</span></div></div><div><div className={styles.eyebrow}>03 / THIRTY DAYS IN A CIRCLE</div><h2>A month blooms<br/><em>in a second.</em></h2><p>One spoke per day. The longer the spoke, the more time spent coding. Hover, tap, or use the arrow keys to inspect it.</p><label className={styles.selectLabel} htmlFor="day">INSPECT A DAY</label><select id="day" value={selected} onChange={e=>setSelected(Number(e.target.value))}>{days.map((_,i)=><option key={i} value={i}>Day {i+1}</option>)}</select><details><summary>Show as a table</summary><table><thead><tr><th>Day</th><th>Hours</th></tr></thead><tbody>{days.map((h,i)=><tr key={i}><td>Day {i+1}</td><td>{h}</td></tr>)}</tbody></table></details></div></div></section>
+    <section className={`${styles.panel} ${styles.rhythm}`} id="rhythm"><div className={styles.eyebrow}>04 / WEEKDAY AVERAGE</div><h2>Every week has<br/><em>its own rhythm.</em></h2><p>Average time by day of the week, split across the four largest activity categories. Sample data.</p><div className={styles.weekChart} role="group" aria-label="Sample weekday averages" onKeyDown={e=>move(e,weekday??0,7,setWeekday)}>{weekdays.map((day,i)=><div className={styles.weekColumn} key={day}><button className={styles.weekBar} aria-label={`${day}: ${categories.reduce((sum,c)=>sum+c.values[i],0).toFixed(1)} hours average`} onMouseEnter={()=>setWeekday(i)} onFocus={()=>setWeekday(i)} onClick={()=>setWeekday(i)} aria-pressed={weekday===i}>{categories.map(c=><span key={c.name} style={{height:`${c.values[i]/6*100}%`,background:c.color}}/>)}</button><span>{day.slice(0,3)}</span></div>)}</div><div className={styles.weekReadout} aria-live="polite">{weekday===null?'HOVER, TAP OR FOCUS A DAY TO INSPECT':`${weekdays[weekday]} · ${categories.map(c=>`${c.name} ${c.values[weekday].toFixed(1)}h`).join('  /  ')}`}</div><div className={styles.legend}>{categories.map(c=><span key={c.name}><i style={{background:c.color}}/>{c.name}</span>)}</div><details><summary>Show as a table</summary><table><thead><tr><th>Day</th>{categories.map(c=><th key={c.name}>{c.name}</th>)}</tr></thead><tbody>{weekdays.map((d,i)=><tr key={d}><td>{d}</td>{categories.map(c=><td key={c.name}>{c.values[i].toFixed(1)} h</td>)}</tr>)}</tbody></table></details></section>
+  </main></div><Footer textEnter={()=>{}} textLeave={()=>{}}/></>;
+}

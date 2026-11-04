@@ -70,7 +70,7 @@ ${developerProfile.skills.join(', ')}
 ## Projects
 ${works.map(work => `- [${work.title}](${siteUrl}/works/${work.slug}): ${work.summary}`).join('\n')}
 
-## Writing
+## Scribble
 ${getDeveloperPosts().map(post => `- [${post.title}](${post.url}): ${post.excerpt}`).join('\n')}
 
 ## Machine-readable resources

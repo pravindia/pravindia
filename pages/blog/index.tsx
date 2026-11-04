@@ -20,19 +20,29 @@ interface Post {
 }
 
 const PINNED: Post = {
-	slug: "ci-cd-for-flutter",
-	title: "CI/CD for Flutter",
-	date: "2024",
+	slug: "is-software-engineering-dead",
+	title: "Is Software Engineering Dead? Your Next Move Matters",
+	date: "2026-11-03",
 	excerpt:
-		"Set up a practical CI/CD pipeline for Flutter apps — from first commit to release build. Covers GitHub Actions, test runners, and artifact signing without the usual boilerplate tax.",
-	tags: ["Flutter", "CI/CD", "DevOps"],
-	readTime: "8 min",
+		"AI is changing the value of writing code. Developers need to think beyond syntax and learn to turn real problems into useful products.",
+	tags: ["AI", "Software Engineering", "Career"],
+	readTime: "2 min",
 	kind: "blog",
-	url: "https://smazee.com/blog/ci-cd-for-flutter",
+	url: "/blog/is-software-engineering-dead",
 	pinned: true,
 };
 
 const POSTS: Post[] = [
+	{
+		slug: "ci-cd-for-flutter",
+		title: "CI/CD for Flutter",
+		date: "2024",
+		excerpt: "Set up a practical CI/CD pipeline for Flutter apps — from first commit to release build. Covers GitHub Actions, test runners, and artifact signing without the usual boilerplate tax.",
+		tags: ["Flutter", "CI/CD", "DevOps"],
+		readTime: "8 min",
+		kind: "blog",
+		url: "https://smazee.com/blog/ci-cd-for-flutter",
+	},
 	{
 		slug: "deno-whats-different-from-nodejs",
 		title: "Deno: What's Different from Node.js",
@@ -213,7 +223,7 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 						rel="noopener noreferrer"
 					>
 						<div className={styles.featEyebrow}>
-							<span className={styles.featPin}> <span style={{ fontSize: "16px" }}>★</span> Case Study</span>
+							<span className={styles.featPin}> <span style={{ fontSize: "16px" }}>★</span> Featured Post</span>
 							<span className={styles.dot} />
 							<span>{PINNED.date}</span>
 							<span className={styles.dot} />
