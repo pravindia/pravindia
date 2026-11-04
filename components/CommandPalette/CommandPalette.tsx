@@ -13,14 +13,6 @@ interface Command {
 
 const commands: Command[] = [
 	{
-		id: "developers",
-		title: "Developers",
-		description: "Public APIs, agent context, and developer resources",
-		category: "navigation",
-		icon: "⌘",
-		action: () => window.location.href = "/developers",
-	},
-	{
 		id: "home",
 		title: "Home",
 		category: "navigation",
@@ -34,6 +26,22 @@ const commands: Command[] = [
 		category: "navigation",
 		icon: "📖",
 		action: () => window.location.href = "/blog",
+	},
+	{
+		id: "developers",
+		title: "Developers",
+		description: "Public APIs, agent context, and developer resources",
+		category: "navigation",
+		icon: "⌘",
+		action: () => window.location.href = "/developers",
+	},
+	{
+		id: "coding",
+		title: "Coding",
+		description: "View my coding projects and work",
+		category: "navigation",
+		icon: "💻",
+		action: () => window.location.href = "/coding",
 	},
 	{
 		id: "deno-post",

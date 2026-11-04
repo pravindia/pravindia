@@ -11,7 +11,7 @@
 .greenDot { display:inline-block; width:9px; height:9px; background:#3f9960; border-radius:2px; margin-right:8px; }
 .page h1,.page h2 { font-family:Georgia,serif; font-weight:400; letter-spacing:-.065em; line-height:.94; margin:24px 0; }
 .page h1 { font-size:clamp(64px,7.3vw,124px); }.page h2 { font-size:clamp(58px,6.8vw,110px); }.page h1 em,.page h2 em { font-weight:400; }
-.lede,.sectionHead p,.monthGrid p,.rhythm > p { font-size:clamp(16px,1.3vw,20px); line-height:1.6; max-width:420px; }
+.lede,.sectionHead p,.monthGrid p,.rhythm > p { font-size:clamp(16px,1.3vw,20px); line-height:1.6; }
 .demoBadge { display:inline-block; margin-top:24px; padding:10px 12px; border:1px solid #9ca99b; font:10px var(--font-mono); letter-spacing:.05em; }
 .cards { display:grid; grid-template-columns:1fr 1fr; gap:14px; }.card { background:#fff; border-radius:18px; padding:24px; min-height:190px; }.card > span,.card p,.card small { color:#787d78; font:11px var(--font-mono); }.card strong { font:normal 50px Georgia,serif; }.card svg { width:100%; height:42px; margin-top:14px; }.card p { margin:7px 0 0; }.bottomline p { font:14px/1.5 Arial,sans-serif; letter-spacing:0; }.bottomline a { border-bottom:1px solid; }
 .landscape { background:#0a1710; color:#e8f2e6; }.sectionHead { display:flex; justify-content:space-between; align-items:end; gap:30px; }.sectionHead p { max-width:330px; }.landscape h2 { color:#dbe8d8; }.cityWrap { height:370px; display:flex; align-items:center; justify-content:center; overflow:hidden; }.city { width:700px; display:grid; grid-template-columns:repeat(28, 20px); grid-template-rows:repeat(7, 20px); transform:rotateX(58deg) rotateZ(-30deg) scale(1.15); transform-style:preserve-3d; }.plot { position:relative; width:17px; height:17px; background:#193c28; transform-style:preserve-3d; }.plot span { position:absolute; inset:0; background:hsl(137 42% calc(24% + var(--level) * 6%)); transform:translateZ(var(--height)); animation:rise 1s both; animation-delay:var(--delay); }.plot span:before,.plot span:after { content:''; position:absolute; background:#215e38; }.plot span:before { width:100%; height:var(--height); top:100%; transform-origin:top; transform:rotateX(-90deg); }.plot span:after { height:100%; width:var(--height); left:100%; transform-origin:left; transform:rotateY(90deg); background:#17472a; } @keyframes rise { from { transform:translateZ(0); opacity:.3; } }
@@ -81,3 +81,16 @@
   .panel.rhythm:after { background:#f1f1e9; }
   .panel.visible:after { transform:scaleY(0); }
 }
+.yearSelect { display:flex; align-items:center; gap:8px; font:11px var(--font-mono); margin-left:auto; }
+.yearSelect select { background:transparent; border:1px solid #a8b3a7; border-radius:4px; padding:8px; color:inherit; font:inherit; }
+.method { max-width:850px; font:11px/1.7 var(--font-mono); margin-top:32px; }
+@media(max-width:800px) { .topline .yearSelect { display:flex; } .yearSelect { margin-left:0; } }
+.dateControl { display:flex; align-items:center; gap:12px; margin-top:24px; font:11px var(--font-mono); }
+.dateControl input { color:#e8f2e6; color-scheme:dark; background:#10251a; border:1px solid #53715a; border-radius:4px; padding:9px; font:inherit; }
+/* Native snap keeps tall panels and expanded tables scrollable. */
+.panel { min-height:100svh; scroll-snap-align:start; }
+.footerPanel { scroll-snap-align:none; }
+.profileLinks { display:flex; gap:10px; flex-wrap:wrap; margin-top:22px; }
+.profileLinks a { display:inline-flex; align-items:center; padding:9px 13px; border:1px solid currentColor; border-radius:4px; font:11px var(--font-mono); transition:background .2s,color .2s; }
+.profileLinks a:hover,.profileLinks a:focus-visible { background:#1b3e2a; color:#fff; }
+@media (prefers-reduced-motion:reduce) { .panel { scroll-snap-stop:normal; } }
