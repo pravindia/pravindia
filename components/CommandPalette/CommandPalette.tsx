@@ -44,62 +44,6 @@ const commands: Command[] = [
 		action: () => window.location.href = "/coding",
 	},
 	{
-		id: "deno-post",
-		title: "Deno: What's Different from Node.js",
-		description: "Deno vs Node.js comparison",
-		category: "blog",
-		icon: "📝",
-		action: () => window.open("https://smazee.com/blog/deno-whats-different-from-nodejs", "_blank"),
-	},
-	{
-		id: "mongodb-post",
-		title: "Learn What's MongoDB NoSQL",
-		description: "MongoDB and NoSQL concepts",
-		category: "blog",
-		icon: "📝",
-		action: () => window.open("https://smazee.com/blog/learn-whats-MongoDB-NoSQL", "_blank"),
-	},
-	{
-		id: "flutter-when-not-post",
-		title: "When Not to Use Flutter",
-		description: "Flutter trade-offs and alternatives",
-		category: "blog",
-		icon: "📝",
-		action: () => window.open("https://smazee.com/blog/When-not-to-use-Flutter", "_blank"),
-	},
-	{
-		id: "glassmorphism-post",
-		title: "Implement Glassmorphism in Your Flutter App",
-		description: "Modern glassmorphism UI design",
-		category: "blog",
-		icon: "📝",
-		action: () => window.open("https://smazee.com/blog/Implement-glassmorphism-in-your-flutter-app", "_blank"),
-	},
-	{
-		id: "tailwind-post",
-		title: "Try Tailwind CSS Today: Beginner Guide",
-		description: "Utility-first CSS framework guide",
-		category: "blog",
-		icon: "📝",
-		action: () => window.open("https://smazee.com/blog/try-tailwindcss-today-beginner-guide", "_blank"),
-	},
-	{
-		id: "css-post",
-		title: "Awesome CSS Pseudo Class and Functions",
-		description: "Modern CSS techniques",
-		category: "blog",
-		icon: "📝",
-		action: () => window.open("https://smazee.com/blog/awesome-css-pseudo-class-and-functions", "_blank"),
-	},
-	{
-		id: "cicd-flutter-post",
-		title: "CI/CD for Flutter",
-		description: "Flutter pipeline setup",
-		category: "blog",
-		icon: "📝",
-		action: () => window.open("https://smazee.com/blog/ci-cd-for-flutter", "_blank"),
-	},
-	{
 		id: "works",
 		title: "Works",
 		description: "View my projects and work",
@@ -111,6 +55,14 @@ const commands: Command[] = [
 		},
 	},
 	{
+		id: "typing",
+		title: "How fast I type?",
+		description: "View my typing practice and progress",
+		category: "navigation",
+		icon: "⌨️",
+		action: () => window.location.href = "/typing",
+	},
+	{
 		id: "learning",
 		title: "Learning",
 		description: "What I'm exploring and learning",
@@ -118,61 +70,6 @@ const commands: Command[] = [
 		icon: "📚",
 		action: () => {
 			const element = document.getElementById("learning");
-			element?.scrollIntoView({ behavior: "smooth" });
-		},
-	},
-	{
-		id: "customs",
-		title: "Customs Clearance System",
-		description: "Netherlands • Backend Services",
-		category: "project",
-		icon: "📋",
-		action: () => {
-			const element = document.getElementById("works");
-			element?.scrollIntoView({ behavior: "smooth" });
-		},
-	},
-	{
-		id: "warehouse",
-		title: "Warehouse Management System",
-		description: "Production • Microservices",
-		category: "project",
-		icon: "📦",
-		action: () => {
-			const element = document.getElementById("works");
-			element?.scrollIntoView({ behavior: "smooth" });
-		},
-	},
-	{
-		id: "ecommerce",
-		title: "B2B E-Commerce Platform",
-		description: "Full Stack • Cross-platform",
-		category: "project",
-		icon: "🛍️",
-		action: () => {
-			const element = document.getElementById("works");
-			element?.scrollIntoView({ behavior: "smooth" });
-		},
-	},
-	{
-		id: "ai",
-		title: "AI-Enabled Backend Integrations",
-		description: "RAG • MCP • Production",
-		category: "project",
-		icon: "🤖",
-		action: () => {
-			const element = document.getElementById("works");
-			element?.scrollIntoView({ behavior: "smooth" });
-		},
-	},
-	{
-		id: "elearning",
-		title: "E-Learning Platform",
-		description: "Full Stack • Django • React",
-		category: "project",
-		icon: "📚",
-		action: () => {
-			const element = document.getElementById("works");
 			element?.scrollIntoView({ behavior: "smooth" });
 		},
 	},

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 .page { background:#f6f5ee; color:#202a21; min-height:100vh; padding:140px 28px 80px; }
 .shell { max-width:1200px; margin:auto; }
 .topline,.bottom { display:flex; justify-content:space-between; gap:20px; font:600 10px/1.5 monospace; letter-spacing:.12em; color:#798276; }
@@ -73,9 +74,63 @@
 .keyboard, .keyboard * { cursor:pointer; }
 
 @media (min-width: 801px) {
-  .hero { position: relative; display: block; min-height: 560px; padding: 100px 0; }
-  .hero > div:first-child { position: relative; z-index: 2; max-width: 720px; pointer-events: none; }
+  .hero { position: relative; display: block; min-height: 560px; padding: 50px 0; }
+  .hero > div:first-child { position: relative; z-index: 2; max-width: 820px; pointer-events: none; }
   .hero > div:first-child a { pointer-events: auto; }
   .heroArt { position: absolute; z-index: 1; width: min(76%, 850px); height: auto; right: -3%; top: 50%; transform: translateY(-50%); overflow: visible; }
   .keyboard { width: 100%; max-width: none; opacity: .75; }
+}
+
+/* Match the homepage's shared typography and color tokens. */
+.page { background:var(--bg); color:var(--text); font-family:inherit; }
+.topline,.bottom,.stats span,.recordTop,.chartLabel,.chartDates,.note,.journeyHeader,.goalMeter>div:first-child,.milestone>span { font-family:var(--font-mono); color:var(--text-muted); }
+.topline a,.bottom a,.eyebrow,.history details,.goal h2 em { color:var(--green); }
+.eyebrow { font:400 .85rem/1.5 var(--font-mono); letter-spacing:0; }
+.hero h1 { font-family:inherit; font-size:clamp(2.5rem,6vw,4.5rem); font-weight:800; line-height:1.1; letter-spacing:-.03em; color:var(--text-bright); }
+.hero h1 em { color:var(--green); font-style:normal; }
+.section h2,.goal h2 { font-family:var(--font-mono); font-size:clamp(1.8rem,4vw,2.8rem); font-weight:700; line-height:1.15; letter-spacing:0; color:var(--text-bright); }
+.section h2 em { color:var(--text-bright); font-style:normal; }
+.hero p { color:var(--text-muted); font-size:1.1rem; line-height:1.7; }
+.sectionHead p,.goal p,.empty p { color:var(--text-muted); }
+.profileButton { background:var(--green); color:#000; font-size:.9rem; font-weight:700; border-radius:8px; padding:.65rem 1.5rem; }
+.heroArt { background:radial-gradient(ellipse at center,var(--surface-2) 0%,var(--bg) 72%); }
+.stats,.stats>div,.bottom,.history td,.history th { border-color:var(--border-bright); }
+.stats strong,.record strong,.goalMeter strong,.milestone strong { font-family:var(--font-mono); font-weight:700; color:var(--text-bright); }
+.stats small,.record small,.goalMeter small,.milestone small { font-family:var(--font-mono); color:var(--text-muted); }
+.stats p,.record p,.milestone p { color:var(--text-muted); }
+.record,.chart,.empty,.goal,.milestone,.journeyChart { background:var(--surface); border:1px solid var(--border); border-radius:8px; }
+.barTrack,.goalTrack,.milestoneBar { background:var(--surface-3); }
+.bar,.goalTrack span,.milestoneBar span,.journeyLegend i { background:var(--green); }
+.empty>span { color:var(--green); }
+.gridLine { stroke:var(--border-bright); }.goalLine,.realHistoryLine { stroke:var(--green); }.goalLabel { fill:var(--green); font-family:var(--font-mono); }.axisText { fill:var(--text-muted); font-family:var(--font-mono); }.journeyLegend { color:var(--text-muted); }
+.notice { background:var(--surface-2); border:1px solid var(--border-bright); color:var(--text); }
+@media(max-width:800px) { .stats>div { border-color:var(--border-bright); } }
+
+.stats strong span { font:inherit; color:inherit; letter-spacing:inherit; }
+
+/* Typing page type and accent palette. */
+.page { --typing-primary: #39d353; --typing-secondary: #d97757; --typing-tertiary: #58a6ff; font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+.hero h1,.section h2,.goal h2,.stats strong,.record strong,.goalMeter strong { font-family: 'Space Grotesk', sans-serif; }
+.topline,.bottom,.eyebrow,.stats span,.recordTop,.chartLabel,.chartDates,.note,.journeyHeader,.goalMeter>div:first-child,.milestone>span,.axisText,.goalLabel { font-family: 'Geist', sans-serif; }
+.section h2,.goal h2 { letter-spacing: -.04em; }
+.stats { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; border:0; }
+.stats>div,.stats>div:first-child,.stats>div:last-child { display:flex; flex-direction:column; min-width:0; min-height:230px; padding:25px; border:1px solid var(--border-bright); border-radius:14px; background:var(--surface); }
+.stats strong { order:0; margin:0 0 auto; color:var(--text-bright); font-size:clamp(2.65rem,4.3vw,4.6rem); line-height:1; letter-spacing:-.055em; white-space:nowrap; font-weight:500; }
+.stats strong span { font:inherit; color:inherit; letter-spacing:inherit; }
+.stats strong small { font:500 .9rem 'Geist',sans-serif; letter-spacing:0; color:var(--text-muted); }
+.stats>div>span { order:1; color:var(--text-bright); font:600 1rem/1.3 'Geist',sans-serif; letter-spacing:0; }
+.stats p { order:2; margin:8px 0 0; font:400 .875rem/1.5 'Geist',sans-serif; color:var(--text-muted); }
+.stats>div:nth-child(1) strong { color:var(--typing-primary); }
+.stats>div:nth-child(2) strong { color:var(--typing-secondary); }
+.stats>div:nth-child(3) strong { color:var(--typing-tertiary); }
+.stats>div:nth-child(4) strong { color:var(--text-bright); }
+.goalMeter strong { color:var(--typing-secondary); }
+.goalTrack span,.bar { background:var(--typing-secondary); }
+.history details,.bottom a { color:var(--typing-tertiary); }
+@media(max-width:800px) { .stats { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; } .stats>div,.stats>div:first-child,.stats>div:last-child { padding:20px!important; min-height:190px; border:1px solid var(--border-bright); } .stats strong { font-size:clamp(2.1rem,7.5vw,3.8rem); } }
+@media(max-width:360px) { .stats { grid-template-columns:1fr; } .stats>div,.stats>div:first-child,.stats>div:last-child { min-height:160px; } }
+
+@media (min-width: 801px) {
+  /* The keyboard is up to 850px wide at a 5:4 aspect ratio. */
+  .hero { min-height: 720px; }
 }

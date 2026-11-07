@@ -294,3 +294,7 @@
       }
     }
 }
+/* Alternate full-width sections to give the homepage a clear rhythm. */
+.container > main > section:nth-of-type(even) {
+  background: rgb(10, 23, 16);
+}
