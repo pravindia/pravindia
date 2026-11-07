@@ -25,7 +25,7 @@ const experiences = [
 		current: false,
 	},
 	{
-		role: "Software Developer | Co-Founder",
+		role: "Software Engineer | Co-Founder",
 		company: "Smazee",
 		companyUrl: "https://smazee.com",
 		period: "May 2018 — Dec 2022",

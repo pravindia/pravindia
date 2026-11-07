@@ -12,6 +12,7 @@
     "node": ">=20.0.0"
   },
   "dependencies": {
+    "@lucasmarkes/hairline": "^0.5.1",
     "@vercel/analytics": "^2.0.1",
     "framer-motion": "^12.36.0",
     "gray-matter": "^4.0.3",
