@@ -110,6 +110,6 @@ export function getOpenApi() {
 
 export function getSitemap() {
   const escapeXml = (value: string) => value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
-  const urls = ['/', '/developers', '/blog', '/works', ...works.map(work => `/works/${work.slug}`), ...getDeveloperPosts().map(post => `/blog/${post.slug}`)];
+  const urls = ['/', '/developers', '/blog', '/works', '/coding', '/typing', ...works.map(work => `/works/${encodeURIComponent(work.slug)}`), ...getDeveloperPosts().map(post => `/blog/${encodeURIComponent(post.slug)}`)];
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map(url => `\n  <url><loc>${escapeXml(`${siteUrl}${url}`)}</loc></url>`).join('')}\n</urlset>`;
 }

@@ -10,7 +10,7 @@ const nextConfig = {
   // Vercel optimizations
   compress: true,
   async rewrites() {
-    return ['llms.txt', 'developers.md', 'openapi.json', 'sitemap.xml'].map(file => ({
+    return ['llms.txt', 'developers.md', 'openapi.json', 'sitemap.xml', 'robots.txt'].map(file => ({
       source: `/${file}`,
       destination: `/api/developer-files/${file}`,
     }))

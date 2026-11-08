@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getDeveloperGuide, getLlmContext, getOpenApi, getSitemap } from '../../../lib/developer-content';
+import { siteUrl } from '../../../lib/developers';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -10,6 +11,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     'developers.md': { type: 'text/markdown', read: getDeveloperGuide },
     'openapi.json': { type: 'application/json', read: () => JSON.stringify(getOpenApi(), null, 2) },
     'sitemap.xml': { type: 'application/xml', read: getSitemap },
+    'robots.txt': { type: 'text/plain', read: () => `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}/sitemap.xml\n` },
   };
   const file = typeof req.query.file === 'string' && Object.prototype.hasOwnProperty.call(files, req.query.file) ? files[req.query.file] : undefined;
   if (!file) return res.status(404).json({ error: { code: 'not_found', message: 'Unknown resource.' } });

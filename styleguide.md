@@ -33,7 +33,7 @@ Geist and Space Grotesk are loaded from Google Fonts at weights 400, 500, 600 an
 | --- | --- | --- |
 | Primary | `#39D353` (`--typing-primary`, shared `--green`) | Primary button, hero emphasis, chart line and first statistic |
 | Secondary | `#D97757` (`--typing-secondary`) | Accuracy statistic, goal value and progress bars |
-| Tertiary | `#58A6FF` (`--typing-tertiary`) | Completed-test statistic, links and disclosures |
+| Tertiary | `#FF4C00` (`--typing-tertiary`) | Completed-test statistic, links and disclosures |
 | Page background | `#071411` (`--bg`) | Main page background |
 | Surface | `#0D1117` (`--surface`) | Cards, charts and goal panel |
 | Raised surface | `#161B22` (`--surface-2`) | Notice and keyboard background gradient |

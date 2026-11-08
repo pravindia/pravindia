@@ -207,11 +207,9 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 
 					{/* ── Hero ── */}
 					<section className={styles.hero}>
-						<span className={styles.eyebrow}>Writing</span>
-						<h1 className={styles.heroTitle}>Field notes.</h1>
+						<h1 className={styles.heroTitle}>Welcome to my Scrible</h1>
 						<p className={styles.heroSub}>
-							Blog posts, engineering insights, and real-world case studies —
-							on frontend, mobile, and the craft of shipping things that last.
+							Blog posts, engineering insights, and case studies and my thoughts
 						</p>
 					</section>
 
