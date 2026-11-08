@@ -72,6 +72,19 @@
 	}
 }
 
+[data-variant="section"] .cell {
+	animation-name: letterFlicker;
+}
+
+@keyframes letterFlicker {
+	from { opacity: 0.8; }
+	to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.cell { animation: none; }
+}
+
 @keyframes flicker {
 	from {
 		opacity: 0.4;

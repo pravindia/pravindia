@@ -1,39 +1,39 @@
 import styles from "./TechStack.module.scss";
 
 const dailyConfident = [
-	{ icon: "📘", name: "TypeScript" },
-	{ icon: "🐍", name: "Python" },
-	{ icon: "🔷", name: "Angular" },
-	{ icon: "▲", name: "Next.js" },
-	{ icon: "☕", name: "JavaScript" },
-	{ icon: "🟢", name: "Node.js" },
-	{ icon: "🦅", name: "NestJS" },
-	{ icon: "⚡", name: "FastAPI" },
-	{ icon: "🦋", name: "Flutter" },
+	{ icon: "typescript-original", name: "TypeScript", svg: true },
+	{ icon: "python-original", name: "Python", svg: true },
+	{ icon: "angular-original", name: "Angular", svg: true },
+	{ icon: "nextjs-original", name: "Next.js", svg: true },
+	{ icon: "javascript-original", name: "JavaScript", svg: true },
+	{ icon: "nodejs-original", name: "Node.js", svg: true },
+	{ icon: "nestjs-original", name: "NestJS", svg: true },
+	{ icon: "fastapi-original", name: "FastAPI", svg: true },
+	{ icon: "flutter-original", name: "Flutter", svg: true },
 	{ icon: "🔗", name: "REST APIs" },
 	{ icon: "🏗️", name: "Microservices" },
-	{ icon: "🐘", name: "PostgreSQL" },
-	{ icon: "🍃", name: "MongoDB" },
-	{ icon: "🐬", name: "MySQL" },
-	{ icon: "⚡", name: "Redis" },
+	{ icon: "postgresql-original", name: "PostgreSQL", svg: true },
+	{ icon: "mongodb-original", name: "MongoDB", svg: true },
+	{ icon: "mysql-original", name: "MySQL", svg: true },
+	{ icon: "redis-original", name: "Redis", svg: true },
 
 ];
 
 const experimentingTools = [
-	{ icon: "🔗", name: "Git / GitHub" },
-	{ icon: "🐳", name: "Docker" },
-	{ icon: "☁️", name: "AWS (EC2, S3, Lambda)" },
+	{ icon: "github-original", name: "Git / GitHub", svg: true },
+	{ icon: "docker-original", name: "Docker", svg: true },
+	{ icon: "amazonwebservices-original", name: "AWS (EC2, S3, Lambda)", svg: true },
 	{ icon: "🔄", name: "CI/CD Pipelines" },
-	{ icon: "☁️", name: "DigitalOcean" },
-	{ icon: "▲", name: "Vercel" },
-	{ icon: "🔥", name: "Firebase" },
+	{ icon: "digitalocean-original", name: "DigitalOcean", svg: true },
+	{ icon: "vercel-original", name: "Vercel", svg: true },
+	{ icon: "firebase-original", name: "Firebase", svg: true },
 	{ icon: "🔌", name: "MCP" },
-	{ icon: "🔍", name: "Elasticsearch" },
+	{ icon: "elasticsearch-original", name: "Elasticsearch", svg: true },
 	{ icon: "🧠", name: "RAG" },
 	{ icon: "✨", name: "LLM Embeddings" },
 	{ icon: "📊", name: "Vector DBs" },
-	{ icon: "🚂", name: "Kafka" },
-	{ icon: "🔌", name: "Socket.IO" },
+	{ icon: "apachekafka-original", name: "Kafka", svg: true },
+	{ icon: "socketio-original", name: "Socket.IO", svg: true },
 ];
 
 export default function TechStack() {
@@ -44,7 +44,6 @@ export default function TechStack() {
 		<section className={styles.section} id="stack">
 			<div className={styles.inner}>
 				<div className={styles.heading}>
-					<span className={styles.prompt}>/02</span>
 					<h2>Things I reach for</h2>
 				</div>
 
@@ -54,7 +53,16 @@ export default function TechStack() {
 						<div className={styles.track}>
 							{allChips1.map((chip, idx) => (
 								<span key={`${chip.name}-${idx}`} className={styles.chip}>
-									<span className={styles.glyph}>{chip.icon}</span>
+									{"svg" in chip ? (
+										<img
+											className={`${styles.glyph} ${["Next.js", "Git / GitHub", "Vercel", "Kafka", "Socket.IO"].includes(chip.name) ? styles.lightGlyph : ""}`}
+											src={`/icons/tech/${chip.icon}.svg`}
+											alt=""
+											aria-hidden="true"
+										/>
+									) : (
+										<span className={styles.glyph} aria-hidden="true">{chip.icon}</span>
+									)}
 									{chip.name}
 								</span>
 							))}
@@ -68,7 +76,16 @@ export default function TechStack() {
 						<div className={`${styles.track} ${styles.trackRev}`}>
 							{allChips2.map((chip, idx) => (
 								<span key={`${chip.name}-${idx}`} className={styles.chip}>
-									<span className={styles.glyph}>{chip.icon}</span>
+									{"svg" in chip ? (
+										<img
+											className={`${styles.glyph} ${["Next.js", "Git / GitHub", "Vercel", "Kafka", "Socket.IO"].includes(chip.name) ? styles.lightGlyph : ""}`}
+											src={`/icons/tech/${chip.icon}.svg`}
+											alt=""
+											aria-hidden="true"
+										/>
+									) : (
+										<span className={styles.glyph} aria-hidden="true">{chip.icon}</span>
+									)}
 									{chip.name}
 								</span>
 							))}

@@ -7,6 +7,28 @@ const TOTAL = WEEKS * DAYS;
 
 type Cell = { level: number; delay: number; dur: number };
 
+// Five-column pixel letters, separated by one column, fill the 53-week grid.
+const LETTERS = [
+	["00000", "11110", "10001", "10001", "11110", "10000", "10000"], // p
+	["00000", "10110", "11001", "10000", "10000", "10000", "10000"], // r
+	["00000", "01110", "00001", "01111", "10001", "01111", "00000"], // a
+	["00000", "10001", "10001", "10001", "01010", "00100", "00000"], // v
+	["00100", "00000", "01100", "00100", "00100", "01110", "00000"], // i
+	["00000", "11110", "10001", "10001", "10001", "10001", "00000"], // n
+	["00001", "00001", "01111", "10001", "10001", "01111", "00000"], // d
+	["00100", "00000", "01100", "00100", "00100", "01110", "00000"], // i
+	["00000", "01110", "00001", "01111", "10001", "01111", "00000"], // a
+];
+
+function isLetterCell(index: number) {
+	const row = Math.floor(index / WEEKS);
+	const column = index % WEEKS;
+	const letter = Math.floor(column / 6);
+	const letterColumn = column % 6;
+	return letterColumn < 5 && LETTERS[letter]?.[row][letterColumn] === "1";
+}
+
+
 function randomLevel() {
 	const r = Math.random();
 	if (r < 0.45) return 0;
@@ -43,7 +65,7 @@ export default function GitHubGrid({ variant = "bg" }: { variant?: "bg" | "secti
 		const interval = setInterval(() => {
 			setCells((prev) => {
 				const next = [...prev];
-				for (let i = 0; i < 8; i++) {
+				for (let i = 0; i < 16; i++) {
 					const idx = Math.floor(Math.random() * TOTAL);
 					next[idx] = { ...next[idx], level: randomLevel() };
 				}
@@ -81,13 +103,12 @@ export default function GitHubGrid({ variant = "bg" }: { variant?: "bg" | "secti
 					<span key={m}>{m}</span>
 				))}
 			</div>
-			<div className={styles.grid} data-variant="section">
+			<div className={styles.grid} data-variant="section" role="img" aria-label="pravindia in an animated contribution grid">
 				{cells.map((cell, i) => (
 					<div
 						key={i}
 						className={styles.cell}
-						data-level={cell.level}
-						title={`${cell.level > 0 ? cell.level : "No"} contribution${cell.level !== 1 ? "s" : ""}`}
+						data-level={isLetterCell(i) ? (cell.level >= 3 ? 4 : 3) : (cell.level === 4 ? 2 : 0)}
 						style={{ animationDelay: `${cell.delay}s`, animationDuration: `${cell.dur}s` }}
 					/>
 				))}
