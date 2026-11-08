@@ -109,7 +109,7 @@
 .stats strong span { font:inherit; color:inherit; letter-spacing:inherit; }
 
 /* Typing page type and accent palette. */
-.page { --typing-primary: #39d353; --typing-secondary: #d97757; --typing-tertiary: #ff4c00; font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+.page { --typing-primary: #39d353; --typing-secondary: #ff4c00; --typing-tertiary: #2979FF; font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
 .hero h1,.section h2,.goal h2,.stats strong,.record strong,.goalMeter strong { font-family: 'Space Grotesk', sans-serif; }
 .topline,.bottom,.eyebrow,.stats span,.recordTop,.chartLabel,.chartDates,.note,.journeyHeader,.goalMeter>div:first-child,.milestone>span,.axisText,.goalLabel { font-family: 'Geist', sans-serif; }
 .section h2,.goal h2 { letter-spacing: -.04em; }

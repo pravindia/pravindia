@@ -51,8 +51,8 @@ const Interests = () => {
 
 	const colors: Record<string, string> = {
 		core: 'var(--green)',
-		lang: '#79c0ff',
-		life: '#ffa657',
+		lang: '#ff4c00',
+		life: '#2979FF',
 	};
 
 	return (
@@ -194,15 +194,15 @@ const Interests = () => {
 					{/* Legend */}
 					<div className={styles.legend}>
 						<span>
-							<i style={{ background: 'var(--green)' }} />
+							<i style={{ background: colors.core }} />
 							core interests
 						</span>
 						<span>
-							<i style={{ background: '#79c0ff' }} />
+							<i style={{ background: colors.lang }} />
 							languages
 						</span>
 						<span>
-							<i style={{ background: '#ffa657' }} />
+							<i style={{ background: colors.life }} />
 							off the keyboard
 						</span>
 					</div>
