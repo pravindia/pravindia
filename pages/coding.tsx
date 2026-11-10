@@ -62,8 +62,8 @@ const weekdays = [
   "Saturday",
   "Sunday",
 ];
-const colors = ["#5b9cf5", "#f6c644", "#b58af3", "#72d59b"];
-const categoryColors = ["#398b65", "#7b9fde", "#d2a653", "#9d79bf"];
+const colors = ["#2979ff", "#ff4c00", "#39d353", "#8ab5ff"];
+const categoryColors = ["#39d353", "#2979ff", "#ff4c00", "#8ab5ff"];
 const hours = (seconds: number) => seconds / 3600;
 const formatHours = (seconds: number) =>
   hours(seconds).toLocaleString("en-US", { maximumFractionDigits: 1 });
@@ -275,7 +275,7 @@ export default function CodingPage({ profile }: { profile: Profile }) {
       label: "CODING TIME",
       value: formatHours(year === "all" ? profile.totalSeconds : total),
       unit: "hrs",
-      color: "#317a4b",
+      color: "#39d353",
       note:
         year === "all" ? "WakaTime · all time" : `Export estimate · ${year}`,
       series: dailySeries,
@@ -285,7 +285,7 @@ export default function CodingPage({ profile }: { profile: Profile }) {
       label: "ACTIVE DAYS",
       value: (year === "all" ? profile.activeDays : active).toLocaleString(),
       unit: "days",
-      color: "#e7684f",
+      color: "#ff4c00",
       note: year === "all" ? "WakaTime · all time" : "Days with estimated time",
       series: range(7).map((d) => (d.seconds > 0 ? 1 : 0)),
       sparkUnit: "active days",
@@ -298,7 +298,7 @@ export default function CodingPage({ profile }: { profile: Profile }) {
           : total / Math.max(active, 1),
       ),
       unit: "hrs",
-      color: "#2f56dc",
+      color: "#2979ff",
       note: year === "all" ? "WakaTime · active days" : "Across active days",
       series: dailySeries,
       sparkUnit: "hours",
@@ -311,7 +311,7 @@ export default function CodingPage({ profile }: { profile: Profile }) {
           : languageTotals.filter(([n]) => n !== "Other").length,
       ),
       unit: "used",
-      color: "#b88519",
+      color: "#2979ff",
       note: year === "all" ? "WakaTime · all time" : "Recognised languages",
       series: range(7).map(
         (d) => Object.keys(d.languages).filter((k) => k !== "Other").length,

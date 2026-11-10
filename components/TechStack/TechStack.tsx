@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import styles from "./TechStack.module.scss";
 
 const dailyConfident = [
@@ -37,20 +38,56 @@ const experimentingTools = [
 ];
 
 export default function TechStack() {
+	const sectionRef = useRef<HTMLElement>(null);
+
+	useEffect(() => {
+		const section = sectionRef.current;
+		if (!section) return;
+		const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+		let visible = false;
+		let resetTimer: ReturnType<typeof setTimeout> | undefined;
+		const setSpeed = (speed: number) => {
+			section.querySelectorAll<HTMLElement>("[data-marquee-track]").forEach((track) => {
+				track.getAnimations().forEach((animation) => animation.updatePlaybackRate(speed));
+			});
+		};
+		const onScroll = () => {
+			if (!visible || motion.matches) return;
+			setSpeed(2);
+			clearTimeout(resetTimer);
+			resetTimer = setTimeout(() => setSpeed(1), 220);
+		};
+		const observer = new IntersectionObserver(([entry]) => {
+			visible = entry.isIntersecting;
+			section.dataset.marqueeVisible = String(visible);
+			if (!visible) {
+				clearTimeout(resetTimer);
+				setSpeed(1);
+			}
+		});
+		observer.observe(section);
+		window.addEventListener("scroll", onScroll, { passive: true });
+		return () => {
+			window.removeEventListener("scroll", onScroll);
+			observer.disconnect();
+			clearTimeout(resetTimer);
+		};
+	}, []);
 	const allChips1 = [...dailyConfident, ...dailyConfident];
 	const allChips2 = [...experimentingTools, ...experimentingTools];
 
 	return (
-		<section className={styles.section} id="stack">
+		<section ref={sectionRef} className={styles.section} id="stack">
 			<div className={styles.inner}>
 				<div className={styles.heading}>
 					<h2>Things I reach for</h2>
 				</div>
 
+				<div className={styles.rows}>
 				<div className={styles.rowWrapper}>
 					{/* <span className={styles.confidence}>more confident</span> */}
 					<div className={styles.wrapper}>
-						<div className={styles.track}>
+						<div className={styles.track} data-marquee-track>
 							{allChips1.map((chip, idx) => (
 								<span key={`${chip.name}-${idx}`} className={styles.chip}>
 									{"svg" in chip ? (
@@ -73,7 +110,7 @@ export default function TechStack() {
 				<div className={styles.rowWrapper}>
 					{/* <span className={styles.confidence}>passionate & experimenting</span> */}
 					<div className={styles.wrapper}>
-						<div className={`${styles.track} ${styles.trackRev}`}>
+						<div className={`${styles.track} ${styles.trackRev}`} data-marquee-track>
 							{allChips2.map((chip, idx) => (
 								<span key={`${chip.name}-${idx}`} className={styles.chip}>
 									{"svg" in chip ? (
@@ -91,6 +128,7 @@ export default function TechStack() {
 							))}
 						</div>
 					</div>
+				</div>
 				</div>
 			</div>
 		</section>

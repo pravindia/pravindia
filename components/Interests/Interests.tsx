@@ -72,13 +72,26 @@ export default function Interests() {
 	const [tilt, setTilt] = useState(0.28);
 	const [hovered, setHovered] = useState<number | null>(null);
 	const drag = useRef<{ x: number; y: number; pointerId: number } | null>(null);
+	const sectionRef = useRef<HTMLElement>(null);
 
 	useEffect(() => {
 		const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 		let frame = 0;
 		let previous = 0;
+		let visible = false;
+		let lastScroll = -Infinity;
+		const observer = new IntersectionObserver(([entry]) => {
+			visible = entry.isIntersecting;
+			if (!visible) lastScroll = -Infinity;
+		});
+		if (sectionRef.current) observer.observe(sectionRef.current);
+		const onScroll = () => {
+			if (visible && !reducedMotion.matches) lastScroll = performance.now();
+		};
+		window.addEventListener("scroll", onScroll, { passive: true });
 		const animate = (time: number) => {
-			if (previous && !drag.current) setAngle((value) => value + Math.min(time - previous, 50) * 0.000075);
+			const boost = Math.max(0, 1 - (time - lastScroll) / 450);
+			if (previous && !drag.current) setAngle((value) => value + Math.min(time - previous, 50) * 0.000075 * (1 + boost));
 			previous = time;
 			frame = requestAnimationFrame(animate);
 		};
@@ -91,6 +104,8 @@ export default function Interests() {
 		reducedMotion.addEventListener("change", update);
 		return () => {
 			cancelAnimationFrame(frame);
+			observer.disconnect();
+			window.removeEventListener("scroll", onScroll);
 			reducedMotion.removeEventListener("change", update);
 		};
 	}, []);
@@ -105,11 +120,11 @@ export default function Interests() {
 	});
 
 	return (
-		<section className={styles.section} id="interests">
+		<section ref={sectionRef} className={styles.section} id="interests">
 			<div className={styles.inner}>
 				<div className={styles.heading}>
 					<h2>Interests</h2>
-					<span className={styles.meta}>things I think about · drag to explore</span>
+					<span className={styles.meta}>things I think about</span>
 				</div>
 				<div className={styles.constellation}>
 					<svg viewBox={`0 0 ${SIZE} ${SIZE}`} className={styles.constellationSvg}

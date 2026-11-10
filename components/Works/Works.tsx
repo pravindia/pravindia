@@ -96,7 +96,6 @@ export default function Works() {
 		<section className={styles.section} id="works">
 			<div className={styles.inner}>
 				<div className={styles.heading}>
-					<span className={styles.prompt}>/01</span>
 					<h2>Selected works</h2>
 				</div>
 				<div className={styles.grid} ref={gridRef}>

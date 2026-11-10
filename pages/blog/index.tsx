@@ -3,7 +3,7 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import styles from "../../styles/Blog.module.scss";
 import { useState, useMemo, useRef, useEffect } from "react";
-import Link from 'next/link';
+
 
 type Kind = "blog" | "insights" | "case-study";
 
@@ -112,15 +112,14 @@ const KINDS = [
 	{ id: "case-study", label: "Case Studies" },
 ] as const;
 
-const totalReadMin = POSTS.reduce((sum, p) => sum + parseInt(p.readTime), 0) + parseInt(PINNED.readTime);
+
 
 export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 	const [kind, setKind] = useState<string>("all");
 	const [q, setQ] = useState("");
 	const [activeTag, setActiveTag] = useState<string | null>(null);
 	const [theme, setTheme] = useState<"dark" | "light">("dark");
-	const [email, setEmail] = useState("");
-	const [subscribed, setSubscribed] = useState(false);
+	const [themeReady, setThemeReady] = useState(false);
 	const searchRef = useRef<HTMLInputElement>(null);
 
 	useEffect(() => {
@@ -130,15 +129,17 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 		} else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
 			setTheme("light");
 		}
+		setThemeReady(true);
 	}, []);
 
 	useEffect(() => {
+		if (!themeReady) return;
 		localStorage.setItem("blog-theme", theme);
-	}, [theme]);
+	}, [theme, themeReady]);
 
 	useEffect(() => {
 		function onKey(e: KeyboardEvent) {
-			if (e.key === "/" && (document.activeElement as HTMLElement).tagName !== "INPUT") {
+			if (e.key === "/" && !e.ctrlKey && !e.metaKey && !e.altKey && !(e.target instanceof HTMLElement && (e.target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)))) {
 				e.preventDefault();
 				searchRef.current?.focus();
 			}
@@ -155,7 +156,7 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 			date: p.date || '',
 			excerpt: p.excerpt || '',
 			tags: p.tags || [],
-			readTime: p.readTime || '1',
+			readTime: `${parseInt(p.readTime || '1', 10) || 1} min`,
 			kind: 'blog' as Kind,
 			url: `/blog/${p.slug}`,
 		}));
@@ -207,9 +208,9 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 
 					{/* ── Hero ── */}
 					<section className={styles.hero}>
-						<h1 className={styles.heroTitle}>Welcome to my Scrible</h1>
+						<h1 className={styles.heroTitle}>Welcome to my Scribble</h1>
 						<p className={styles.heroSub}>
-							Blog posts, engineering insights, and case studies and my thoughts
+							Blog posts, engineering insights, and case studies, and my thoughts
 						</p>
 					</section>
 
@@ -217,8 +218,7 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 					<a
 						className={styles.featured}
 						href={PINNED.url}
-						target="_blank"
-						rel="noopener noreferrer"
+
 					>
 						<div className={styles.featEyebrow}>
 							<span className={styles.featPin}> <span style={{ fontSize: "16px" }}>★</span> Featured Post</span>
@@ -245,6 +245,7 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 									key={k.id}
 									className={styles.tab}
 									data-on={kind === k.id}
+									aria-pressed={kind === k.id}
 									onClick={() => setKind(k.id)}
 								>
 									{k.label}
@@ -252,16 +253,17 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 							))}
 						</div>
 						<label className={styles.search}>
-							<span className={styles.searchIcon}>⌕</span>
+							<svg className={styles.searchIcon} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 4 4" /></svg>
 							<input
 								ref={searchRef}
-								type="text"
-								placeholder="Search  /"
+								type="search"
+								aria-label="Search articles"
+								placeholder="Search articles…"
 								value={q}
 								onChange={(e) => setQ(e.target.value)}
 							/>
 							{q && (
-								<button type="button" className={styles.searchClear} onClick={() => setQ("")}>
+								<button type="button" className={styles.searchClear} aria-label="Clear search" onClick={() => setQ("")}>
 									✕
 								</button>
 							)}
@@ -277,7 +279,7 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 					)}
 
 					{/* ── List meta ── */}
-					<p className={styles.listMeta}>
+					<p className={styles.listMeta} role="status" aria-live="polite">
 						{filtered.length} {filtered.length === 1 ? "article" : "articles"} · newest first
 					</p>
 
@@ -290,12 +292,9 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 							</div>
 						) : (
 								filtered.map((post: Post) => (
-								<a
+								<article
 									key={post.slug}
 									className={styles.postCard}
-									href={post.url}
-									target="_blank"
-									rel="noopener noreferrer"
 								>
 									<div className={styles.postEyebrow}>
 										<span className={styles.postKind} data-kind={post.kind}>{post.kind}</span>
@@ -304,59 +303,35 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 										<span className={styles.dot} />
 										<span>{post.readTime} read</span>
 									</div>
-									<h3 className={styles.postTitle}>{post.title}</h3>
+									<h2 className={styles.postTitle}><a href={post.url} target={post.url.startsWith("https:") ? "_blank" : undefined} rel={post.url.startsWith("https:") ? "noopener noreferrer" : undefined}>{post.title}</a></h2>
 									<p className={styles.postExcerpt}>{post.excerpt}</p>
 									<div className={styles.postFoot}>
 										<div className={styles.postTags}>
 												{post.tags.map((t: string) => (
-												<span
+												<button
 													key={t}
 													className={styles.tag}
 													data-on={activeTag === t}
-													onClick={(e) => { e.preventDefault(); handleTag(t); }}
+													aria-pressed={activeTag === t}
+													aria-label={`Filter by ${t}`}
+													onClick={() => handleTag(t)}
 												>
 													{t}
-												</span>
+												</button>
 											))}
 										</div>
 										<span className={styles.postRead}>read →</span>
 									</div>
-								</a>
+								</article>
 							))
 						)}
 					</div>
 
-					{/* ── Newsletter ── */}
 					<section className={styles.subscribe}>
-						<h2 className={styles.subTitle}>One email when I publish.</h2>
-						<p className={styles.subText}>
-							No drip campaign, no tracking pixels. Just the post, in plaintext, roughly once a month.
-						</p>
-						{subscribed ? (
-							<div className={styles.subOk}>
-								<span className={styles.subCheck}>✓</span> You&rsquo;re on the list.
-							</div>
-						) : (
-							<form
-								className={styles.subForm}
-								onSubmit={(e) => {
-									// TODO: integrate with an actual email service instead of just showing the success state
-									e.preventDefault();
-									if (email.trim()) setSubscribed(true);
-								}}
-							>
-								<input
-									className={styles.subInput}
-									type="email"
-									placeholder="you@domain.dev"
-									value={email}
-									onChange={(e) => setEmail(e.target.value)}
-									required
-								/>
-								<button className={styles.subBtn} type="submit">Subscribe</button>
-							</form>
-						)}
-					</section>
+                        <h2 className={styles.subTitle}>Follow the writing.</h2>
+                        <p className={styles.subText}>Get new posts in your feed reader.</p>
+                        <a className={styles.subBtn} href="/api/rss.xml">Subscribe via RSS</a>
+                    </section>
 
 				</main>
 
@@ -390,7 +365,7 @@ export async function getStaticProps() {
 		date: p.date || '',
 		excerpt: p.excerpt || '',
 		tags: p.tags || [],
-		readTime: p.readTime || '1',
+		readTime: `${parseInt(p.readTime || '1', 10) || 1} min`,
 		kind: 'blog' as Kind,
 		url: `/blog/${p.slug}`,
 	}));

@@ -11,7 +11,7 @@
 .badges { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; font: 10px var(--font-mono); color: var(--text-muted); span { display: flex; gap: 7px; align-items: center; } i { width: 6px; height: 6px; border-radius: 50%; background: var(--green); } }
 .terminal { min-width: 0; border: 1px solid var(--border-bright); border-radius: 10px; background: var(--surface); box-shadow: 0 24px 70px #0003; scroll-margin-top: 110px; }
 .terminalHeader { padding: 14px 17px; display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); border-bottom: 1px solid var(--border); font: 10px var(--font-mono); }
-.dots { display: flex; gap: 5px; i { width: 7px; height: 7px; border-radius: 50%; background: var(--border-bright); &:first-child { background: #ff7b72; } &:nth-child(2) { background: #e3b341; } &:last-child { background: #39d353; } } }
+.dots { display: flex; gap: 5px; i { width: 7px; height: 7px; border-radius: 50%; background: var(--border-bright); &:first-child { background: var(--secondary); } &:nth-child(2) { background: var(--secondary); } &:last-child { background: #39d353; } } }
 .terminalBody { padding: 24px 20px 17px; }
 .request { margin-bottom: 24px; }
 .comment { color: var(--text-muted); font: 10px var(--font-mono); }

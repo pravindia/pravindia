@@ -5,7 +5,7 @@
 .header a { color: #d5e1d8; text-decoration: none; letter-spacing: .02em; font-size: 13px; }
 .intro { position: absolute; left: 8%; top: 37%; width: 290px; pointer-events: none; }
 .eyebrow, .status, .hint { font-size: 10px; letter-spacing: .2em; color: #92aa9b; }
-.intro h1 { font-family: inherit; font-size: clamp(42px, 5vw, 76px); font-weight: 400; letter-spacing: -.06em; line-height: .98; margin: 24px 0; }
+.intro h1 { font-family: var(--font-heading); font-size: clamp(42px, 5vw, 76px); font-weight: 400; letter-spacing: -.06em; line-height: .98; margin: 24px 0; }
 .intro h1 em { color: #a8c5b1; font-weight: 400; }
 .intro p, .controls p { color: #8c9d92; line-height: 1.65; font-size: 13px; }
 .controls { position: absolute; bottom: 36px; left: 5%; display: flex; align-items: center; gap: 24px; z-index: 1; }
