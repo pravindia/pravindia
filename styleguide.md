@@ -1,6 +1,6 @@
 # Typing page style guide
 
-This guide records the current visual system for `/typing`. Its page-specific styles live in `styles/Typing.module.scss`; the shared color tokens come from `styles/globals.css`. Other pages may still use different fonts and layouts.
+This guide records the current visual system for `/typing`. Its page-specific styles live in `styles/Typing.module.scss`; the shared color tokens come from `styles/globals.css`. All pages share Geist body text, Space Grotesk headings, JetBrains Mono technical labels, and the primary/secondary/tertiary tokens in `styles/globals.css`. Layouts remain page-specific.
 
 ## Typography
 
@@ -10,7 +10,7 @@ This guide records the current visual system for `/typing`. Its page-specific st
 | Primary | Geist | Body copy, labels, buttons, chart annotations and supporting text |
 | Fallbacks | System sans-serif | Used if web fonts cannot load |
 
-Geist and Space Grotesk are loaded from Google Fonts at weights 400, 500, 600 and 700. The hero requests weight 800; because that weight is not loaded explicitly, the browser may synthesize it.
+Geist and Space Grotesk are loaded from Google Fonts at weights 400, 500, 600 and 700. All three font families are loaded once globally. The hero requests weight 800; because that weight is not loaded explicitly, the browser may synthesize it.
 
 | Element | Size | Weight | Line height / tracking |
 | --- | --- | --- | --- |
@@ -32,8 +32,8 @@ Geist and Space Grotesk are loaded from Google Fonts at weights 400, 500, 600 an
 | Role | Token / value | Use |
 | --- | --- | --- |
 | Primary | `#39D353` (`--typing-primary`, shared `--green`) | Primary button, hero emphasis, chart line and first statistic |
-| Secondary | `#D97757` (`--typing-secondary`) | Accuracy statistic, goal value and progress bars |
-| Tertiary | `#FF4C00` (`--typing-tertiary`) | Completed-test statistic, links and disclosures |
+| Secondary | `#FF4C00` (`--typing-secondary`) | Accuracy statistic, goal value and progress bars |
+| Tertiary | `#2979FF` (`--typing-tertiary`) | Completed-test statistic, links and disclosures |
 | Page background | `#071411` (`--bg`) | Main page background |
 | Surface | `#0D1117` (`--surface`) | Cards, charts and goal panel |
 | Raised surface | `#161B22` (`--surface-2`) | Notice and keyboard background gradient |

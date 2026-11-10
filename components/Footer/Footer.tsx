@@ -4,6 +4,8 @@ import GitHubGrid from "../GitHubGrid/GitHubGrid";
 import LocalClock from "./LocalClock";
 import SocialIcon from "./SocialIcon";
 import styles from "./Footer.module.scss";
+import RotatingQuote from "./RotatingQuote";
+import ScrambleWord from "./ScrambleWord";
 
 const quickLinks = [
   ["Work", "/works"], ["Scribble", "/blog"], ["Coding", "/coding"],
@@ -28,9 +30,9 @@ export default function Footer({ textEnter, textLeave }: { textEnter?: () => voi
       <div className={styles.inner}>
         <div className={styles.top}>
           <div className={styles.contact}>
-            <h2>Good things start<br />with a conversation<span>.</span></h2>
+            <h2 aria-label="Good things start with a conversation.">Good things start<br />with a <ScrambleWord /></h2>
             <p>Projects, opportunities, or a good technical rabbit hole.<br className={styles.desktopBreak} /> I’d love to hear from you.</p>
-            {email ? <a className={styles.email} href={`mailto:${email}`} onMouseEnter={textEnter} onMouseLeave={textLeave}>{email}<Arrow /></a> : <span className={styles.email}>Let’s connect<Arrow /></span>}
+            {email ? <a data-nosnippet className={styles.email} href={`mailto:${email}`} onMouseEnter={textEnter} onMouseLeave={textLeave}>{email}<Arrow /></a> : <span className={styles.email}>Let’s connect<Arrow /></span>}
           </div>
           <nav className={styles.links} aria-label="Footer navigation">
             <h3>Explore</h3>
@@ -42,15 +44,7 @@ export default function Footer({ textEnter, textLeave }: { textEnter?: () => voi
             <div className={styles.clock}><span>My local time · India</span><LocalClock /></div>
           </div>
         </div>
-        <div className={styles.signature} aria-hidden="true">pravindia<span>_</span></div>
-        <div className={styles.baseline}>
-          <figure className={styles.quote}>
-            <blockquote>“Simplicity does not precede complexity, but follows it.”</blockquote>
-            <figcaption><a href="https://www.cs.yale.edu/homes/perlis-alan/quotes.html" target="_blank" rel="noopener noreferrer">Alan Perlis · Epigrams in Programming</a></figcaption>
-          </figure>
-          <a className={styles.backTop} href="#" aria-label="Back to top">Back to top <Arrow /></a>
-        </div>
-        <div className={styles.credits}><span>© {new Date().getFullYear()} Pravin Kumar</span><span>Always learning. Always building.</span></div>
+        {/* <div className={styles.baseline}><RotatingQuote /></div> */}
       </div>
       <div className={styles.activityStrip}><GitHubGrid variant="section" /></div>
     </footer>
