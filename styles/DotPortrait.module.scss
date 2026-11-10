@@ -1,6 +1,6 @@
 .page { position: relative; min-height: 100svh; overflow: hidden; background: #09110f; color: #e6eee8; font-family: inherit; }
 .canvas { position: absolute; inset: 0; z-index: 0; }
-.grain { position: absolute; inset: 0; pointer-events: none; opacity: .08; background: url('/assets/img/grains.png'); }
+.grain { position: absolute; inset: 0; pointer-events: none; opacity: .08; background: url('/assets/images/grains.png'); }
 .header { position: relative; display: flex; justify-content: space-between; padding: 32px 5%; color: #a5b8ac; font-size: 10px; letter-spacing: .16em; z-index: 1; }
 .header a { color: #d5e1d8; text-decoration: none; letter-spacing: .02em; font-size: 13px; }
 .intro { position: absolute; left: 8%; top: 37%; width: 290px; pointer-events: none; }

@@ -1,13 +1,13 @@
 import fs from 'fs';
+import { externalArticles } from '../data/external-articles';
 import path from 'path';
 import matter from 'gray-matter';
 import { works } from '../data/works';
 import { developerProfile, endpointGroups, siteUrl } from './developers';
 
-export function getDeveloperPosts() {
+export function getDeveloperPosts(includeExternal = false) {
   const directory = path.join(process.cwd(), 'posts');
-  if (!fs.existsSync(directory)) return [];
-  return fs.readdirSync(directory).filter(file => file.endsWith('.mdx')).map(file => {
+  const localPosts = (fs.existsSync(directory) ? fs.readdirSync(directory) : []).filter(file => file.endsWith('.mdx')).map(file => {
     const { data } = matter(fs.readFileSync(path.join(directory, file), 'utf8'));
     const slug = file.replace(/\.mdx$/, '');
     return {
@@ -18,7 +18,8 @@ export function getDeveloperPosts() {
       tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
       url: `${siteUrl}/blog/${slug}`,
     };
-  }).sort((a, b) => b.date.localeCompare(a.date));
+  });
+  return [...localPosts, ...(includeExternal ? externalArticles.map(article => ({ ...article, external: true })) : [])].sort((a, b) => b.date.localeCompare(a.date));
 }
 
 export function getDeveloperProjects() {

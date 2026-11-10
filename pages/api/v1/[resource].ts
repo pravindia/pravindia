@@ -13,7 +13,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     switch (req.query.resource) {
       case 'profile': data = developerProfile; break;
       case 'projects': data = getDeveloperProjects(); break;
-      case 'posts': data = getDeveloperPosts(); break;
+      case 'posts': data = getDeveloperPosts(true); break;
       default: return res.status(404).json({ error: { code: 'not_found', message: 'Unknown resource.' } });
     }
     res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=3600');

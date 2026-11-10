@@ -33,3 +33,6 @@
 .footer { flex-shrink: 0; display: flex; align-items: center; gap: 20px; padding: 12px 18px; border-top: 1px solid var(--border-bright); color: var(--text-muted); font-size: 11px; span { display: inline-flex; align-items: center; gap: 5px; } }
 @media (max-width: 640px) { .container { top: 12dvh; transform: translateX(-50%); max-height: 76dvh; } .inputWrapper { padding: 12px; gap: 8px; } .input { font-size: 16px; } .footer { gap: 12px; padding: 10px 12px; font-size: 10px; } .category { display: none; } .articleMeta { flex-wrap: wrap; } }
 @media (prefers-reduced-motion: reduce) { .item { transition: none; } }
+
+.group[data-group="Scribble"], .group[data-group="Projects"] { color: var(--secondary); }
+.footer { color: #7d8792; background: var(--surface); border-top-color: var(--border); kbd { color: #7d8792; background: transparent; border-color: var(--border); } }

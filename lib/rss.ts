@@ -33,7 +33,7 @@ export async function generateRSSFeed(siteUrl: string) {
     <language>en-us</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <image>
-      <url>${siteUrl}/assets/img/logo.png</url>
+      <url>${siteUrl}/assets/images/logo.png</url>
       <title>Pravin Kumar</title>
       <link>${siteUrl}</link>
     </image>
