@@ -24,11 +24,11 @@ const dailyConfident = [
 const experimentingTools = [
 	{ icon: "github-original", name: "Git / GitHub", svg: true },
 	{ icon: "docker-original", name: "Docker", svg: true },
-	{ icon: "amazonwebservices-original", name: "AWS (EC2, S3, Lambda)", svg: true },
+	{ icon: "amazonwebservices-original", name: "AWS", svg: true },
 	{ icon: "🔄", name: "CI/CD Pipelines" },
 	{ icon: "digitalocean-original", name: "DigitalOcean", svg: true },
 	{ icon: "vercel-original", name: "Vercel", svg: true },
-	{ icon: "O", name: "OpenAI", svg: true },
+	{ icon: "O", name: "OpenAI" },
 	{ icon: "firebase-original", name: "Firebase", svg: true },
 	{ icon: "🔌", name: "MCP" },
 	{ icon: "elasticsearch-original", name: "Elasticsearch", svg: true },
@@ -37,7 +37,7 @@ const experimentingTools = [
 	{ icon: "📊", name: "Vector DBs" },
 	{ icon: "apachekafka-original", name: "Kafka", svg: true },
 	{ icon: "socketio-original", name: "Socket.IO", svg: true },
-	{ icon: "C", name: "Claude", svg: true },
+	{ icon: "C", name: "Claude",},
 ];
 
 export default function TechStack() {

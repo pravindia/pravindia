@@ -21,7 +21,7 @@ colors:
 typography:
   display:
     fontFamily: "Space Grotesk, Geist, sans-serif"
-    fontSize: "clamp(2.5rem, 6vw, 4.5rem)"
+    fontSize: "clamp(2.5rem, 6vw, 3.5rem)"
     fontWeight: 800
     lineHeight: 1.1
     letterSpacing: "-0.03em"

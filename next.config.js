@@ -7,7 +7,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'miro.medium.com', pathname: '/**' },
-      { protocol: 'https', hostname: 'smazee.com', pathname: 'uploads/**' },
+      new URL('https://smazee.com/uploads/**'),
+      new URL('https://media2.dev.to/dynamic/image/**'),
     ],
     formats: ['image/avif', 'image/webp'],
   },

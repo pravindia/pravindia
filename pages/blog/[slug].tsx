@@ -8,8 +8,10 @@ import MDXComponents from '../../components/Blog/MDXComponents';
 import styles from '../../styles/Blog.module.scss';
 import CoverImage from '../../components/Blog/CoverImage';
 import { siteUrl } from '../../lib/developers';
+import { useBlogTheme } from '../../components/Blog/useBlogTheme';
 
 export default function Post({ post }: any) {
+	const { theme, setTheme } = useBlogTheme();
 	return (
 		<>
 			<Head>
@@ -22,7 +24,8 @@ export default function Post({ post }: any) {
 				<link rel="alternate" type="application/rss+xml" title="Pravin Kumar Blog" href="/api/rss.xml" />
 			</Head>
 			<Header />
-			<main className={styles.articlePage}>
+			<div className={styles.page} data-theme={theme}>
+			<main className={styles.articlePage} data-theme={theme}>
 				<h1>{post.frontmatter.title}</h1>
 				<p className={styles.articleExcerpt}>{post.frontmatter.excerpt}</p>
 				{post.frontmatter.coverImage && <CoverImage src={post.frontmatter.coverImage} alt={post.frontmatter.coverAlt || ''} variant="article" />}
@@ -30,7 +33,17 @@ export default function Post({ post }: any) {
 					<MDXRemote {...post.mdxSource} components={MDXComponents} />
 				</article>
 			</main>
+			<button
+				className={styles.themeToggle}
+				type="button"
+				onClick={() => setTheme((current) => current === 'dark' ? 'light' : 'dark')}
+				aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+				title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+			>
+				{theme === 'dark' ? '☀' : '☾'}
+			</button>
 			<Footer textEnter={() => { }} textLeave={() => { }} />
+			</div>
 		</>
 	);
 }

@@ -4,6 +4,7 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import styles from "../../styles/Blog.module.scss";
 import CoverImage from "../../components/Blog/CoverImage";
+import { useBlogTheme } from "../../components/Blog/useBlogTheme";
 import { useState, useMemo, useRef, useEffect } from "react";
 
 
@@ -15,7 +16,7 @@ interface Post {
 	date: string;
 	excerpt: string;
 	tags: string[];
-	readTime: string;
+	readTime?: string;
 	kind: Kind;
 	url: string;
 	coverImage?: string;
@@ -39,6 +40,7 @@ const PINNED: Post = {
 };
 
 const POSTS: Post[] = externalArticles;
+const DEFAULT_ARTICLE_COVER = "/assets/images/blog/article.webp";
 
 const KINDS = [
 	{ id: "all", label: "All" },
@@ -53,24 +55,8 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 	const [kind, setKind] = useState<string>("all");
 	const [q, setQ] = useState("");
 	const [activeTag, setActiveTag] = useState<string | null>(null);
-	const [theme, setTheme] = useState<"dark" | "light">("dark");
-	const [themeReady, setThemeReady] = useState(false);
+	const { theme, setTheme } = useBlogTheme();
 	const searchRef = useRef<HTMLInputElement>(null);
-
-	useEffect(() => {
-		const saved = localStorage.getItem("blog-theme");
-		if (saved === "light" || saved === "dark") {
-			setTheme(saved);
-		} else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
-			setTheme("light");
-		}
-		setThemeReady(true);
-	}, []);
-
-	useEffect(() => {
-		if (!themeReady) return;
-		localStorage.setItem("blog-theme", theme);
-	}, [theme, themeReady]);
 
 	useEffect(() => {
 		function onKey(e: KeyboardEvent) {
@@ -232,16 +218,15 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 								filtered.map((post: Post) => (
 								<article
 									key={post.slug}
-									className={`${styles.postCard} ${post.coverImage ? styles.postCardWithCover : ''}`}
+									className={`${styles.postCard} ${styles.postCardWithCover}`}
 								>
-									{post.coverImage && <CoverImage src={post.coverImage} alt={post.coverAlt || ""} variant="card" />}
+									<CoverImage src={post.coverImage || DEFAULT_ARTICLE_COVER} alt={post.coverImage ? post.coverAlt || "" : ""} variant="card" />
 									<div className={styles.postContent}>
 									<div className={styles.postEyebrow}>
 										<span className={styles.postKind} data-kind={post.kind}>{post.kind}</span>
 										<span className={styles.dot} />
 										<span>{post.date}</span>
-										<span className={styles.dot} />
-										<span>{post.readTime} read</span>
+										{post.readTime && <><span className={styles.dot} /><span>{post.readTime} read</span></>}
 									</div>
 									<h2 className={styles.postTitle}><a href={post.url} target={post.url.startsWith("https:") ? "_blank" : undefined} rel={post.url.startsWith("https:") ? "noopener noreferrer" : undefined}>{post.title}</a></h2>
 									<p className={styles.postExcerpt}>{post.excerpt}</p>
