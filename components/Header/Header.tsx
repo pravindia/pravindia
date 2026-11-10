@@ -24,7 +24,7 @@ const Header = () => {
 
 				<nav className={styles.navList}>
 					<ul>
-						<li><Link href="/#works"><span className={styles.hash}>/</span>works</Link></li>
+						<li><Link href="/works"><span className={styles.hash}>/</span>works</Link></li>
 						<li><Link href="/blog"><span className={styles.hash}>/</span>scribble</Link></li>
 						{/* <li><Link href="/developers"><span className={styles.hash}>/</span>developers</Link></li> */}
 					</ul>

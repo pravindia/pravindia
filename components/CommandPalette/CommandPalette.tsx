@@ -4,6 +4,7 @@ import { useCommandPalette } from "../../lib/CommandPaletteContext";
 import { works } from "../../data/works";
 import CommandIcon, { IconName } from "./CommandIcon";
 import styles from "./CommandPalette.module.scss";
+import Image from "next/image";
 
 interface Command {
   id: string;
@@ -15,6 +16,8 @@ interface Command {
   external?: boolean;
   date?: string;
   tags?: string[];
+  coverImage?: string;
+  coverAlt?: string;
 }
 interface Post {
   url: string;
@@ -24,6 +27,8 @@ interface Post {
   excerpt: string;
   date: string;
   tags: string[];
+  coverImage?: string;
+  coverAlt?: string;
 }
 const pages: Command[] = [
   { id: "home", title: "Home", group: "Pages", icon: "home", href: "/" },
@@ -115,6 +120,8 @@ export default function CommandPalette() {
           description: post.excerpt,
           date: post.date,
           tags: post.tags,
+          coverImage: post.coverImage,
+          coverAlt: post.coverAlt,
           group: "Scribble",
           icon: "file",
           href: post.external ? post.url : `/blog/${post.slug}`,
@@ -332,9 +339,15 @@ export default function CommandPalette() {
                   onClick={() => choose(cmd)}
                   onMouseEnter={() => setSelectedIndex(index)}
                 >
-                  <span className={styles.icon}>
-                    <CommandIcon name={cmd.icon} />
-                  </span>
+                  {cmd.coverImage ? (
+                    <span className={`${styles.icon} ${styles.coverThumb}`}>
+                      <Image src={cmd.coverImage} alt="" width={96} height={64} sizes="96px" loading="lazy" unoptimized={process.env.NODE_ENV === 'development' && cmd.coverImage.startsWith('https://')} />
+                    </span>
+                  ) : (
+                    <span className={styles.icon}>
+                      <CommandIcon name={cmd.icon} />
+                    </span>
+                  )}
                   <span className={styles.text}>
                     <span className={styles.title}>{cmd.title}</span>
                     {cmd.description && (

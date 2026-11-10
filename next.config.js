@@ -4,6 +4,13 @@ const path = require('path')
 
 const nextConfig = {
   reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: 'miro.medium.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'smazee.com', pathname: 'uploads/**' },
+    ],
+    formats: ['image/avif', 'image/webp'],
+  },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },

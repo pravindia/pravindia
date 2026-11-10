@@ -1,0 +1,17 @@
+.cover {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	background: var(--surface, #151a21);
+
+	img { object-fit: cover; }
+}
+
+.feature { aspect-ratio: 16 / 7; margin: 0 0 1.5rem; border-radius: 10px; }
+.card { flex: 0 0 144px; width: 144px; height: 90px; border-radius: 8px; }
+.article { aspect-ratio: 16 / 9; margin: 0 0 2.5rem; border-radius: 12px; }
+
+@media (max-width: 640px) {
+	.feature { aspect-ratio: 16 / 9; }
+	.card { flex-basis: 96px; width: 96px; height: 72px; }
+}

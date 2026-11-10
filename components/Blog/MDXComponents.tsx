@@ -1,5 +1,5 @@
 import React from 'react';
-// Use plain <img> in MDX to avoid next/image SSR/CSR markup differences
+import Image from 'next/image';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
@@ -33,19 +33,22 @@ export const YouTube: React.FC<{ id: string; title?: string }> = ({ id, title })
 
 export const MDXImage: React.FC<any> = (props) => {
 	const { src, alt, width, height } = props;
+	if (typeof src !== 'string' || !src) return null;
 	// normalize public paths: allow authors to write /public/... or /...
 	let out = src || '';
 	if (out.startsWith('/public/')) out = out.replace(/^\/public\//, '/');
 	return (
 		<>
-			<img
+			<Image
 				src={out}
 				alt={alt || ''}
-				width={width}
-				height={height}
-				style={{ maxWidth: '100%', height: 'auto', display: 'block', margin: '1rem 0' }}
+				width={Number(width) || 1200}
+				height={Number(height) || 675}
+				sizes="(max-width: 860px) 100vw, 840px"
+				style={{ maxWidth: '100%', width: '100%', height: 'auto', display: 'block', margin: '1rem 0' }}
 				decoding="async"
 				loading="lazy"
+				unoptimized={process.env.NODE_ENV === 'development' && out.startsWith('https://')}
 			/>
 		</>
 	);

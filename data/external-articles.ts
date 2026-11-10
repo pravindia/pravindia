@@ -7,6 +7,8 @@ export interface ExternalArticle {
   readTime: string;
   kind: "blog" | "insights" | "case-study";
   url: string;
+  coverImage?: string;
+  coverAlt?: string;
 }
 
 export const externalArticles: ExternalArticle[] = [
@@ -39,6 +41,8 @@ export const externalArticles: ExternalArticle[] = [
 		readTime: "5 min",
 		kind: "insights",
 		url: "https://smazee.com/blog/learn-whats-MongoDB-NoSQL",
+		coverImage: "https://miro.medium.com/v2/resize:fit:2000/format:webp/1*plTQEOtbHS3qAr_pz24E4Q.jpeg",
+		coverAlt: "Illustration of NoSQL databases and connected data servers",
 	},
 	{
 		slug: "When-not-to-use-Flutter",
@@ -49,6 +53,7 @@ export const externalArticles: ExternalArticle[] = [
 		readTime: "7 min",
 		kind: "blog",
 		url: "https://smazee.com/blog/When-not-to-use-Flutter",
+		coverImage: "https://smazee.com/uploads/blog/When-not-to-use-Flutter.png",
 	},
 	{
 		slug: "Implement-glassmorphism-in-your-flutter-app",

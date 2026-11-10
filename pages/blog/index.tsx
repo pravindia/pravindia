@@ -3,6 +3,7 @@ import Head from "next/head";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import styles from "../../styles/Blog.module.scss";
+import CoverImage from "../../components/Blog/CoverImage";
 import { useState, useMemo, useRef, useEffect } from "react";
 
 
@@ -17,6 +18,8 @@ interface Post {
 	readTime: string;
 	kind: Kind;
 	url: string;
+	coverImage?: string;
+	coverAlt?: string;
 	pinned?: boolean;
 }
 
@@ -30,6 +33,8 @@ const PINNED: Post = {
 	readTime: "2 min",
 	kind: "blog",
 	url: "/blog/is-software-engineering-dead",
+	coverImage: "/images/blog/software-dev-next.webp",
+	coverAlt: "Future of software development with AI",
 	pinned: true,
 };
 
@@ -89,6 +94,8 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 			readTime: `${parseInt(p.readTime || '1', 10) || 1} min`,
 			kind: 'blog' as Kind,
 			url: `/blog/${p.slug}`,
+			...(p.coverImage ? { coverImage: p.coverImage } : {}),
+			...(p.coverAlt ? { coverAlt: p.coverAlt } : {}),
 		}));
 		return [...locals, ...POSTS].sort(
 			(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
@@ -150,6 +157,7 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 						href={PINNED.url}
 
 					>
+						{PINNED.coverImage && <CoverImage src={PINNED.coverImage} alt={PINNED.coverAlt || ""} variant="feature" />}
 						<div className={styles.featEyebrow}>
 							<span className={styles.featPin}> <span style={{ fontSize: "16px" }}>★</span> Featured Post</span>
 							<span className={styles.dot} />
@@ -224,8 +232,10 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 								filtered.map((post: Post) => (
 								<article
 									key={post.slug}
-									className={styles.postCard}
+									className={`${styles.postCard} ${post.coverImage ? styles.postCardWithCover : ''}`}
 								>
+									{post.coverImage && <CoverImage src={post.coverImage} alt={post.coverAlt || ""} variant="card" />}
+									<div className={styles.postContent}>
 									<div className={styles.postEyebrow}>
 										<span className={styles.postKind} data-kind={post.kind}>{post.kind}</span>
 										<span className={styles.dot} />
@@ -251,6 +261,7 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 											))}
 										</div>
 										<span className={styles.postRead}>read →</span>
+									</div>
 									</div>
 								</article>
 							))
@@ -298,6 +309,8 @@ export async function getStaticProps() {
 		readTime: `${parseInt(p.readTime || '1', 10) || 1} min`,
 		kind: 'blog' as Kind,
 		url: `/blog/${p.slug}`,
+		...(p.coverImage ? { coverImage: p.coverImage } : {}),
+		...(p.coverAlt ? { coverAlt: p.coverAlt } : {}),
 	}));
 	return {
 		props: { localPosts: locals },

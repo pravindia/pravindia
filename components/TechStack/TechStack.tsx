@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import styles from "./TechStack.module.scss";
 
+//  svg imported from https://devicon.dev/
 const dailyConfident = [
 	{ icon: "typescript-original", name: "TypeScript", svg: true },
 	{ icon: "python-original", name: "Python", svg: true },
@@ -27,6 +28,7 @@ const experimentingTools = [
 	{ icon: "🔄", name: "CI/CD Pipelines" },
 	{ icon: "digitalocean-original", name: "DigitalOcean", svg: true },
 	{ icon: "vercel-original", name: "Vercel", svg: true },
+	{ icon: "O", name: "OpenAI", svg: true },
 	{ icon: "firebase-original", name: "Firebase", svg: true },
 	{ icon: "🔌", name: "MCP" },
 	{ icon: "elasticsearch-original", name: "Elasticsearch", svg: true },
@@ -35,6 +37,7 @@ const experimentingTools = [
 	{ icon: "📊", name: "Vector DBs" },
 	{ icon: "apachekafka-original", name: "Kafka", svg: true },
 	{ icon: "socketio-original", name: "Socket.IO", svg: true },
+	{ icon: "C", name: "Claude", svg: true },
 ];
 
 export default function TechStack() {
