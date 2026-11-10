@@ -1,0 +1,19 @@
+.page { position: relative; min-height: 100svh; overflow: hidden; background: #09110f; color: #e6eee8; font-family: inherit; }
+.canvas { position: absolute; inset: 0; z-index: 0; }
+.grain { position: absolute; inset: 0; pointer-events: none; opacity: .08; background: url('/assets/img/grains.png'); }
+.header { position: relative; display: flex; justify-content: space-between; padding: 32px 5%; color: #a5b8ac; font-size: 10px; letter-spacing: .16em; z-index: 1; }
+.header a { color: #d5e1d8; text-decoration: none; letter-spacing: .02em; font-size: 13px; }
+.intro { position: absolute; left: 8%; top: 37%; width: 290px; pointer-events: none; }
+.eyebrow, .status, .hint { font-size: 10px; letter-spacing: .2em; color: #92aa9b; }
+.intro h1 { font-family: inherit; font-size: clamp(42px, 5vw, 76px); font-weight: 400; letter-spacing: -.06em; line-height: .98; margin: 24px 0; }
+.intro h1 em { color: #a8c5b1; font-weight: 400; }
+.intro p, .controls p { color: #8c9d92; line-height: 1.65; font-size: 13px; }
+.controls { position: absolute; bottom: 36px; left: 5%; display: flex; align-items: center; gap: 24px; z-index: 1; }
+.controls p { margin: 8px 0 0; font-size: 11px; }
+.status i { display: inline-block; width: 6px; height: 6px; background: #a8d8b2; border-radius: 50%; margin-right: 7px; }
+.button, .reset { background: transparent; border: 1px solid #52665a; color: #dbe9dd; padding: 12px 16px; font-size: 11px; cursor: pointer; }
+.button:hover, .reset:hover { background: #25372b; }
+.button input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.button:focus-within { outline: 2px solid #b8e5c3; outline-offset: 3px; }
+.hint { position: absolute; right: 5%; bottom: 42px; }.hint span { font-size: 18px; }
+@media (max-width: 700px) { .header { padding: 24px; }.header span { font-size: 8px; }.intro { left: 24px; top: 15%; width: 230px; }.intro h1 { font-size: 43px; margin: 14px 0; }.intro p { font-size: 12px; }.controls { left: 24px; right: 24px; bottom: 25px; gap: 12px; flex-wrap: wrap; }.controls div { width: 100%; }.hint { display: none; } }
