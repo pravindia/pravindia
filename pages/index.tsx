@@ -76,11 +76,11 @@ export default function Home() {
                 <span className={styles.promptSymbol}>❯</span> whoami
               </span>
               <h1 className={styles.title} onMouseEnter={textEnter} onMouseLeave={textLeave}>
-                <span className={styles.highlight}>Engineer. Developer. Startup Builder. </span>
+                <span className={styles.highlight}>Backend. Distributed Systems. Applied AI. </span>
               </h1>
               <p className={styles.description}>
-                {"Hi! I'm"} <strong>Pravin Kumar</strong>{`, a Senior Software Developer with ${experienceYears} years of experience.`}
-                {" I write code machines understand and people uses."}
+                {"Hi! I'm"} <strong>Pravin Kumar</strong>{`, a Senior Software Engineer with ${experienceYears} years of experience.`}
+                {" I write code that machines understand and people use."}
               </p>
               <div className={styles.heroActions}>
                 <a href="#works" className={styles.btnPrimary}>See my work</a>

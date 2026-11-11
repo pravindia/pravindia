@@ -1,7 +1,7 @@
 export type WorkItem = {
 	slug: string;
 	title: string;
-	status: "live" | "wip";
+	status: "completed";
 	period: string;
 	role: string;
 	summary: string;
@@ -16,16 +16,15 @@ export const works: WorkItem[] = [
 	{
 		slug: "ai-marketing-intelligence-platform",
 		title: "AI Marketing Intelligence Platform",
-		status: "wip",
-		period: "Jun 2026 — Present",
-		role: "Senior Product Engineer",
-		summary: "Multi-tenant AI marketing intelligence platform with agent workflows, multimodal RAG, LLM observability, and cost controls.",
+		status: "completed",
+		period: "Jun 2026 — Sept 2026",
+		role: "Senior Product Engineer | Independent contractor",
+		summary: "AI marketing intelligence platform with a reusable multi-model agent architecture, multimodal RAG, evaluation, observability, and cost controls.",
 		description:
-			"Architecting a scalable multi-tenant AI marketing intelligence platform that brings fragmented AI capabilities into a reusable multi-model agent architecture. The platform combines production-grade RAG, evaluation, observability, and resilient execution workflows.",
+			"Architected a scalable AI marketing intelligence platform using NestJS, TypeScript, Next.js, and PostgreSQL. Built a reusable multi-model agent architecture with multimodal RAG, evaluation, observability, and resilient execution workflows.",
 		highlights: [
-			"Designed a reusable multi-model agent architecture with NestJS, TypeScript, Next.js, and PostgreSQL",
-			"Built multimodal RAG using pgvector, hybrid retrieval, grounded citations, reranking, and human-in-the-loop controls",
-			"Improved reliability and cost governance with automated evaluations, token metering, idempotent execution, and failure recovery",
+			"Built multimodal RAG with LangChain, pgvector, hybrid retrieval, reranking, grounded citations, and human-in-the-loop controls, achieving 86% Recall@8 and 480 ms p95 retrieval latency",
+			"Established LLMOps practices for automated evaluation, token and cost metering, observability, idempotent execution, and failure recovery",
 			"Reduced p95 time-to-first-token from 3.1s to 2.4s and lowered average AI-run cost by 14%",
 		],
 		tech: ["NestJS", "TypeScript", "Next.js", "PostgreSQL", "pgvector", "LangChain", "RAG", "LLMOps"],
@@ -35,16 +34,17 @@ export const works: WorkItem[] = [
 	{
 		slug: "customs-clearance-system-netherlands",
 		title: "Customs Clearance System (Netherlands)",
-		status: "live",
-		period: "2023 — Present",
+		status: "completed",
+		period: "Jan 2023 — May 2026",
 		role: "Senior Software Specialist | Tech Lead",
 		summary: "NestJS + Python microservices for customs workflows, VPN communication, and AI-assisted HS code recommendations.",
 		description:
-			"Built and maintained backend services for a large-scale Dutch import customs clearance platform. Delivered secure IPSec VPN communication with customs systems, integrated DMS/DECO workflows, and introduced AI-assisted product classification using embeddings and similarity search.",
+			"Built and maintained backend services for a large-scale Dutch import customs clearance platform, supporting DMS and DECO workflows that process 30K+ declarations daily. Delivered secure IPSec VPN communication and AI-assisted product classification using embeddings and similarity search.",
 		highlights: [
 			"Developed backend services with NestJS, Python microservices, and Angular-integrated workflows",
 			"Integrated secure IPSec VPN communication for customs data exchange",
-			"Built AI-assisted HS code recommendations using embeddings and similarity search",
+			"Built AI-assisted HS code recommendations using LLM embeddings and similarity search, reducing manual classification time by 80%",
+			"Configured IPSec VPN and VPN-based email exchange for customs declaration submissions and responses",
 		],
 		tech: ["NestJS", "TypeScript", "Python", "Angular", "IPSec VPN", "LLM Embeddings"],
 		link: null,
@@ -53,56 +53,21 @@ export const works: WorkItem[] = [
 	{
 		slug: "warehouse-management-system",
 		title: "Warehouse Management System",
-		status: "live",
-		period: "2023 — Present",
+		status: "completed",
+		period: "Jan 2023 — May 2026",
 		role: "Tech Lead",
 		summary: "Production-grade warehouse platform with barcode scanning, OCR automation, real-time workflows, and backend infra ownership.",
 		description:
-			"Led the backend team from project initiation to production, owning architecture, deployments, server configuration, load balancing, and database replication. Built high-performance APIs for parcel scanning, OCR-driven document pipelines, and real-time event workflows.",
+			"Led a team of three engineers from project initiation to production, including architecture, CI/CD deployments, server configuration, load balancing, and database replication. Built APIs, OCR pipelines, and event-driven workflows for warehouse and parcel operations.",
 		highlights: [
-			"Led backend architecture, CI/CD, infra, load balancing, and replication strategy",
-			"Built barcode scanning and shipment retrieval APIs using Redis and read replicas",
-			"Implemented OCR-based extraction for NOA, T1, and TTL documents",
+			"Led architecture, CI/CD, server configuration, load balancing, and replication, achieving 99.5% uptime",
+			"Built barcode scanning APIs with Redis caching and read-replica optimization, achieving parcel retrieval latency below 80 ms",
+			"Built OCR extraction for NOA, T1, and TTL documents, reducing manual processing time by about 70%",
+			"Developed real-time communication and search with Socket.io, Firebase, Typesense, Redis, background workers, and event-driven workflows",
 		],
 		tech: ["Node.js", "FastAPI", "MySQL", "Redis", "Socket.IO", "Firebase", "Typesense", "Docker"],
 		link: null,
 		github: null,
-	},
-	{
-		slug: "b2b-ecommerce-platform",
-		title: "B2B E-Commerce Platform",
-		status: "live",
-		period: "2023 — Present",
-		role: "Backend / App Engineer",
-		summary: "FastAPI backend services, Flutter apps across Android/iOS/Web, and operational dashboards for sorting workflows.",
-		description:
-			"Developed backend services to power inbound and parcel sorting operations, integrating external third-party systems via SOAP APIs. Built Flutter apps across platforms and supported Node.js admin applications for operational management and analytics.",
-		highlights: [
-			"Developed FastAPI services for inbound and parcel sorting workflows",
-			"Integrated external enterprise systems via SOAP APIs",
-			"Built Flutter apps for Android, iOS, and Web alongside admin tooling",
-		],
-		tech: ["FastAPI", "Flutter", "Node.js", "SOAP APIs", "Analytics Dashboards"],
-		link: null,
-		github: null,
-	},
-	{
-		slug: "ai-enabled-backend-integrations",
-		title: "AI-Enabled Backend Integrations",
-		status: "wip",
-		period: "Ongoing",
-		role: "AI Systems Exploration",
-		summary: "Production-oriented OCR, RAG, MCP, and retrieval-driven backend automations for operational workflows.",
-		description:
-			"Built and explored AI-enabled backend workflows including OCR extraction, context retrieval, MCP integrations, and retrieval-augmented flows for faster operations and better decision support in production-like systems.",
-		highlights: [
-			"Applied OCR pipelines for structured extraction from operational documents",
-			"Explored MCP and RAG-based integration patterns for internal tools",
-			"Used Redis, Elasticsearch, and retrieval-driven flows for AI-assisted operations",
-		],
-		tech: ["RAG", "MCP", "Python", "Elasticsearch", "Redis", "Distributed Systems"],
-		link: null,
-		github: "https://github.com/pravindia",
 	},
 ];
 

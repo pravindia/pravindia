@@ -85,7 +85,7 @@
 	border-radius: 999px;
 	border: 1px solid;
 
-	&[data-status="live"] {
+	&[data-status="completed"] {
 		color: var(--green);
 		border-color: var(--green);
 	}

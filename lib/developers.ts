@@ -3,8 +3,8 @@ export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://pravindia.c
 export const developerProfile = {
   name: 'Pravin Kumar',
   username: 'pravindia',
-  role: 'Senior Software Developer',
-  bio: 'Engineer, developer, and startup builder focused on backend architecture, distributed systems, and applied AI.',
+  role: 'Senior Software Engineer',
+  bio: 'Senior software engineer with 8+ years of experience in backend architecture, distributed systems, and applied AI.',
   skills: ['TypeScript', 'Python', 'Node.js', 'NestJS', 'FastAPI', 'Next.js', 'Angular', 'Flutter', 'PostgreSQL', 'Redis', 'Docker', 'AWS', 'RAG', 'MCP', 'LLMOps'],
   links: {
     website: siteUrl,

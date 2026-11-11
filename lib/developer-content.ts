@@ -29,9 +29,9 @@ export function getDeveloperProjects() {
 }
 
 export function getDeveloperGuide() {
-  return `# Developers — Pravin Kumar
+  return `# Developers — ${developerProfile.name}
 
-Public, read-only resources for exploring Pravin Kumar's portfolio with tools and AI agents.
+Public, read-only resources for exploring ${developerProfile.name}'s portfolio with tools and AI agents.
 Base URL: ${siteUrl}
 
 ${endpointGroups.map(group => `## ${group.title}\n\n${group.endpoints.map(endpoint => `- GET ${siteUrl}${endpoint.path} (${endpoint.format}): ${endpoint.description}`).join('\n')}`).join('\n\n')}
@@ -89,7 +89,7 @@ Use these sources for questions about Pravin's engineering work. Cite original U
 export function getOpenApi() {
   const resources = {
     profile: { description: 'Profile, skills, and public links.', schema: { type: 'object', properties: { name: { type: 'string' }, username: { type: 'string' }, role: { type: 'string' }, bio: { type: 'string' }, skills: { type: 'array', items: { type: 'string' } }, links: { type: 'object', additionalProperties: { type: 'string', format: 'uri' } } } } },
-    projects: { description: 'Project case studies and engineering highlights.', schema: { type: 'array', items: { type: 'object', properties: { slug: { type: 'string' }, title: { type: 'string' }, status: { type: 'string', enum: ['live', 'wip'] }, period: { type: 'string' }, role: { type: 'string' }, summary: { type: 'string' }, description: { type: 'string' }, highlights: { type: 'array', items: { type: 'string' } }, tech: { type: 'array', items: { type: 'string' } }, link: { type: ['string', 'null'] }, github: { type: ['string', 'null'] }, url: { type: 'string', format: 'uri' } } } } },
+    projects: { description: 'Project case studies and engineering highlights.', schema: { type: 'array', items: { type: 'object', properties: { slug: { type: 'string' }, title: { type: 'string' }, status: { type: 'string', enum: ['completed'] }, period: { type: 'string' }, role: { type: 'string' }, summary: { type: 'string' }, description: { type: 'string' }, highlights: { type: 'array', items: { type: 'string' } }, tech: { type: 'array', items: { type: 'string' } }, link: { type: ['string', 'null'] }, github: { type: ['string', 'null'] }, url: { type: 'string', format: 'uri' } } } } },
     posts: { description: 'Published blog metadata, newest first.', schema: { type: 'array', items: { type: 'object', properties: { slug: { type: 'string' }, title: { type: 'string' }, date: { type: 'string' }, excerpt: { type: 'string' }, tags: { type: 'array', items: { type: 'string' } }, coverImage: { type: 'string', description: 'Optional local image path or HTTPS cover image URL.' }, coverAlt: { type: 'string', description: 'Alternative text for the cover image.' }, url: { type: 'string', format: 'uri' } } } } },
   };
   return {

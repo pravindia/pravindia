@@ -65,7 +65,7 @@ export default function ResumeModal({ open, onClose }: ResumeModalProps) {
           </div>
           <div className={styles.title}>
             <span className={styles.filename}>Pravin Kumar</span>
-            <span className={styles.source}>Software Engineer · 8 years · v2026.04</span>
+            <span className={styles.source}>Senior Software Engineer · 8+ years</span>
           </div>
           <button className={styles.close} onClick={onClose} aria-label="Close">
             esc

@@ -46,7 +46,7 @@ export default function WorkDetailPage({ slug }: InferGetStaticPropsType<typeof 
 
 					<div className={styles.hero}>
 						<div className={styles.heroTop}>
-							<span className={styles.status} data-status={work.status}>{work.status === "wip" ? "WIP" : "LIVE"}</span>
+							<span className={styles.status} data-status={work.status}>{work.status.toUpperCase()}</span>
 							<span className={styles.period}>{work.period}</span>
 						</div>
 						<h1 className={styles.title}>{work.title}</h1>
@@ -54,9 +54,20 @@ export default function WorkDetailPage({ slug }: InferGetStaticPropsType<typeof 
 						<p className={styles.summary}>{work.description}</p>
 					</div>
 
+					<section className={styles.answerBox} aria-labelledby="project-answer-title">
+						<div>
+							<span>WHAT WAS BUILT?</span>
+							<h2 id="project-answer-title">{work.summary}</h2>
+						</div>
+						<div className={styles.scope}>
+							<span><b>Role</b>{work.role}</span>
+							<span><b>Scope</b>{work.period}</span>
+						</div>
+					</section>
+
 					<div className={styles.layout}>
 						<section className={styles.panel}>
-							<h2>Highlights</h2>
+							<h2>What I delivered</h2>
 							<ul className={styles.list}>
 								{work.highlights.map((highlight) => (
 									<li key={highlight}>{highlight}</li>
@@ -66,7 +77,7 @@ export default function WorkDetailPage({ slug }: InferGetStaticPropsType<typeof 
 
 						<aside className={styles.sidebar}>
 							<div className={styles.panel}>
-								<h2>Stack</h2>
+								<h2>Technologies used</h2>
 								<div className={styles.tags}>
 									{work.tech.map((tech) => (
 										<span key={tech} className={styles.tag}>{tech}</span>

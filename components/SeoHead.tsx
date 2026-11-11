@@ -20,13 +20,17 @@ export const personSchema = {
   name: "Pravin Kumar",
   alternateName: "pravindia",
   url: profileUrl,
-  jobTitle: "Senior Software Developer",
+  jobTitle: "Senior Software Engineer",
   description:
-    "Backend and applied AI engineer focused on distributed systems, TypeScript, Python, and production AI integrations.",
+    "Senior software engineer focused on backend architecture, distributed systems, and applied AI.",
+  address: { "@type": "PostalAddress", addressLocality: "Chennai", addressCountry: "IN" },
   sameAs: [
     "https://github.com/pravindia",
     "https://www.linkedin.com/in/pravindia",
-    "https://codepen.io/pravindia",
+    "https://x.com/pravindia_",
+    "https://www.threads.com/@pravindia",
+    "https://dev.to/pravindia",
+    "https://medium.com/@pravindia",
   ],
 };
 

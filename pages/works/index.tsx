@@ -25,7 +25,7 @@ export default function WorksPage() {
 						{works.map((work) => (
 							<Link key={work.slug} href={`/works/${work.slug}`} className={styles.card}>
 								<div className={styles.cardTop}>
-									<span className={styles.status} data-status={work.status}>{work.status === "wip" ? "WIP" : "LIVE"}</span>
+									<span className={styles.status} data-status={work.status}>{work.status.toUpperCase()}</span>
 									<span className={styles.period}>{work.period}</span>
 								</div>
 								<h2 className={styles.cardTitle}>{work.title}</h2>

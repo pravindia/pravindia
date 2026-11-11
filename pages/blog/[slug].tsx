@@ -10,6 +10,10 @@ import CoverImage from '../../components/Blog/CoverImage';
 import { siteUrl } from '../../lib/developers';
 import { useBlogTheme } from '../../components/Blog/useBlogTheme';
 
+const formatDate = (value: string) => new Date(`${value}T12:00:00Z`).toLocaleDateString('en-GB', {
+	day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC',
+});
+
 export default function Post({ post }: any) {
 	const { theme, setTheme } = useBlogTheme();
 	return (
@@ -19,7 +23,15 @@ export default function Post({ post }: any) {
 			<div className={styles.page} data-theme={theme}>
 			<main className={styles.articlePage} data-theme={theme}>
 				<h1>{post.frontmatter.title}</h1>
+				<div className={styles.articleMeta}>
+					<time dateTime={post.frontmatter.date}>{formatDate(post.frontmatter.date)}</time>
+					{post.frontmatter.readTime && <><span aria-hidden="true">·</span><span>{String(post.frontmatter.readTime).includes('min') ? `${post.frontmatter.readTime} read` : `${post.frontmatter.readTime} min read`}</span></>}
+				</div>
 				<p className={styles.articleExcerpt}>{post.frontmatter.excerpt}</p>
+				{post.frontmatter.answer && <aside className={styles.answerBox} aria-labelledby="quick-answer-title">
+					<h2 id="quick-answer-title">Quick answer</h2>
+					<p>{post.frontmatter.answer}</p>
+				</aside>}
 				{post.frontmatter.coverImage && <CoverImage src={post.frontmatter.coverImage} alt={post.frontmatter.coverAlt || ''} variant="article" />}
 				<article className={styles.articleBody}>
 					<MDXRemote {...post.mdxSource} components={MDXComponents} />
