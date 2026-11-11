@@ -1,5 +1,14 @@
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import styles from "./Works.module.scss";
+
+const workPaths: Record<string, string> = {
+	"AI Marketing Intelligence Platform": "/works/ai-marketing-intelligence-platform",
+	"Customs Clearance System (Netherlands)": "/works/customs-clearance-system-netherlands",
+	"Warehouse Management System": "/works/warehouse-management-system",
+	"B2B E-Commerce Platform": "/works/b2b-ecommerce-platform",
+	"AI-Enabled Backend Integrations": "/works/ai-enabled-backend-integrations",
+};
 
 const works = [
 	{
@@ -130,9 +139,9 @@ export default function Works() {
 								</div>
 							</div>
 
-							<a href="#" className={styles.arrow}>
+							<Link href={workPaths[w.title] || "/works"} className={styles.arrow}>
 								case study <span>↗</span>
-							</a>
+							</Link>
 						</article>
 					))}
 				</div>

@@ -1,4 +1,4 @@
-import Head from "next/head";
+import SeoHead from "../components/SeoHead";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { CountUp } from "countup.js";
 import type { GetServerSideProps } from "next";
@@ -376,13 +376,7 @@ export default function CodingPage({ profile }: { profile: Profile }) {
   };
   return (
     <>
-      <Head>
-        <title>Coding activity — Pravin Kumar</title>
-        <meta
-          name="description"
-          content="Coding activity and the patterns behind the work."
-        />
-      </Head>
+      <SeoHead title="Coding Activity — Pravin Kumar" description="A public coding activity dashboard showing the patterns behind Pravin Kumar's engineering work." path="/coding" />
       <Header />
       <div className={`${styles.page}`}>
         <main>

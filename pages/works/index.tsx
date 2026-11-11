@@ -1,4 +1,4 @@
-import Head from "next/head";
+import SeoHead from "../../components/SeoHead";
 import Link from "next/link";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
@@ -11,13 +11,9 @@ export default function WorksPage() {
 
 	return (
 		<>
+			<SeoHead title="Engineering Case Studies — Pravin Kumar" description="Selected backend systems, product platforms, and applied AI integrations built by Pravin Kumar." path="/works" />
 			<Header />
 			<div className={styles.page}>
-				<Head>
-					<title>Works — Pravin Kumar</title>
-					<meta name="description" content="Selected work and case studies by Pravin Kumar." />
-				</Head>
-
 				<main className={styles.main}>
 					<div className={styles.hero}>
 						<span className={styles.prompt}>pravindia@works:~$ ls -la ./projects</span>

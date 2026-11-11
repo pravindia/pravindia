@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import SeoHead from '../components/SeoHead';
 import { useState } from 'react';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
@@ -26,17 +26,7 @@ const requests = [
 
 export default function Developers() {
   return <>
-    <Head>
-      <title>Developers — Pravin Kumar</title>
-      <meta name="description" content="Connect your tools and AI agents to Pravin Kumar's portfolio. Public JSON APIs, plain-text context, RSS, and an OpenAPI specification." />
-      <link rel="canonical" href={`${siteUrl}/developers`} />
-      <link rel="alternate" type="text/markdown" href={`${siteUrl}/developers.md`} />
-      <link rel="alternate" type="application/rss+xml" title="Pravin Kumar — Writing" href="/api/rss.xml" />
-      <meta property="og:title" content="Developers — Pravin Kumar" />
-      <meta property="og:description" content="A human behind the code. An interface for your agent." />
-      <meta property="og:url" content={`${siteUrl}/developers`} />
-      <meta property="og:type" content="website" />
-    </Head>
+    <SeoHead title="Developer Resources — Pravin Kumar" description="Public portfolio API, structured context, RSS, and developer resources for Pravin Kumar's engineering work." path="/developers" />
     <Header />
     <div className={styles.page}>
       <main className={styles.main}>

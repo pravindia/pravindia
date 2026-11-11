@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import SeoHead from '../components/SeoHead'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import DotPortrait from '../components/DotPortrait/DotPortrait'
@@ -11,7 +11,6 @@ export default function DotPortraitPage() {
   useEffect(() => () => { if (modelUrl.startsWith('blob:')) URL.revokeObjectURL(modelUrl) }, [modelUrl])
   const usingUploadedModel = modelUrl.startsWith('blob:')
   return <>
-    <Head><title>Dot portrait experiment | Pravindia</title><meta name="robots" content="noindex" /></Head>
     <main className={styles.page}>
       <div className={styles.canvas}><DotPortrait modelUrl={modelUrl} /></div>
       <div className={styles.grain} />

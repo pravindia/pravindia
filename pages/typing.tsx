@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import SeoHead from '../components/SeoHead';
 import { useEffect, useRef, useState } from 'react';
 import { Keyboard } from '@lucasmarkes/hairline/react';
 import type { GetServerSideProps } from 'next';
@@ -97,7 +97,7 @@ export default function TypingPage({ profile, results, historyEnabled, keybrHist
   const keybrX = (timestamp: number) => 54 + (timestamp - firstKeybr) / Math.max(lastKeybr - firstKeybr, 1) * 596;
   const keybrY = (wpm: number) => 275 - wpm / keybrScaleMax * 224;
   const keybrLine = keybrDays.map(d => `${keybrX(d.timestamp)},${keybrY(d.wpm)}`).join(' ');
-  return <><Head><title>Typing journey — Pravin Kumar</title><meta name="description" content="A look at my typing practice and personal bests on Monkeytype." /></Head><Header /><main className={styles.page}>
+  return <><SeoHead title="Typing Journey — Pravin Kumar" description="Pravin Kumar's typing practice history and personal bests from Keybr and Monkeytype." path="/typing" /><Header /><main className={styles.page}>
     <div className={styles.shell}>
       
       <section className={styles.hero}><div><div className={styles.topline}><span>MY TYPING SPEED</span></div><h1>Started slow.<br /><em>Still getting faster.</em></h1><p>From learning the keys on Keybr to chasing 80 words per minute on Monkeytype. Here’s the progress, one test at a time.</p><a className={styles.profileButton} href="https://monkeytype.com/profile/pravindia" target="_blank" rel="noreferrer">View Monkeytype profile <span>↗</span></a></div><div className={styles.heroArt}><Keyboard theme="dark" className={styles.keyboard} aria-label="Interactive keyboard illustration" /></div></section>

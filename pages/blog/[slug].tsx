@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import Head from 'next/head';
+import SeoHead from '../../components/SeoHead';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import { getPostSlugs, getPostBySlug } from '../../lib/mdx';
@@ -14,15 +14,7 @@ export default function Post({ post }: any) {
 	const { theme, setTheme } = useBlogTheme();
 	return (
 		<>
-			<Head>
-				<title>{post.frontmatter.title} — Pravin Kumar</title>
-				<meta name="description" content={post.frontmatter.excerpt || ''} />
-				<meta property="og:type" content="article" />
-				<meta property="og:title" content={post.frontmatter.title} />
-				<meta property="og:description" content={post.frontmatter.excerpt || ''} />
-				{post.frontmatter.coverImage && <meta property="og:image" content={post.frontmatter.coverImage.startsWith('http') ? post.frontmatter.coverImage : `${siteUrl}${post.frontmatter.coverImage}`} />}
-				<link rel="alternate" type="application/rss+xml" title="Pravin Kumar Blog" href="/api/rss.xml" />
-			</Head>
+			<SeoHead title={`${post.frontmatter.title} — Pravin Kumar`} description={post.frontmatter.excerpt || `Article by Pravin Kumar: ${post.frontmatter.title}`} path={`/blog/${post.slug}`} type="article" publishedTime={post.frontmatter.date} structuredData={{ "@context": "https://schema.org", "@type": "BlogPosting", headline: post.frontmatter.title, description: post.frontmatter.excerpt, datePublished: post.frontmatter.date, dateModified: post.frontmatter.date, mainEntityOfPage: `${siteUrl}/blog/${post.slug}`, author: { "@type": "Person", name: "Pravin Kumar", url: siteUrl }, publisher: { "@type": "Person", name: "Pravin Kumar", url: siteUrl }, keywords: Array.isArray(post.frontmatter.tags) ? post.frontmatter.tags.join(", ") : undefined }} />
 			<Header />
 			<div className={styles.page} data-theme={theme}>
 			<main className={styles.articlePage} data-theme={theme}>

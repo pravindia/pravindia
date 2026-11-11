@@ -1,4 +1,5 @@
-import Head from "next/head";
+import SeoHead, { personSchema } from "../components/SeoHead";
+import { siteUrl } from "../lib/developers";
 import styles from "../styles/Home.module.scss";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
@@ -64,13 +65,10 @@ export default function Home() {
     <>
       {/* <ParticleBackground /> */}
       <Cursor variants={variants} curVariant={cursorVariant} />
+      <SeoHead title="Pravin Kumar - Backend & Applied AI Engineer" description="Portfolio of Pravin Kumar, a backend and applied AI engineer building distributed systems, production AI integrations, and product platforms with TypeScript and Python." structuredData={[personSchema, { "@context": "https://schema.org", "@type": "WebSite", "@id": `${siteUrl}/#website`, url: `${siteUrl}/`, name: "Pravin Kumar", publisher: { "@id": `${siteUrl}/#person` } }]} />
       <Header />
       <ResumeModal open={resumeOpen} onClose={handleCloseResume} />
       <div className={styles.container}>
-        <Head>
-          <title>Pravin Kumar — Senior Software Developer</title>
-          <meta name="description" content="Personal portfolio and blog of Pravin Kumar featuring software projects, technical writing, career highlights, and engineering expertise." />
-        </Head>
         <main>
           <section className={styles.home}>
             <div className={styles.heroContent}>

@@ -1,5 +1,5 @@
 import { externalArticles } from "../../data/external-articles";
-import Head from "next/head";
+import SeoHead from "../../components/SeoHead";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import styles from "../../styles/Blog.module.scss";
@@ -118,11 +118,7 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 
 	return (
 		<>
-			<Head>
-				<title>Writing — Pravin Kumar</title>
-				<meta name="description" content="Essays, notes, and short takes on frontend, mobile, and the craft of building things." />
-				<link rel="alternate" type="application/rss+xml" title="Pravin Kumar Blog" href="/api/rss.xml" />
-			</Head>
+			<SeoHead title="Technical Writing — Pravin Kumar" description="Technical writing by Pravin Kumar on backend engineering, applied AI, system design, developer tools, and software careers." path="/blog" />
 
 			<Header />
 

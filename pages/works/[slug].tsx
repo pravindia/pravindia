@@ -1,4 +1,5 @@
-import Head from "next/head";
+import SeoHead, { personSchema } from "../../components/SeoHead";
+import { siteUrl } from "../../lib/developers";
 import Link from "next/link";
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import Header from "../../components/Header/Header";
@@ -37,13 +38,9 @@ export default function WorkDetailPage({ slug }: InferGetStaticPropsType<typeof 
 
 	return (
 		<>
+			<SeoHead title={`${work.title} — Pravin Kumar`} description={work.summary} path={`/works/${work.slug}`} structuredData={{ "@context": "https://schema.org", "@type": "CreativeWork", name: work.title, description: work.summary, url: `${siteUrl}/works/${work.slug}`, author: { "@type": "Person", "@id": `${siteUrl}/#person`, name: personSchema.name, url: siteUrl }, keywords: work.tech.join(", ") }} />
 			<Header />
 			<div className={styles.page}>
-				<Head>
-					<title>{work.title} — Pravin Kumar</title>
-					<meta name="description" content={work.summary} />
-				</Head>
-
 				<main className={styles.main}>
 					<Link href="/works" className={styles.backLink}>← All works</Link>
 
