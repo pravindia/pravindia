@@ -1,72 +1,43 @@
+import { getArticleCategory, type ArticleCategory } from "../../data/article-categories";
+import Link from "next/link";
+import ScribbleTitle from "./ScribbleTitle";
 import styles from "./Blog.module.scss";
 
-const posts = [
-	{
-		slug: "deno-whats-different-from-nodejs",
-		title: "Deno: What's Different from Node.js",
-		tags: ["Deno", "Node.js", "JavaScript"],
-		url: "https://smazee.com/blog/deno-whats-different-from-nodejs",
-	},
-	{
-		slug: "learn-whats-MongoDB-NoSQL",
-		title: "Learn What's MongoDB NoSQL",
-		tags: ["MongoDB", "NoSQL", "Databases"],
-		url: "https://smazee.com/blog/learn-whats-MongoDB-NoSQL",
-	},
-	{
-		slug: "When-not-to-use-Flutter",
-		title: "When Not to Use Flutter",
-		tags: ["Flutter", "Mobile", "Architecture"],
-		url: "https://smazee.com/blog/When-not-to-use-Flutter",
-	},
-	{
-		slug: "Implement-glassmorphism-in-your-flutter-app",
-		title: "Implement Glassmorphism in Your Flutter App",
-		tags: ["Flutter", "UI", "Design"],
-		url: "https://smazee.com/blog/Implement-glassmorphism-in-your-flutter-app",
-	},
-];
+export interface LatestPost {
+  category: ArticleCategory;
+  slug: string;
+  title: string;
+  date: string;
+  excerpt: string;
+  tags: string[];
+  url: string;
+}
 
-export default function Blog() {
-	return (
-		<section className={styles.section} id="blog">
-			<div className={styles.inner}>
-				<div className={styles.heading}>
-					<span className={styles.prompt}>/04</span>
-					<h2>Scribble</h2>
-					<span className={styles.meta}>thoughts on systems, code & craft</span>
-				</div>
-
-				<div className={styles.blogList}>
-					{posts.map((post) => (
-						<a
-							key={post.slug}
-							href={post.url}
-							target="_blank"
-							rel="noreferrer"
-							className={styles.blogRow}
-						>
-							<span className={styles.title}>{post.title}</span>
-							<div className={styles.tags}>
-								{post.tags.map((tag: string) => (
-									<span key={tag} className={styles.tag}>
-										#{tag}
-									</span>
-								))}
-							</div>
-							<span className={styles.readTime}>
-								<span className={styles.arrow}>↗</span>
-							</span>
-						</a>
-					))}
-				</div>
-
-				<div className={styles.viewMore}>
-					<a href="/blog">
-						View all articles ↗
-					</a>
-				</div>
-			</div>
-		</section>
-	);
+export default function Blog({ posts }: { posts: LatestPost[] }) {
+  return (
+    <section className={styles.section} id="blog" aria-labelledby="latest-writing">
+      <div className={styles.inner}>
+        <div className={styles.heading}>
+          <h2 id="latest-writing"><ScribbleTitle /></h2>
+        </div>
+        <ul className={styles.blogList}>
+          {posts.map(post => (
+            <li key={post.slug}>
+              <a href={post.url} className={styles.blogRow}>
+                <div className={styles.content}>
+                  <h3>{post.title}</h3>
+                  <div className={styles.meta}>
+                    <span>{getArticleCategory(post.category).label}</span><span aria-hidden="true">—</span>
+                    <time dateTime={post.date}>{new Date(post.date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" })}</time>
+                  </div>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div className={styles.more}><Link href="/blog" className={styles.viewMore}>All articles</Link></div>
+        {posts.length === 0 && <p>New writing is on the way. Check back soon.</p>}
+      </div>
+    </section>
+  );
 }

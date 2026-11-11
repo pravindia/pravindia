@@ -1,3 +1,4 @@
+import { getArticleCategory } from "../data/article-categories";
 import { getAllPosts } from './mdx';
 
 export async function generateRSSFeed(siteUrl: string) {
@@ -19,7 +20,7 @@ export async function generateRSSFeed(siteUrl: string) {
       <guid isPermaLink="true">${postUrl}</guid>
       <pubDate>${pubDate}</pubDate>
       <description>${escapeXml(post.excerpt || '')}</description>
-      <category>${escapeXml((post.tags && post.tags[0]) || 'blog')}</category>
+      <category>${escapeXml(getArticleCategory(post.category).label)}</category>
     </item>`;
 		})
 		.join('');

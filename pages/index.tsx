@@ -9,12 +9,13 @@ import Works from "../components/Works/Works";
 import TechStack from "../components/TechStack/TechStack";
 import Interests from "../components/Interests/Interests";
 import Timeline from "../components/Timeline/Timeline";
-import Blog from "../components/Blog/Blog";
+import Blog, { type LatestPost } from "../components/Blog/Blog";
 import ResumeModal from "../components/ResumeModal/ResumeModal";
+import HeroMarquee from "../components/HeroMarquee/HeroMarquee";
 import { Variants } from "framer-motion";
 import { useEffect, useState } from "react";
 
-export default function Home() {
+export default function Home({ latestPosts }: { latestPosts: LatestPost[] }) {
   const [mousePosition, setMousePosition] = useState({
     x: 0,
     y: 0,
@@ -87,13 +88,14 @@ export default function Home() {
                 <button onClick={handleOpenResume} className={styles.btnSecondary}>Resumé ↗</button>
               </div>
             </div>
+            {/* <HeroMarquee /> */}
           </section>
 
           <Works />
           <TechStack />
           <Interests />
           <Timeline />
-          <Blog />
+          <Blog posts={latestPosts} />
 
           <section className={styles.learningSection} id="learning">
             <div className={styles.learningInner}>
@@ -139,4 +141,14 @@ export default function Home() {
       </div>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const { getDeveloperPosts } = await import("../lib/developer-content");
+  const latestPosts = getDeveloperPosts(true).slice(0, 4).map(post => ({
+    slug: post.slug, title: post.title, date: post.date,
+    excerpt: post.excerpt, tags: post.tags, category: post.category,
+    url: post.url.startsWith(siteUrl + "/") ? post.url.slice(siteUrl.length) : post.url,
+  }));
+  return { props: { latestPosts }, revalidate: 3600 };
 }

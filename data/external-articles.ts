@@ -1,3 +1,5 @@
+import type { ArticleCategory } from "./article-categories";
+
 export interface ExternalArticle {
 	slug: string;
 	title: string;
@@ -5,7 +7,7 @@ export interface ExternalArticle {
 	excerpt: string;
 	tags: string[];
 	readTime?: string;
-	kind: "blog" | "insights" | "case-study";
+	category: ArticleCategory;
 	url: string;
 	coverImage?: string;
 	coverAlt?: string;
@@ -19,7 +21,7 @@ export const externalArticles: ExternalArticle[] = [
 		date: "2020-06-06",
 		excerpt: "Have you ever thought to automate of building and publishing your Flutter app in one click. If you have ever thought of building it, then you should start here.",
 		tags: ["Flutter", "CI/CD", "DevOps"],
-		kind: "blog",
+		category: "tutorials-how-tos",
 		url: "https://smazee.com/blog/ci-cd-for-flutter",
 		coverImage: "https://smazee.com/uploads/blog/Automate-build-and-deployment-for-Flutter-Apps.png",
 		coverAlt: "Automate build and deployment for Flutter Apps",
@@ -30,7 +32,7 @@ export const externalArticles: ExternalArticle[] = [
 		date: "2020-05-14",
 		excerpt: "Deno is a simple, modern and secure runtime for JavaScript and TypeScript that uses V8 and is built in Rust.",
 		tags: ["Deno", "Node.js", "JavaScript"],
-		kind: "blog",
+		category: "emerging-tech-ai",
 		url: "https://smazee.com/blog/deno-whats-different-from-nodejs",
 		coverImage: "https://smazee.com/uploads/blog/Deno---Whats-different-from-Node-JS4.png",
 		coverAlt: "Deno - What's different from Node JS",
@@ -41,7 +43,7 @@ export const externalArticles: ExternalArticle[] = [
 		date: "2018-10-17",
 		excerpt: "Mongo DB, a NoSQL non-relational database system, has a dynamic schema for unstructured data. It is more scalable, flexible, and faster than any relational database.",
 		tags: ["MongoDB", "NoSQL", "Databases"],
-		kind: "insights",
+		category: "system-design-architecture",
 		url: "https://smazee.com/blog/learn-whats-MongoDB-NoSQL",
 		coverImage: "https://smazee.com/uploads/blog/Learn-whats-MongoDB--NoSQL.jpeg",
 		coverAlt: "Learn what's MongoDB | NoSQL",
@@ -52,7 +54,7 @@ export const externalArticles: ExternalArticle[] = [
 		date: "2021-09-25",
 		excerpt: "When creating iOS and Android apps, Flutter is often recommended because working with it is productive and efficient. But there are instances where Flutter may not really be the best fit.",
 		tags: ["Flutter", "Mobile", "Architecture"],
-		kind: "blog",
+		category: "system-design-architecture",
 		url: "https://smazee.com/blog/When-not-to-use-Flutter",
 		coverImage: "https://smazee.com/uploads/blog/When-not-to-use-Flutter.png",
 		coverAlt: "When not to use Flutter",
@@ -63,7 +65,7 @@ export const externalArticles: ExternalArticle[] = [
 		date: "2021-09-21",
 		excerpt: "Since 2018, Flutter has become one of the most adopted trends in app development. How did Flutter become so popular so quickly?",
 		tags: ["Flutter", "Mobile", "App Development"],
-		kind: "insights",
+		category: "career-productivity",
 		url: "https://smazee.com/blog/How-much-does-a-basic-Flutter-App-development-cost",
 		coverImage: "https://smazee.com/uploads/blog/How-much-does-a-basic-Flutter-App-development-cost.png",
 		coverAlt: "How much does a basic Flutter App development cost?",
@@ -74,7 +76,7 @@ export const externalArticles: ExternalArticle[] = [
 		date: "2021-07-15",
 		excerpt: "Glassmorphism is a unified name for the popular frosted-glass design. It focuses on a light, transparent, blurred effect on a container that matches the background. Putting the concept into practice brings implementation trade-offs.",
 		tags: ["Flutter", "UI", "Design"],
-		kind: "case-study",
+		category: "tutorials-how-tos",
 		url: "https://smazee.com/blog/Implement-glassmorphism-in-your-flutter-app",
 		coverImage: "https://smazee.com/uploads/blog/Implement-glassmorphism-in-your-flutter-app.png",
 		coverAlt: "Implement glassmorphism in your Flutter app",
@@ -85,7 +87,7 @@ export const externalArticles: ExternalArticle[] = [
 		date: "2021-04-19",
 		excerpt: "Tailwind CSS is a utility-first open-source CSS framework with a deep catalog of classes and tools for styling and customizing responsive websites.",
 		tags: ["Tailwind", "CSS", "Frontend"],
-		kind: "blog",
+		category: "tutorials-how-tos",
 		url: "https://smazee.com/blog/try-tailwindcss-today-beginner-guide",
 		coverImage: "https://smazee.com/uploads/blog/Why-not-Tailwind-CSS.png",
 		coverAlt: "Why not Tailwind CSS?",
@@ -96,7 +98,7 @@ export const externalArticles: ExternalArticle[] = [
 		date: "2021-03-03",
 		excerpt: "Export an Excel sheet with image files inside its cells. This article uses ExcelJS with Ionic Capacitor to achieve it on Android.",
 		tags: ["Android", "Excel", "Flutter"],
-		kind: "blog",
+		category: "tutorials-how-tos",
 		url: "https://smazee.com/blog/download-excel-sheet-with-image-in-android",
 		coverImage: "https://smazee.com/uploads/blog/Download-excel-sheet-with-image-in-Android.png",
 		coverAlt: "Download Excel sheet with image in Android",
@@ -107,7 +109,7 @@ export const externalArticles: ExternalArticle[] = [
 		date: "2020-10-05",
 		excerpt: "CSS cannot make database or API calls, but its built-in functions can help front-end developers write better styles.",
 		tags: ["CSS", "Frontend"],
-		kind: "insights",
+		category: "tutorials-how-tos",
 		url: "https://smazee.com/blog/awesome-css-pseudo-class-and-functions",
 		coverImage: "https://smazee.com/uploads/blog/CSS-functions-that-save-your-life.png",
 		coverAlt: "CSS functions that save your life",
@@ -118,7 +120,7 @@ export const externalArticles: ExternalArticle[] = [
 		date: "2020-08-05",
 		excerpt: "An introduction to common CSS unit notations and where each can be used effectively.",
 		tags: ["CSS", "Frontend", "Web Design"],
-		kind: "insights",
+		category: "tutorials-how-tos",
 		url: "https://smazee.com/blog/css-units-px-em-rem-vh-vw-vmin-vmax",
 		coverImage: "https://smazee.com/uploads/blog/A-deep-study-on-CSS-Units.png",
 		coverAlt: "A deep study on CSS Units",
@@ -129,7 +131,7 @@ export const externalArticles: ExternalArticle[] = [
 		date: "2020-06-24",
 		excerpt: "A look at the new features, changes, and support in the first Bootstrap 5 alpha, released on June 16, 2020.",
 		tags: ["Bootstrap", "CSS", "Frontend"],
-		kind: "blog",
+		category: "emerging-tech-ai",
 		url: "https://smazee.com/blog/all-new-bootstrap-5-alpha",
 		coverImage: "https://smazee.com/uploads/blog/all-new-bootstrap-5.png",
 		coverAlt: "Bootstrap 5 is here!",
@@ -140,7 +142,7 @@ export const externalArticles: ExternalArticle[] = [
 		date: "2020-06-01",
 		excerpt: "Sass, also known as SCSS, is a mature and widely used CSS extension language.",
 		tags: ["Sass", "CSS", "Frontend"],
-		kind: "insights",
+		category: "tutorials-how-tos",
 		url: "https://smazee.com/blog/complete-guide-to-sass",
 		coverImage: "https://smazee.com/uploads/blog/A-complete-guide-to-Sass.png",
 		coverAlt: "A complete guide to Sass",
@@ -151,7 +153,7 @@ export const externalArticles: ExternalArticle[] = [
 		date: "2020-04-29",
 		excerpt: "Shortcuts and tips to code faster and more efficiently in Dart, including tricks for Flutter apps.",
 		tags: ["Dart", "Flutter", "Programming"],
-		kind: "insights",
+		category: "tutorials-how-tos",
 		url: "https://smazee.com/blog/dart-programming-tips-and-tricks",
 		coverImage: "https://smazee.com/uploads/blog/Dart-Programming---Tips-and-Tricks.png",
 		coverAlt: "Dart Programming - Tips and Tricks",
@@ -163,7 +165,7 @@ export const externalArticles: ExternalArticle[] = [
 		excerpt: "To code faster and efficiently one must also learn the shortcuts of that programming language. Reduce your time of coding and make your Flutter app faster by knowing some of the tricks.",
 		tags: ["Dart", "Flutter", "Dart Tips"],
 		readTime: "3 min",
-		kind: "insights",
+		category: "tutorials-how-tos",
 		url: "https://medium.com/@pravindia/dart-programming-tips-and-tricks-b852aface35e",
 		coverImage: "https://miro.medium.com/v2/resize:fit:1200/0*gKROHHrVjoOX3kLx.png",
 		coverAlt: "Dart efficiency tips illustration",
@@ -174,7 +176,7 @@ export const externalArticles: ExternalArticle[] = [
 		date: "2020-08-16",
 		excerpt: "Practical ways to reduce a Flutter app's download size, including image assets, Google Fonts, tree-shaken icons, app bundles, caching, ProGuard, and removing unused libraries.",
 		tags: ["Flutter", "Application", "Optimization", "Production"],
-		kind: "blog",
+		category: "tutorials-how-tos",
 		url: "https://dev.to/smazeestudio/reducing-flutter-app-size-1p0k",
 		coverImage: "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fi%2Fzcarqhsw1ja1scuvgrwb.png",
 		coverAlt: "Reducing App size in Flutter",
@@ -185,7 +187,7 @@ export const externalArticles: ExternalArticle[] = [
 		date: "2020-10-14",
 		excerpt: "A list of VS Code extensions Pravin liked, including WakaTime, Better Comments, GitLens, Live Server, Prettier, ESLint, and Material Icon Theme.",
 		tags: ["VS Code", "Developer Tools", "Productivity"],
-		kind: "insights",
+		category: "career-productivity",
 		url: "https://dev.to/pravindia/vs-code-extenstions-that-i-love-1p87",
 	},
 ];

@@ -1,3 +1,4 @@
+import { getArticleCategory } from "../data/article-categories";
 import fs from 'fs';
 import { externalArticles } from '../data/external-articles';
 import path from 'path';
@@ -12,6 +13,7 @@ export function getDeveloperPosts(includeExternal = false) {
     const slug = file.replace(/\.mdx$/, '');
     return {
       slug,
+      category: getArticleCategory(data.category).id,
       title: String(data.title || slug),
       date: data.date instanceof Date ? data.date.toISOString() : String(data.date || ''),
       excerpt: String(data.excerpt || ''),
@@ -90,7 +92,7 @@ export function getOpenApi() {
   const resources = {
     profile: { description: 'Profile, skills, and public links.', schema: { type: 'object', properties: { name: { type: 'string' }, username: { type: 'string' }, role: { type: 'string' }, bio: { type: 'string' }, skills: { type: 'array', items: { type: 'string' } }, links: { type: 'object', additionalProperties: { type: 'string', format: 'uri' } } } } },
     projects: { description: 'Project case studies and engineering highlights.', schema: { type: 'array', items: { type: 'object', properties: { slug: { type: 'string' }, title: { type: 'string' }, status: { type: 'string', enum: ['completed'] }, period: { type: 'string' }, role: { type: 'string' }, summary: { type: 'string' }, description: { type: 'string' }, highlights: { type: 'array', items: { type: 'string' } }, tech: { type: 'array', items: { type: 'string' } }, link: { type: ['string', 'null'] }, github: { type: ['string', 'null'] }, url: { type: 'string', format: 'uri' } } } } },
-    posts: { description: 'Published blog metadata, newest first.', schema: { type: 'array', items: { type: 'object', properties: { slug: { type: 'string' }, title: { type: 'string' }, date: { type: 'string' }, excerpt: { type: 'string' }, tags: { type: 'array', items: { type: 'string' } }, coverImage: { type: 'string', description: 'Optional local image path or HTTPS cover image URL.' }, coverAlt: { type: 'string', description: 'Alternative text for the cover image.' }, url: { type: 'string', format: 'uri' } } } } },
+    posts: { description: 'Published blog metadata, newest first.', schema: { type: 'array', items: { type: 'object', properties: { slug: { type: 'string' }, title: { type: 'string' }, category: { type: 'string', description: 'Article category identifier.' }, date: { type: 'string' }, excerpt: { type: 'string' }, tags: { type: 'array', items: { type: 'string' } }, coverImage: { type: 'string', description: 'Optional local image path or HTTPS cover image URL.' }, coverAlt: { type: 'string', description: 'Alternative text for the cover image.' }, url: { type: 'string', format: 'uri' } } } } },
   };
   return {
     openapi: '3.1.0',

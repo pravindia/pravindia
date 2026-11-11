@@ -13,5 +13,5 @@
 
 @media (max-width: 640px) {
 	.feature { aspect-ratio: 16 / 9; }
-	.card { flex-basis: 96px; width: 96px; height: 72px; }
+	.card { display: none; }
 }

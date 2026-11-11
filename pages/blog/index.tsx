@@ -1,14 +1,16 @@
+import { articleCategories, getArticleCategory, type ArticleCategory } from "../../data/article-categories";
 import { externalArticles } from "../../data/external-articles";
 import SeoHead from "../../components/SeoHead";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import styles from "../../styles/Blog.module.scss";
+import ScribbleTitle from "../../components/Blog/ScribbleTitle";
 import CoverImage from "../../components/Blog/CoverImage";
 import { useBlogTheme } from "../../components/Blog/useBlogTheme";
 import { useState, useMemo, useRef, useEffect } from "react";
 
 
-type Kind = "blog" | "insights" | "case-study";
+
 
 interface Post {
 	slug: string;
@@ -17,7 +19,7 @@ interface Post {
 	excerpt: string;
 	tags: string[];
 	readTime?: string;
-	kind: Kind;
+	category: ArticleCategory;
 	url: string;
 	coverImage?: string;
 	coverAlt?: string;
@@ -32,7 +34,7 @@ const PINNED: Post = {
 		"AI is changing the value of writing code. Developers need to think beyond syntax and learn to turn real problems into useful products.",
 	tags: ["AI", "Software Engineering", "Career"],
 	readTime: "2 min",
-	kind: "blog",
+	category: "career-productivity",
 	url: "/blog/is-software-engineering-dead",
 	coverImage: "/images/blog/software-dev-next.webp",
 	coverAlt: "Future of software development with AI",
@@ -42,12 +44,7 @@ const PINNED: Post = {
 const POSTS: Post[] = externalArticles;
 const DEFAULT_ARTICLE_COVER = "/assets/images/blog/article.webp";
 
-const KINDS = [
-	{ id: "all", label: "All" },
-	{ id: "blog", label: "Blog" },
-	{ id: "insights", label: "Insights" },
-	{ id: "case-study", label: "Case Studies" },
-] as const;
+const KINDS = [{ id: "all", label: "All", description: "All articles." }, ...articleCategories];
 
 
 
@@ -78,7 +75,7 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 			excerpt: p.excerpt || '',
 			tags: p.tags || [],
 			readTime: `${parseInt(p.readTime || '1', 10) || 1} min`,
-			kind: 'blog' as Kind,
+			category: getArticleCategory(p.category).id,
 			url: `/blog/${p.slug}`,
 			...(p.coverImage ? { coverImage: p.coverImage } : {}),
 			...(p.coverAlt ? { coverAlt: p.coverAlt } : {}),
@@ -91,10 +88,10 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 	const filtered = useMemo(() => {
 		const needle = q.trim().toLowerCase();
 		return mergedPosts.filter((p) => {
-			if (kind !== "all" && p.kind !== kind) return false;
+			if (kind !== "all" && p.category !== kind) return false;
 			if (activeTag && !p.tags.includes(activeTag)) return false;
 			if (needle) {
-				const hay = (p.title + " " + p.excerpt + " " + p.tags.join(" ")).toLowerCase();
+				const hay = (p.title + " " + p.excerpt + " " + p.tags.join(" ") + " " + getArticleCategory(p.category).label).toLowerCase();
 				if (!hay.includes(needle)) return false;
 			}
 			return true;
@@ -127,10 +124,9 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 
 					{/* ── Hero ── */}
 					<section className={styles.hero}>
-						<h1 className={styles.heroTitle}>Welcome to my Scribble</h1>
-						<p className={styles.heroSub}>
-							Blog posts, engineering insights, and case studies, and my thoughts
-						</p>
+						<h1 className={styles.heroTitle}>
+							{/* <span className={styles.welcome}>Welcome to my</span> */}
+							<ScribbleTitle /></h1>
 					</section>
 
 					{/* ── Featured ── */}
@@ -143,7 +139,7 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 						<div className={styles.featEyebrow}>
 							<span className={styles.featPin}> <span style={{ fontSize: "16px" }}>★</span> Featured Post</span>
 							<span className={styles.dot} />
-							<span>{PINNED.date}</span>
+							<span>{PINNED.date}</span><span className={styles.dot} /><span>{getArticleCategory(PINNED.category).label}</span>
 							<span className={styles.dot} />
 							<span>{PINNED.readTime} read</span>
 						</div>
@@ -154,24 +150,16 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 								<span key={t} className={styles.tag}>{t}</span>
 							))}
 						</div>
-						<span className={styles.featCta}>Read the story <span className={styles.arr}>›</span></span>
 					</a>
 
 					{/* ── Controls ── */}
 					<div className={styles.controls}>
-						<div className={styles.tabs}>
-							{KINDS.map((k) => (
-								<button
-									key={k.id}
-									className={styles.tab}
-									data-on={kind === k.id}
-									aria-pressed={kind === k.id}
-									onClick={() => setKind(k.id)}
-								>
-									{k.label}
-								</button>
-							))}
-						</div>
+                        <div className={styles.categoryFilter}>
+                          <select aria-label="Filter articles by category" value={kind} onChange={event => setKind(event.target.value)} title={kind === "all" ? "All categories" : getArticleCategory(kind).description}>
+                            {KINDS.map(category => <option key={category.id} value={category.id}>{category.id === "all" ? "All categories" : category.label}</option>)}
+                          </select>
+                          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="m6 8 4 4 4-4" /></svg>
+                        </div>
 						<label className={styles.search}>
 							<svg className={styles.searchIcon} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 4 4" /></svg>
 							<input
@@ -190,24 +178,11 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 						</label>
 					</div>
 
-					{/* ── Active tag bar ── */}
-					{activeTag && (
-						<div className={styles.tagBar}>
-							Filtering by <b>#{activeTag}</b>
-							<button onClick={() => setActiveTag(null)}>Clear</button>
-						</div>
-					)}
-
-					{/* ── List meta ── */}
-					<p className={styles.listMeta} role="status" aria-live="polite">
-						{filtered.length} {filtered.length === 1 ? "article" : "articles"} · newest first
-					</p>
-
 					{/* ── Post list ── */}
 					<div className={styles.list}>
 						{filtered.length === 0 ? (
 							<div className={styles.empty}>
-								Nothing matches <b>{q ? `"${q}"` : activeTag ? `#${activeTag}` : kind}</b>.
+								Nothing matches <b>{q ? `"${q}"` : activeTag ? `#${activeTag}` : kind === "all" ? "all articles" : getArticleCategory(kind).label}</b>.
 								<button onClick={reset}>Clear filters</button>
 							</div>
 						) : (
@@ -219,7 +194,7 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 									<CoverImage src={post.coverImage || DEFAULT_ARTICLE_COVER} alt={post.coverImage ? post.coverAlt || "" : ""} variant="card" />
 									<div className={styles.postContent}>
 									<div className={styles.postEyebrow}>
-										<span className={styles.postKind} data-kind={post.kind}>{post.kind}</span>
+										<span className={styles.postKind} data-category={post.category}>{getArticleCategory(post.category).label}</span>
 										<span className={styles.dot} />
 										<span>{post.date}</span>
 										{post.readTime && <><span className={styles.dot} /><span>{post.readTime} read</span></>}
@@ -241,7 +216,6 @@ export default function Blog({ localPosts = [] }: { localPosts?: any[] }) {
 												</button>
 											))}
 										</div>
-										<span className={styles.postRead}>read →</span>
 									</div>
 									</div>
 								</article>
@@ -288,7 +262,7 @@ export async function getStaticProps() {
 		excerpt: p.excerpt || '',
 		tags: p.tags || [],
 		readTime: `${parseInt(p.readTime || '1', 10) || 1} min`,
-		kind: 'blog' as Kind,
+		category: getArticleCategory(p.category).id,
 		url: `/blog/${p.slug}`,
 		...(p.coverImage ? { coverImage: p.coverImage } : {}),
 		...(p.coverAlt ? { coverAlt: p.coverAlt } : {}),

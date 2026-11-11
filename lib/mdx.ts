@@ -1,3 +1,4 @@
+import { getArticleCategory } from "../data/article-categories";
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
@@ -18,7 +19,7 @@ export async function getPostBySlug(slug: string) {
 	const mdxSource = await serialize(content, { scope: data });
 	return {
 		slug: realSlug,
-		frontmatter: data,
+		frontmatter: { ...data, category: getArticleCategory(data.category).id },
 		mdxSource,
 	};
 }

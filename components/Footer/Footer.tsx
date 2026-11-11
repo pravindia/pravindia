@@ -41,7 +41,7 @@ export default function Footer({ textEnter, textLeave }: { textEnter?: () => voi
           <div className={styles.links}>
             <h3>Elsewhere</h3>
             {socials.map(({name, url}) => <a key={name} href={url} target="_blank" rel="noopener noreferrer"><span className={styles.socialName}><SocialIcon name={name} />{name}</span><Arrow /><span className={styles.srOnly}> (opens in a new tab)</span></a>)}
-            <div className={styles.clock}><span>My local time · India</span><LocalClock /></div>
+            <div className={styles.clock}><span></span><LocalClock /></div>
           </div>
         </div>
         {/* <div className={styles.baseline}><RotatingQuote /></div> */}

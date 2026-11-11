@@ -1,3 +1,4 @@
+import { getArticleCategory } from "../../data/article-categories";
 import { GetStaticPaths, GetStaticProps } from 'next';
 import SeoHead from '../../components/SeoHead';
 import Header from '../../components/Header/Header';
@@ -18,12 +19,13 @@ export default function Post({ post }: any) {
 	const { theme, setTheme } = useBlogTheme();
 	return (
 		<>
-			<SeoHead title={`${post.frontmatter.title} — Pravin Kumar`} description={post.frontmatter.excerpt || `Article by Pravin Kumar: ${post.frontmatter.title}`} path={`/blog/${post.slug}`} type="article" publishedTime={post.frontmatter.date} structuredData={{ "@context": "https://schema.org", "@type": "BlogPosting", headline: post.frontmatter.title, description: post.frontmatter.excerpt, datePublished: post.frontmatter.date, dateModified: post.frontmatter.date, mainEntityOfPage: `${siteUrl}/blog/${post.slug}`, author: { "@type": "Person", name: "Pravin Kumar", url: siteUrl }, publisher: { "@type": "Person", name: "Pravin Kumar", url: siteUrl }, keywords: Array.isArray(post.frontmatter.tags) ? post.frontmatter.tags.join(", ") : undefined }} />
+			<SeoHead title={`${post.frontmatter.title} — Pravin Kumar`} description={post.frontmatter.excerpt || `Article by Pravin Kumar: ${post.frontmatter.title}`} path={`/blog/${post.slug}`} type="article" publishedTime={post.frontmatter.date} structuredData={{ "@context": "https://schema.org", "@type": "BlogPosting", headline: post.frontmatter.title, articleSection: getArticleCategory(post.frontmatter.category).label, description: post.frontmatter.excerpt, datePublished: post.frontmatter.date, dateModified: post.frontmatter.date, mainEntityOfPage: `${siteUrl}/blog/${post.slug}`, author: { "@type": "Person", name: "Pravin Kumar", url: siteUrl }, publisher: { "@type": "Person", name: "Pravin Kumar", url: siteUrl }, keywords: Array.isArray(post.frontmatter.tags) ? post.frontmatter.tags.join(", ") : undefined }} />
 			<Header />
 			<div className={styles.page} data-theme={theme}>
 			<main className={styles.articlePage} data-theme={theme}>
 				<h1>{post.frontmatter.title}</h1>
 				<div className={styles.articleMeta}>
+                    <span>{getArticleCategory(post.frontmatter.category).label}</span><span aria-hidden="true">·</span>
 					<time dateTime={post.frontmatter.date}>{formatDate(post.frontmatter.date)}</time>
 					{post.frontmatter.readTime && <><span aria-hidden="true">·</span><span>{String(post.frontmatter.readTime).includes('min') ? `${post.frontmatter.readTime} read` : `${post.frontmatter.readTime} min read`}</span></>}
 				</div>

@@ -1,0 +1,13 @@
+.word { display: block; position: absolute; inset: 0; width: min(92%, 620px); margin-inline: auto; color: var(--text-bright); opacity: .65; pointer-events: none; user-select: none;
+  svg { display: block; width: 100%; height: auto; overflow: visible; }
+  path { fill: currentColor; stroke: currentColor; stroke-width: .7; stroke-linecap: round; stroke-linejoin: round; }
+  &[data-visible='true'] path { animation: write .8s ease-out both; }
+}
+@keyframes write {
+  from { opacity: 0; fill-opacity: 0; stroke-dasharray: 1; stroke-dashoffset: 1; }
+  1% { opacity: 1; }
+  65% { fill-opacity: 0; }
+  to { opacity: 1; fill-opacity: 1; stroke-dasharray: 1; stroke-dashoffset: 0; }
+}
+.accessible { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+@media (prefers-reduced-motion: reduce) { .word[data-visible='true'] path { animation: none; } }
