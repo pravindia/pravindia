@@ -35,7 +35,7 @@ export default function Blog({ posts }: { posts: LatestPost[] }) {
             </li>
           ))}
         </ul>
-        <div className={styles.more}><Link href="/blog" className={styles.viewMore}>All articles</Link></div>
+        <div className={styles.more}><Link href="/blog" className={styles.viewMore}>View all articles <span aria-hidden="true">↗</span></Link></div>
         {posts.length === 0 && <p>New writing is on the way. Check back soon.</p>}
       </div>
     </section>

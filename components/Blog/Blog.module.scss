@@ -4,8 +4,24 @@
   h2 > span { width: 100%; }
   h2 { margin: 0; }
 }
-.more { display: flex; justify-content: center; margin-top: 20px; }
-.viewMore { display: inline-flex; align-items: center; color: var(--primary); text-decoration: none; min-height: 44px; font-size: 14px; }
+.more { display: flex; justify-content: center; margin-top: 24px; }
+.viewMore {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: 44px;
+  padding: 0.65rem 1.5rem;
+  background: var(--green);
+  border-radius: 8px;
+  color: #000;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  &:hover { opacity: 0.9; transform: translateY(-1px); }
+}
 .blogList { list-style: none; padding: 0; margin: 0;  }
 .blogList li { border-bottom: 0.2px solid var(--border-bright); }
 .blogRow { display: block; padding: 22px 8px; color: var(--text); text-decoration: none; }
