@@ -58,13 +58,13 @@ export default function Works() {
 							<div className={styles.spot} />
 
 							<div className={styles.head}>
-								<span className={styles.index}>{String(idx + 1).padStart(2, '0')}</span>
+								<span className={styles.index}></span>
 								<span className={styles.year}>{w.period}</span>
 							</div>
 
 							<div className={styles.body}>
 								<h3 className={styles.title}>{w.title}</h3>
-								<p className={styles.tag}>{w.status}</p>
+								<p className={styles.tag}></p>
 								<p className={styles.desc}>{w.description}</p>
 
 								<div className={styles.stack}>

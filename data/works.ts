@@ -1,7 +1,6 @@
 export type WorkItem = {
 	slug: string;
 	title: string;
-	status: "completed";
 	period: string;
 	role: string;
 	summary: string;
@@ -16,7 +15,6 @@ export const works: WorkItem[] = [
 	{
 		slug: "ai-marketing-intelligence-platform",
 		title: "AI Marketing Intelligence Platform",
-		status: "completed",
 		period: "Jun 2026 — Sept 2026",
 		role: "Senior Product Engineer | Independent contractor",
 		summary: "AI marketing intelligence platform with a reusable multi-model agent architecture, multimodal RAG, evaluation, observability, and cost controls.",
@@ -34,7 +32,6 @@ export const works: WorkItem[] = [
 	{
 		slug: "customs-clearance-system-netherlands",
 		title: "Customs Clearance System (Netherlands)",
-		status: "completed",
 		period: "Jan 2023 — May 2026",
 		role: "Senior Software Specialist | Tech Lead",
 		summary: "NestJS + Python microservices for customs workflows, VPN communication, and AI-assisted HS code recommendations.",
@@ -53,9 +50,8 @@ export const works: WorkItem[] = [
 	{
 		slug: "warehouse-management-system",
 		title: "Warehouse Management System",
-		status: "completed",
 		period: "Jan 2023 — May 2026",
-		role: "Tech Lead",
+		role: "Individual Contributor",
 		summary: "Production-grade warehouse platform with barcode scanning, OCR automation, real-time workflows, and backend infra ownership.",
 		description:
 			"Led a team of three engineers from project initiation to production, including architecture, CI/CD deployments, server configuration, load balancing, and database replication. Built APIs, OCR pipelines, and event-driven workflows for warehouse and parcel operations.",

@@ -66,6 +66,162 @@ const colors: Record<Group, string> = { core: "#39d353", lang: "#ff6a2b", life: 
 const SIZE = 760;
 const CENTER = SIZE / 2;
 const RADIUS = 270;
+const spaceStars = Array.from({ length: 150 }, (_, index) => {
+	const seed = Math.sin((index + 1) * 91.173) * 43758.5453;
+	const random = seed - Math.floor(seed);
+	return {
+		id: index,
+		x: (index * 67.37) % 1000,
+		y: (index * 149.23 + random * 250) % 1000,
+		r: index % 29 === 0 ? 1.45 : index % 7 === 0 ? 0.9 : 0.5,
+		opacity: 0.16 + random * 0.52,
+	};
+});
+
+type TitleParticle = {
+	x: number;
+	y: number;
+	size: number;
+	opacity: number;
+	scatterX: number;
+	scatterY: number;
+	hoverX: number;
+	hoverY: number;
+	phase: number;
+	delay: number;
+};
+
+function ParticleTitle({ children }: { children: string }) {
+	const canvasRef = useRef<HTMLCanvasElement>(null);
+	const particlesRef = useRef<TitleParticle[]>([]);
+	const pointerRef = useRef({ x: 0, y: 0, active: false, burstAt: 0 });
+
+	useEffect(() => {
+		const canvas = canvasRef.current;
+		if (!canvas) return;
+		const context = canvas.getContext("2d");
+		if (!context) return;
+		const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+		let animationFrame = 0;
+		let gatherStartedAt: number | null = null;
+		let titleVisible = false;
+		let hoverAmount = 0;
+		let width = 0;
+		let height = 0;
+
+		const buildAndDraw = () => {
+			const bounds = canvas.getBoundingClientRect();
+			width = Math.max(1, Math.floor(bounds.width));
+			height = Math.max(1, Math.floor(bounds.height));
+			const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+			canvas.width = width * pixelRatio;
+			canvas.height = height * pixelRatio;
+			canvas.style.background = "transparent";
+			context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+			const source = document.createElement("canvas");
+			source.width = width;
+			source.height = height;
+			const sourceContext = source.getContext("2d");
+			if (!sourceContext) return;
+			const fontSize = Math.min(height * 0.76, width / 3.95);
+			sourceContext.font = `600 ${fontSize}px Space Grotesk, Geist, sans-serif`;
+			sourceContext.textBaseline = "middle";
+			sourceContext.fillStyle = "#ffffff";
+			const textWidth = sourceContext.measureText(children).width;
+			sourceContext.fillText(children, Math.max(0, (width - textWidth) / 2), height / 2 + fontSize * 0.035);
+
+			const pixels = sourceContext.getImageData(0, 0, width, height).data;
+			const particles: TitleParticle[] = [];
+			const step = Math.max(4, Math.round(width / 170));
+			for (let y = 0; y < height; y += step) {
+				for (let x = 0; x < width; x += step) {
+					if (pixels[(y * width + x) * 4 + 3] < 160) continue;
+					const seed = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453;
+					const random = seed - Math.floor(seed);
+					const angle = random * Math.PI * 2;
+					const scatterDistance = 60 + ((random * 1.618) % 1) * 140;
+					const hoverRandom = (random * 1.732) % 1;
+					const hoverRandomY = (random * 2.414) % 1;
+					particles.push({
+						x,
+						y,
+						size: 0.4 + random * 0.7,
+						opacity: 0.35 + random * 0.55,
+						scatterX: Math.cos(angle) * scatterDistance,
+						scatterY: Math.sin(angle) * scatterDistance,
+						hoverX: (hoverRandom - 0.5) * 82,
+						hoverY: (hoverRandomY - 0.5) * 58,
+						phase: random * Math.PI * 2,
+						delay: ((random * 1.414) % 1) * 240,
+					});
+				}
+			}
+			particlesRef.current = particles.slice(0, 950);
+			context.clearRect(0, 0, width, height);
+			for (const particle of particlesRef.current) {
+				context.globalAlpha = particle.opacity;
+				context.fillStyle = "#f0f6fc";
+				context.beginPath();
+				context.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+				context.fill();
+			}
+			context.globalAlpha = 1;
+		};
+
+		const draw = (time: number) => {
+			const elapsed = reducedMotion.matches ? 1740 : gatherStartedAt === null ? 0 : time - gatherStartedAt;
+			const { active, burstAt } = pointerRef.current;
+			hoverAmount += ((active && !reducedMotion.matches ? 1 : 0) - hoverAmount) * 0.12;
+			const clickBurst = reducedMotion.matches ? 0 : Math.max(0, 1 - (time - burstAt) / 900);
+			context.clearRect(0, 0, width, height);
+
+			for (const particle of particlesRef.current) {
+				const localProgress = Math.max(0, Math.min(1, (elapsed - particle.delay) / 1500));
+				const gather = 1 - Math.pow(1 - localProgress, 3);
+				const idleX = Math.sin(time * 0.0005 + particle.phase) * 0.5;
+				const idleY = Math.cos(time * 0.0006 + particle.phase) * 0.5;
+				const scatterAmount = hoverAmount * 0.62 + clickBurst * 1.55;
+				const x = particle.x + particle.scatterX * (1 - gather) + idleX + particle.hoverX * scatterAmount;
+				const y = particle.y + particle.scatterY * (1 - gather) + idleY + particle.hoverY * scatterAmount;
+				context.globalAlpha = particle.opacity * (0.45 + gather * 0.55);
+				context.fillStyle = scatterAmount > 0.12 ? "#94a3b8" : "#f0f6fc";
+				context.beginPath();
+				context.arc(x, y, particle.size * (1 + scatterAmount * 0.16), 0, Math.PI * 2);
+				context.fill();
+			}
+			context.globalAlpha = 1;
+			animationFrame = requestAnimationFrame(draw);
+		};
+
+		const resizeObserver = new ResizeObserver(buildAndDraw);
+		const intersectionObserver = new IntersectionObserver(([entry]) => {
+			titleVisible = entry.isIntersecting;
+			if (titleVisible && gatherStartedAt === null) gatherStartedAt = performance.now();
+		}, { threshold: 0.25 });
+		resizeObserver.observe(canvas);
+		intersectionObserver.observe(canvas);
+		buildAndDraw();
+		animationFrame = requestAnimationFrame(draw);
+		return () => {
+			cancelAnimationFrame(animationFrame);
+			resizeObserver.disconnect();
+			intersectionObserver.disconnect();
+		};
+	}, [children]);
+
+	return (
+		<h2
+			className={styles.particleTitle}
+			onPointerEnter={() => { pointerRef.current.active = true; }}
+			onPointerLeave={() => { pointerRef.current.active = false; }}
+			onClick={() => { pointerRef.current.burstAt = performance.now(); }}
+		>
+			<span className={styles.srOnly}>{children}</span>
+			<canvas ref={canvasRef} aria-hidden="true" />
+		</h2>
+	);
+}
 
 export default function Interests() {
 	const [angle, setAngle] = useState(0);
@@ -121,11 +277,16 @@ export default function Interests() {
 
 	return (
 		<section ref={sectionRef} className={styles.section} id="interests">
+			<svg className={styles.spaceField} viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
+				{spaceStars.map((star) => <circle key={star.id} cx={star.x} cy={star.y} r={star.r} fill="#f0f6fc" opacity={star.opacity} />)}
+			</svg>
+			<div className={styles.meteorField} aria-hidden="true">
+				<span className={`${styles.meteor} ${styles.meteorOne}`} />
+				<span className={`${styles.meteor} ${styles.meteorTwo}`} />
+				<span className={`${styles.meteor} ${styles.meteorThree}`} />
+			</div>
 			<div className={styles.inner}>
-				<div className={styles.heading}>
-					<h2>Interests</h2>
-					<span className={styles.meta}>things I think about</span>
-				</div>
+				<ParticleTitle>Interests</ParticleTitle>
 				<div className={styles.constellation}>
 					<svg viewBox={`0 0 ${SIZE} ${SIZE}`} className={styles.constellationSvg}
 						onPointerDown={(event) => {

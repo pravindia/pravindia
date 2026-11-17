@@ -14,7 +14,7 @@ const experiences = [
 		current: false,
 	},
 	{
-		role: "Senior Software Specialist | Tech Lead",
+		role: "Senior Software Specialist",
 		company: "Tem Technologies Pvt. Ltd.",
 		companyUrl: "https://temtechnologies.com",
 		period: "Jan 2023 — May 2026",

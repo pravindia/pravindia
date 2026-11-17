@@ -9,7 +9,7 @@ I'm **Pravin Kumar**, Senior Software Engineer · 8.5 Years · Backend Architect
 * 💼 Current role: Senior Software Developer
 * 🌱 Currently learning: Cloud architecture, AI systems, distributed systems
 * 🔭 Working on: Open-source projects and backend platforms
-* ⚡ Interests: System design, AI automation, developer tooling
+* ⚡ Interests: System design, AI automation, developer tooling, building AI agents
 * 📫 Reach me at: `hello [at] pravindia [dot] com`
 * 🌐 Portfolio: [https://pravindia.com](https://pravindia.com)
 
