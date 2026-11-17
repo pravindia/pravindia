@@ -16,13 +16,14 @@
 
 .particleTitle {
 	position: absolute;
-	top: -1.25rem;
+	top: -10px;
 	left: 10%;
 	right: 10%;
 	z-index: 50;
 	width: 80%;
-	height: clamp(11rem, 26vw, 20rem);
+	height: clamp(8rem, 26vw, 15rem);
 	margin: auto;
+	opacity: 0.82;
 
 	canvas {
 		display: block;
@@ -57,7 +58,7 @@
 	background: #fff;
 	box-shadow: 0 0 6px #fff;
 	opacity: 0;
-	animation: meteor-flight var(--meteor-duration) linear infinite;
+	animation: meteor-flight var(--meteor-duration) cubic-bezier(0.42, 0, 1, 1) infinite;
 
 	&::before {
 		content: '';
@@ -68,6 +69,9 @@
 		height: 1px;
 		background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.55) 58%, #fff 100%);
 		box-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
+		transform-origin: right center;
+		animation: meteor-tail var(--meteor-duration) linear infinite;
+		animation-delay: inherit;
 	}
 }
 
@@ -84,7 +88,7 @@
 .meteorTwo {
 	top: -12%;
 	left: 88%;
-	--meteor-duration: 27s;
+	--meteor-duration: 30s;
 	--meteor-x: 0;
 	--meteor-y: 130vh;
 	--meteor-angle: 90deg;
@@ -94,7 +98,7 @@
 .meteorThree {
 	top: 82%;
 	left: 110%;
-	--meteor-duration: 31s;
+	--meteor-duration: 34s;
 	--meteor-x: -138vw;
 	--meteor-y: -28vh;
 	--meteor-angle: -160deg;
@@ -104,9 +108,16 @@
 @keyframes meteor-flight {
 	0%, 10% { opacity: 0; transform: translate3d(0, 0, 0) rotate(var(--meteor-angle)); }
 	18% { opacity: 0.9; }
-	52% { opacity: 0.7; transform: translate3d(var(--meteor-x), var(--meteor-y), 0) rotate(var(--meteor-angle)); }
-	68% { opacity: 0; transform: translate3d(var(--meteor-x), var(--meteor-y), 0) rotate(var(--meteor-angle)); }
+	42% { opacity: 0.45; transform: translate3d(var(--meteor-x), var(--meteor-y), 0) rotate(var(--meteor-angle)); }
+	58% { opacity: 0; transform: translate3d(var(--meteor-x), var(--meteor-y), 0) rotate(var(--meteor-angle)); }
 	100% { opacity: 0; transform: translate3d(var(--meteor-x), var(--meteor-y), 0) rotate(var(--meteor-angle)); }
+}
+
+@keyframes meteor-tail {
+	0%, 10% { opacity: 0; transform: scaleX(0.15); }
+	18% { opacity: 0.9; transform: scaleX(0.8); }
+	42% { opacity: 0.38; transform: scaleX(0.46); }
+	58%, 100% { opacity: 0; transform: scaleX(0.12); }
 }
 
 .srOnly {
@@ -127,7 +138,7 @@
 	width: 100%;
 	aspect-ratio: auto;
 	max-width: 760px;
-	padding-top: clamp(6rem, 11vw, 9rem);
+	padding-top: clamp(3.5rem, 7vw, 5.5rem);
 	margin: 0 auto 2rem;
 }
 

@@ -46,7 +46,6 @@ export default function WorkDetailPage({ slug }: InferGetStaticPropsType<typeof 
 
 					<div className={styles.hero}>
 						<div className={styles.heroTop}>
-							<span className={styles.status} data-status={work.status}>{work.status.toUpperCase()}</span>
 							<span className={styles.period}>{work.period}</span>
 						</div>
 						<h1 className={styles.title}>{work.title}</h1>
