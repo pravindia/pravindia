@@ -77,7 +77,7 @@ export default function Home({ latestPosts }: { latestPosts: LatestPost[] }) {
                 <span className={styles.promptSymbol}>❯</span> whoami
               </span>
               <h1 className={styles.title} onMouseEnter={textEnter} onMouseLeave={textLeave}>
-                <span className={styles.highlight}>Backend. Distributed Systems. Applied AI. </span>
+                <span className={styles.highlight}>Engineer. Developer. Startup Builder. </span>
               </h1>
               <p className={styles.description}>
                 {"Hi! I'm"} <strong>Pravin Kumar</strong>{`, a Senior Software Engineer with ${experienceYears} years of experience.`}
