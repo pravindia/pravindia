@@ -9,6 +9,7 @@ import { trackEvent } from '../lib/analytics'
 import CommandPalette from '../components/CommandPalette/CommandPalette'
 import { CommandPaletteProvider } from '../lib/CommandPaletteContext'
 import PageLoader from '../components/PageLoader/PageLoader'
+import PageTransition from '../components/PageTransition/PageTransition'
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -34,10 +35,10 @@ export default function App({ Component, pageProps }: AppProps) {
       <link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png" />
       <meta name="theme-color" content="#071411" />
     </Head>
-    <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-N0HZPFEXMB"></Script>
+    <Script strategy="lazyOnload" src="https://www.googletagmanager.com/gtag/js?id=G-N0HZPFEXMB"></Script>
     <Script
       id="gtag-init"
-      strategy="afterInteractive"
+      strategy="lazyOnload"
       dangerouslySetInnerHTML={{
         __html: `
         window.dataLayer = window.dataLayer || [];
@@ -50,7 +51,9 @@ export default function App({ Component, pageProps }: AppProps) {
     />
     <CommandPaletteProvider>
       <PageLoader />
-      <Component {...pageProps} />
+      <PageTransition routeKey={router.asPath.split(/[?#]/)[0]}>
+        <Component {...pageProps} />
+      </PageTransition>
       <CommandPalette />
     </CommandPaletteProvider>
     <Analytics />

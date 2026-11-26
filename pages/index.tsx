@@ -4,7 +4,6 @@ import styles from "../styles/Home.module.scss";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import Cursor from "../components/Cursor/Cursor";
-import ParticleBackground from "../components/ParticleBackground/ParticleBackground";
 import Works from "../components/Works/Works";
 import TechStack from "../components/TechStack/TechStack";
 import Interests from "../components/Interests/Interests";
@@ -64,7 +63,6 @@ export default function Home({ latestPosts }: { latestPosts: LatestPost[] }) {
 
   return (
     <>
-      {/* <ParticleBackground /> */}
       <Cursor variants={variants} curVariant={cursorVariant} />
       <SeoHead title="Pravin Kumar - Backend & Applied AI Engineer" description="Portfolio of Pravin Kumar, a backend and applied AI engineer building distributed systems, production AI integrations, and product platforms with TypeScript and Python." structuredData={[personSchema, { "@context": "https://schema.org", "@type": "WebSite", "@id": `${siteUrl}/#website`, url: `${siteUrl}/`, name: "Pravin Kumar", publisher: { "@id": `${siteUrl}/#person` } }]} />
       <Header />
